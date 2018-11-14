@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--如果 apple-mobile-web-app-capable 设置为 yes 了，那么在苹果机的safari上可以通过添加到主屏按钮将网站添加到主屏幕上。而设置相应 apple-touch-icon 标签，则添加到主屏上的图标就会使用我们指定的图片。-->
+    <meta name="format-detection" content="telephone=no">    
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">    
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <link rel="stylesheet" type="text/css" href="static/css/reset.css">
+    <title>elme</title>
+  </head>
+  <body>
+  <div id="app">   
+   <!--路由出口-->
+   <router-view></router-view>  
+  </div> 
+  </body>
+</html>

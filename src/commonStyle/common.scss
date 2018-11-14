@@ -1,0 +1,34 @@
+//px转化为rem
+//假如设计稿宽是640,那么html字体大小则被1re设为64px。原始值/根元素字体大小值
+//flexible.js将视觉稿分为100a。为了兼容vw和vh。1rem=10a。字体用px单位，宽高用rem
+@function px2rem($px, $base-font-size:75px) {
+    @if (unitless($px)) {
+      @warn "Assuming #{$px} to be in pixels, attempting to convert it into pixels for you";
+      @return px2rem($px + 0px); // That may fail.
+    } @else if (unit($px) == rem) {
+      @return $px;
+    }
+    @return ($px / $base-font-size) * m;
+}
+
+/*字体处理*/
+//在处理自适应的css雪碧图。建议使用svg.icon font或者base64等其他方案
+//希望文本字号相同.使用[data-dpr]属性来区分不同的dpr下的文字大小
+@mixin font-dpr($font-size){
+    font-size:$font-size;
+    [data-dpr="2"] &{
+     font-size: $font-size*2;
+    }
+    [data-dpr="3"] &{
+        font-size: $font-size*3
+    }
+}
+/*图片处理*/
+@mixin bg-image($url)
+{
+    background-image: url($url+"@2x.png");
+    [data-dpr="3"] &{
+    background-image: url($url+"@3x.png");
+    }
+}
+
