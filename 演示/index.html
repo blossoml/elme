@@ -1,0 +1,182 @@
+<!DOCTYPE html >
+<html >
+  <head>
+    <meta charset="utf-8">
+   <meta name="viewport" content="minimal-ui">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <link rel="stylesheet" type="text/css" href="swiper.css">
+    <script type="text/javascript" src="swiper.js"></script>
+    <title>elme</title>
+    <script type="text/javascript">
+      window.onload=function(){      
+        var mySwiper = new Swiper ('.swiper-container', {
+            direction: 'horizontal', // 垂直切换选项
+            loop: true, // 循环模式选项    
+    // 如果需要分页器
+            pagination: {
+             el: '.swiper-pagination',
+            }   
+          })
+      }
+    </script>
+    <style type="text/css">      
+      body,html
+      {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+     .nav /*大容器*/
+      {
+        padding-top: 50px;/*保留顶部距离*/
+        background: #fff;/*背景和边框*/
+        border-bottom:1px solid #e4e4e4;
+        height: 200px;/*高度*/
+        padding-bottom: 12px;
+      }
+      .swiper-container{
+        width: 100%;
+        height: auto;
+        padding-bottom: 10px;
+        position: relative;
+      }
+      .swiper-wrapper/*滑动盒子*/
+      {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        display: flex;        
+        box-sizing: content-box;     
+        /*padding和border不被包含在定义的width和height。
+        element width =width+border+padding标准盒模型
+        border-box:padding和border包含在border,padding之和。element
+        width=width;怪异盒模型
+        */
+      }
+      .swiper-slide/*滑动内容*/
+      {
+        width:100%;
+        height:100%;
+        flex-shrink: 0;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .item
+      {
+        width: 25%;
+        padding: 6px 0;
+        display: flex;/*flex布局，水平居中，换行*/
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .item span
+      {
+        display: inline-block;
+        text-align: center;
+        font-size: 12px;
+        color: #666;
+      }
+      .item img
+      {
+        margin-bottom: 6px;
+        width: 60px;
+        height: 60px;
+      }
+      .swiper-pagination
+      {     
+      bottom: 4px !important;
+      }
+      .swiper-pagination-bullet {
+        width: 4px;
+        height: 4px;        
+      }
+
+    </style>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <a class="item">
+              <img src="https://fuss10.elemecdn.com/2/35/696aa5cf9820adada9b11a3d14bf5jpeg.jpeg">
+              <span>甜品饮品</span>
+            </a>
+            <a class="item">
+              <img src="https://fuss10.elemecdn.com/2/35/696aa5cf9820adada9b11a3d14bf5jpeg.jpeg">
+              <span>甜品饮品</span>
+            </a>
+            <a class="item">
+              <img src="https://fuss10.elemecdn.com/2/35/696aa5cf9820adada9b11a3d14bf5jpeg.jpeg">
+              <span>甜品饮品</span>
+            </a>
+            <a class="item">
+              <img src="https://fuss10.elemecdn.com/2/35/696aa5cf9820adada9b11a3d14bf5jpeg.jpeg">
+              <span>甜品饮品</span>
+            </a>      
+            <a class="item">
+              <img src="https://fuss10.elemecdn.com/0/da/f42235e6929a5cb0e7013115ce78djpeg.jpeg">
+              <span>商超便利</span>
+            </a>
+              <a class="item">
+              <img src="https://fuss10.elemecdn.com/0/da/f42235e6929a5cb0e7013115ce78djpeg.jpeg">
+              <span>商超便利</span>
+            </a>
+              <a class="item">
+              <img src="https://fuss10.elemecdn.com/0/da/f42235e6929a5cb0e7013115ce78djpeg.jpeg">
+              <span>商超便利</span>
+            </a>
+              <a class="item">
+              <img src="https://fuss10.elemecdn.com/0/da/f42235e6929a5cb0e7013115ce78djpeg.jpeg">
+              <span>商超便利</span>
+            </a>                         
+          </div>
+          <div class="swiper-slide">
+             <a class="item">
+              <img src="https://fuss10.elemecdn.com/0/da/f42235e6929a5cb0e7013115ce78djpeg.jpeg">
+              <span>商超便利</span>
+            </a>
+              <a class="item">
+              <img src="https://fuss10.elemecdn.com/0/da/f42235e6929a5cb0e7013115ce78djpeg.jpeg">
+              <span>商超便利</span>
+            </a>
+              <a class="item">
+              <img src="https://fuss10.elemecdn.com/0/da/f42235e6929a5cb0e7013115ce78djpeg.jpeg">
+              <span>商超便利</span>
+            </a>
+              <a class="item">
+              <img src="https://fuss10.elemecdn.com/0/da/f42235e6929a5cb0e7013115ce78djpeg.jpeg">
+              <span>商超便利</span>
+            </a>    
+             <a class="item">
+              <img src="https://fuss10.elemecdn.com/0/da/f42235e6929a5cb0e7013115ce78djpeg.jpeg">
+              <span>商超便利</span>
+            </a>
+              <a class="item">
+              <img src="https://fuss10.elemecdn.com/0/da/f42235e6929a5cb0e7013115ce78djpeg.jpeg">
+              <span>商超便利</span>
+            </a>
+              <a class="item">
+              <img src="https://fuss10.elemecdn.com/0/da/f42235e6929a5cb0e7013115ce78djpeg.jpeg">
+              <span>商超便利</span>
+            </a>
+              <a class="item">
+              <img src="https://fuss10.elemecdn.com/0/da/f42235e6929a5cb0e7013115ce78djpeg.jpeg">
+              <span>商超便利</span>
+            </a>                  
+          </div>        
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>  
+      </div>
+    </nav>
+  </body>
+</html>
