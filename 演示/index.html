@@ -6,7 +6,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="screen-orientation" content="portrait"/>
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
+    <meta name=" format-detection" content="telephone=no">
     <meta name="full-screen" content="yes">
     <meta name="x5-fullscreen" content="true">
     <link rel="stylesheet" type="text/css" href="swiper.css">
@@ -34,6 +34,7 @@
         width: 100%;
         height: 100%;
         box-sizing: border-box;
+        font-family: "Microsoft Yahei"
         -webkit-tap-highlight-color: transparent;
         -webkit-font-smoothing: antialiased;
       }
@@ -72,7 +73,7 @@
         flex-shrink: 0;
         position: relative;
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: wrap;/*换行*/
       }
       .item
       {
@@ -103,40 +104,47 @@
         width: 4px;
         height: 4px;        
       }
+
+      /********商家列表**********************************/
       .shop_list_container
       {
         margin-top: 10px;
         border-top:1px solid #e4e4e4;
         background-color: #fff;       
       }  
+      /****商家列表标题***********/
      .shop_list_header
       { 
         color: #999;
         font-size: 14px;
-        line-height: 36px;   
+        line-height: 36px;/*利用行高把高度撑起来*/   
       }
       .shop_list_header i
       {
         vertical-align: bottom;
         margin-left: 10px;
       } 
-      .shop_right
-      {
-        flex: auto;
-      }
-      .shop_li
+      /*******商家列表内容*******/
+       .shop_li
       {
         display: flex;/*flex布局*/
         border-bottom: 1px solid #f1f1f1;
         padding: 14px 8px;        
       }
+      /***左边的图片***/
       .shop_img
       {
-        width: 54px;
-        height:54px;
+        width: 64px;
+        height:64px;
         display:block;
         margin-right: 8px;
+      } 
+      /***右边的文字***/
+      .shop_right
+      {
+        flex: auto;/*1 1 auto 表示空间足放大，空间不足缩小，*/
       }
+      /*第一行*/
       .shop_detail_header
       {
         display: flex;
@@ -147,6 +155,103 @@
         display: flex;
         transform: scale(0.8);
         margin-right: -6px;
+      }
+      h4.shop_detail_title
+      {
+        width: 140px;
+        color: #333;
+        padding-top: 1px;
+        font-size:15px;
+        line-height: 15px;
+        font-family: "PingFangSC-Regular";
+        font-weight: 700;
+      }
+      h4.shop_detail_title:before
+      {
+        display: inline-block;
+        content: '\54C1\724C';
+        font-size: 12px;
+        line-height: 16px;
+        color: #333;
+        background-color: #ffd930;
+        padding: 0 3px;
+        border: 2px;
+        margin-right: 6px;
+      }
+      li.supports
+      {
+        font-size: 12px;
+        color: #999;
+        border: 1px solid #f1f1f1;
+        padding: 0 1px;
+        border-radius: 2px;
+        margin-left: 1px;
+      }
+      /*第二行  */
+      .rating_order_num
+      {
+        display: flex;
+        justify-content: space-between;/*两端对齐*/
+        height: 14px;
+        margin-top:12px;        
+      }
+      .rating_order_num  .order_section
+      {
+         transform: scale(0.8);
+         font-size: 10px;
+         color: #666;
+         height: 14px;
+      }         
+      .num_right
+      {
+        display: flex;
+        justify-content: flex-end;
+        min-width: 15px;
+        transform: scale(0.8);
+        margin-right: -11px;
+        align-items: center;
+      }
+      .delivery
+      {
+        color: #fff;     
+        font-size: 10px;
+        padding: 1px 2px 1px;
+        border-radius: 2px;
+        margin-right:1px;       
+     
+      }
+      .delivery_left
+      {
+        color: #fff;
+        background-color: #3190e8;
+        border:1px solid #3190e8;
+      }
+     .delivery_right
+      {
+        color:  #3190e8;
+        border:  1px solid #3190e8;
+      }
+      .distance
+      {
+         margin-top:14px;
+         display: flex;
+         justify-content: space-between;
+         font-size: 10px;
+         color: #333;
+         height: 16px;
+      }
+      .fee
+      {
+        transform: scale(0.9);
+      }
+      .distance_time
+      {
+        transform: scale(0.9);
+        color: #999;
+      }
+      .order_time
+      {
+        color: #3190e8
       }
     </style>
   </head>
@@ -248,16 +353,29 @@
               </ul>
             </header> 
             <h5 class="rating_order_num">
-              <section class="num_left"></section>
-              <section class="order_section">
-                月售106单
-              </section>       
-              <section>
+              <section class="num_left">
+                <section class="order_section">
+                  月售106单
+                </section>  
+              </section>    
+              <section class="num_right">
                 <span class="delivery delivery_left">蜂鸟专送</span>
                 <span class="delivery delivery_right">准时达</span>
               </section>
-            </h5>
-           </section>          
+            </h5>         
+           <section class="distance">
+            <p class="fee">
+              ¥20起送
+              <span class="segmentation">/</span>
+              配送费约¥5
+            </p> 
+            <p  class="distance_time">
+              <span>1564.8公里</span> 
+              <span  class="segmentation">/</span> 
+              <span  class="order_time">16小时38分钟</span>
+            </p>
+          </section>    
+          </section>    
         </li>
       </ul>
        </div>
