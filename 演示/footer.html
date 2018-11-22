@@ -10,8 +10,6 @@
     <meta name="full-screen" content="yes">
     <meta name="x5-fullscreen" content="true">
     <link rel="stylesheet" type="text/css" href="swiper.css">
-    <link rel="stylesheet" type="text/css" href="reset.css">
-    <link rel="stylesheet" type="text/css" href="font/iconfont.css">
     <script type="text/javascript" src="swiper.js"></script>
     <title>elme</title>
     <script type="text/javascript">
@@ -33,9 +31,6 @@
         padding: 0;
         width: 100%;
         height: 100%;
-        box-sizing: border-box;
-        -webkit-tap-highlight-color: transparent;
-        -webkit-font-smoothing: antialiased;
       }
      .nav /*大容器*/
       {
@@ -103,54 +98,10 @@
         width: 4px;
         height: 4px;        
       }
-      .shop_list_container
-      {
-        margin-top: 10px;
-        border-top:1px solid #e4e4e4;
-        background-color: #fff;       
-      }  
-     .shop_list_header
-      { 
-        color: #999;
-        font-size: 14px;
-        line-height: 36px;   
-      }
-      .shop_list_header i
-      {
-        vertical-align: bottom;
-        margin-left: 10px;
-      } 
-      .shop_right
-      {
-        flex: auto;
-      }
-      .shop_li
-      {
-        display: flex;/*flex布局*/
-        border-bottom: 1px solid #f1f1f1;
-        padding: 14px 8px;        
-      }
-      .shop_img
-      {
-        width: 54px;
-        height:54px;
-        display:block;
-        margin-right: 8px;
-      }
-      .shop_detail_header
-      {
-        display: flex;
-        justify-content: space-between; /*两端对齐*/      
-      }
-      .shop_detail_ul
-      {
-        display: flex;
-        transform: scale(0.8);
-        margin-right: -6px;
-      }
+
     </style>
   </head>
-  <body style="background: #f5f5f5">
+  <body>
     <nav class="nav">
       <div class="swiper-container">
         <div class="swiper-wrapper">
@@ -227,40 +178,5 @@
         <div class="swiper-pagination"></div>  
       </div>
     </nav>
-    <div class="shop_list_container">
-      <header class="shop_list_header"> 
-       <i class="icon-shop iconfont iconShop"></i>
-       <span class="shop_header_title">附近商家</span>
-      </header>   
-       <div class="shop_detail_container">
-        <ul>     
-         <li class="shop_li">
-           <section>
-             <img src="http://localhost:8000/img/164ad0b6a3917599.jpg" class="shop_img">
-           </section>
-           <section class="shop_right"> 
-            <header class="shop_detail_header">
-               <h4 class="shop_detail_title">效果演示</h4>
-               <ul class="shop_detail_ul">
-                <li class="supports">保</li>
-                <li class="supports">准</li>
-                <li class="supports">票</li>
-              </ul>
-            </header> 
-            <h5 class="rating_order_num">
-              <section class="num_left"></section>
-              <section class="order_section">
-                月售106单
-              </section>       
-              <section>
-                <span class="delivery delivery_left">蜂鸟专送</span>
-                <span class="delivery delivery_right">准时达</span>
-              </section>
-            </h5>
-           </section>          
-        </li>
-      </ul>
-       </div>
-    </div>
   </body>
 </html>
