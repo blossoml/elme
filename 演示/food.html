@@ -40,7 +40,7 @@
      {      
       height: 20px;
       line-height: 20px;  
-      padding-top:8px; 
+      padding-top:8px;   
      }
      .sort-item-header .sort-item-border
      {
@@ -66,7 +66,27 @@
      /*******************下滑具体选择框*******************/
      .category-container
      {
-
+        position: absolute;
+        top:40px;
+        left:0;
+        width: 100%;
+        display: flex;
+        background-color: #fff;      
+     }
+     .category-left
+     {
+      flex:1;
+      background-color: #f1f1f1;/*背景颜色*/
+      height: 320px;
+      overflow-y: auto;
+     }
+     .category-right
+     {
+      flex: 1;
+      background-color: #fff;
+      padding-left: 10px;
+      height: 320px;
+      overflow-y:auto;
      }
     </style>  
   </head>
@@ -99,6 +119,12 @@
                 <span class="category-count">26</span>
               </li>          
              </ul>
+          </section>
+          <section class="category-right">
+            <ul>
+              <li>
+              </li>
+            </ul>
           </section>
         </section>
       </div>
