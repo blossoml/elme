@@ -11,12 +11,20 @@
     <meta name="x5-fullscreen" content="true">
     <link rel="stylesheet" type="text/css" href="swiper.css">
     <link rel="stylesheet" type="text/css" href="reset.css">
-    <link rel="stylesheet" type="text/css" href="font/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="style.css"> 
     <script type="text/javascript" src="swiper.js"></script>
     <title>elme</title>
     <script type="text/javascript">
     </script>
     <style type="text/css">
+      .mask
+      {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        background-color: rgba(0,0,0,0.3);
+      }
      .sort-container
      {
       background-color: #fff;
@@ -26,7 +34,7 @@
       right:0;
       width: 100%;
       display: flex;
-      z-index: 12;
+      z-index: 14;
       box-sizing: border-box;
       }
      .sort-container .sort-item
@@ -64,10 +72,10 @@
       color: #5ea8ed;
      }
      /*******************下滑具体选择框*******************/
-     .category-container
+     .category-container  /*大容器*/
      {
         position: absolute;
-        top:40px;
+        top:37px;
         left:0;
         width: 100%;
         display: flex;
@@ -88,7 +96,94 @@
       height: 320px;
       overflow-y:auto;
      }
-    </style>  
+     /***下滑左边框********/
+     .category-left-li 
+     {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10px;
+     }
+     .category-left-li span
+     {
+        font-size: 10px;
+        color: #666;
+        line-height: 42px;
+     }
+     .category-left-li .category-count
+     {
+      background-color: #ccc;
+      font-size: 8px;
+      padding: 0 2px;
+      border: 1px solid #ccc;
+      border-radius: 16px;
+      vertical-align: middle;
+      margin-right: 4px;
+      color: #fff;
+     }
+     .section-left
+     {
+      display:flex;
+      justify-content: flex-start;
+     }
+     .section_left img{
+      width:18px;
+      height: 18px;
+      line-height: 36px;
+      vertical-align: middle;
+     }
+     .category_active
+     {
+      background: #fff;
+     }
+     /*下滑右边框*/
+      .category-right-li
+      {
+        display: flex;
+        justify-content: space-between;
+        height: 42px;
+        line-height: 42px;
+        border-bottom: 1px solid #e4e4e4;
+        padding-right: 10px;
+      } 
+       .category-right-li span
+       {
+        font-size: 14px;
+        color: #666;
+       }    
+   /*******************第二个下滑选择框*****************/
+       .sort-list-container
+       {
+        width: 100%;
+        font-size: 14px;
+       }
+      .sort-list-li
+      {
+        display: flex;
+        height: 50px;
+        align-items: center;
+      }
+      .sort-list-li i
+      {
+       width: 14px;
+       height: 14px;
+       margin: 0 6px 0 16px;
+      }
+      .sort-list-li .sort_select
+      {
+        display: flex;
+        line-height: 50px; 
+        flex:auto;     
+        justify-content: space-between;
+        text-align: left;
+        text-indent: 1px;
+        border-bottom: 1px solid #e4e4e4;
+        align-items: center;
+     }
+      .sort-list-li .select-icon
+      {
+       color: #6aafee;
+      }
+  </style>  
   </head>
   <body>
     <section class="sort-container">
@@ -97,55 +192,96 @@
           <!--分类头部-->
           <div class="sort-item-border">
             <span class="category-title ">分类</span>
-            <i class="icon-shouqi4 iconfont shouqiIcon"></i>
+            <i class="icon-shouqi4  shouqiIcon"></i>
           </div>         
         </div>  
         <!--分类下滑框-->
-        <section class="category-container sort-detail-type">
+        <section class="category-container sort-detail-type" style="display: none;">
           <section class="category-left">
             <ul>
+              <li class="category-left-li ">
+                <section class="section_left">
+                  <span class="category-left-title">异国料理</span>
+                </section>
+                <section>
+                  <span class="category-count">1024</span>
+                </section>
+              </li>
               <li class="category-left-li category_active">
-                <span class="category-left-title">异国料理</span>
-                <span class="category-count">1024</span>
+                <section class="section_left">
+                  <img data-v-516e3c66="" src="https://fuss10.elemecdn.com/b/ff/533cf9617bd57fe1dfb05603bebcfpng.png" class="category_icon">
+                  <span class="category-left-title">快餐便当</span>
+                </section>
+                <section>
+                  <span class="category-count">826</span>
+                </section>
               </li>
-              <li class="category-left-li">
-                <img data-v-516e3c66="" src="https://fuss10.elemecdn.com/b/ff/533cf9617bd57fe1dfb05603bebcfpng.png" class="category_icon">
-                <span class="category-left-title"></span>
-                <span class="category-count">826</span>
-              </li>
-              <li class="category-left-li">             
-                <img data-v-516e3c66="" src="https://fuss10.elemecdn.com/6/23/5a6fce94bed63a21508f68a72c158png.png" class="category_icon">
-                <span class="category-left-title">果蔬生鲜</span>
-                <span class="category-count">26</span>
+              <li class="category-left-li">  
+                <section class="section_left">           
+                  <img data-v-516e3c66="" src="https://fuss10.elemecdn.com/6/23/5a6fce94bed63a21508f68a72c158png.png" class="category_icon">
+                  <span class="category-left-title">果蔬生鲜</span>
+                </section>
+                <section>
+                   <span class="category-count">26</span>
+                </section>
               </li>          
-             </ul>
-          </section>
-          <section class="category-right">
-            <ul>
-              <li>
-              </li>
             </ul>
+           </section>      
+          <section class="category-right" >
+           <ul>
+            <li class="category-right-li">
+              <span>简餐</span>
+              <span>22</span>
+            </li>             
+           </ul>
           </section>
         </section>
-      </div>
+      </div> 
       <div class="sort-item ">
         <div class="sort-item-header"> 
           <!--分类头部-->
           <div class="sort-item-border">
             <span class="category-title">排序</span>
-            <i class="icon-shouqi4 iconfont shouqiIcon"></i>
+            <i class="icon-shouqi4  shouqiIcon"></i>
           </div>         
-        </div>   
+        </div>  
+        <section class="category-container sort-detail-type">
+         <ul class="sort-list-container">
+          <ul>
+            <li class="sort-list-li">
+             <i class="icon-paixu paixu-icon"></i>
+               <p class="sort_select">
+               <span> 智能排序</span>
+               <i class="icon-huo select-icon"></i>
+              </p>
+            </li>
+            <li class="sort-list-li">
+             <i class="icon-position-o position-icon"></i>
+             <p class="sort_select">
+               <span> 距离最近</span>
+               <!--<i class="icon-huo select-icon"></i>-->
+             </p>
+            </li>
+            <li class="sort-list-li">
+              <i class="icon-huo select-icon"></i>
+              <p class="sort_select">
+               <span> 销量最高</span>
+               <!--<i class="icon-huo select-icon"></i>-->
+             </p>
+           </li>
+         </ul>
+        </section> 
       </div>
       <div class="sort-item ">
        <div class="sort-item-header"> 
         <!--分类头部-->
         <div class="sort-item-border">
           <span class="category-title">筛选</span>
-          <i class="icon-shouqi4 iconfont shouqiIcon"></i>
+          <i class="icon-shouqi4  shouqiIcon"></i>
         </div>       
-      </div>   
-    </div>     
-  </section>
+       </div>   
+      </div>     
+    </section>
+    <div class="mask"></div>
   </body>  
 </html>
