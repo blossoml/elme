@@ -1,0 +1,164 @@
+<!DOCTYPE html >
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name=" format-detection" content="telephone=no">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <link rel="stylesheet" type="text/css" href="swiper.css">
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="style.css">   
+    <script type="text/javascript" src="swiper.js"></script>
+    <title>elme</title>
+    <style type="text/css">   
+    .food-container
+    {
+      background-color: #f5f5f5;
+      padding-bottom: 45px;    
+      height: 500px; /*flex布局*/ 
+     }
+
+    .menu_container
+    {
+    height: 100%;
+    display: flex;/*flex布局*/
+    overflow-y:hidden;
+    position: relative; 
+    }
+    .menu_left{
+          width: 90px;       
+    }
+    .menu_left .menu_left_li
+    {
+      padding: 20px 6px;
+      border-bottom: 1px solid #ededed;
+      box-sizing: border-box;
+      position: relative;
+    }
+    .menu_left .menu_left_li.active_li
+    {
+      border-left: 3px solid #3190e8;
+      background-color: #fff;
+    }
+    .menu_left .menu_left_li.active_li span
+    {
+      font-weight: bold;
+    }
+    .menu_left .menu_left_li span
+    {
+      font-size: 16px;
+      color: #666;
+    }
+    /*右边菜单栏*/
+    .menu_right{
+      flex:1;/*缩小1，变大1，0%*/     
+    } 
+     /*商品标题*/
+    .menu_detail_header
+    {  
+      padding: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .menu_detail_header strong{
+      font-size: 18px;
+      color: #666;
+      font-weight: bold;
+    }    
+    /*商品详细*/
+    .menu_detail_list
+    {
+      background-color: #fff;
+      padding: 14px 8px;
+      border-bottom: 1px solid #f8f8f8;
+      overflow: hidden;
+    }
+    .menu_food_img 
+    {
+      margin-right: 10px;
+    }
+    .menu_food_img img{
+      width: 48px;
+      height: 48px;
+      display: block;
+    }
+     .menu_detail_list .menu_detail_link{
+      display: flex;
+     }
+     .menu_detail_list .menu_food_decription
+     {
+      flex:1;
+     }
+
+
+
+              
+     </style> 
+    <style type="text/css">      
+    </style>
+    </head>
+    <body> 
+    <!--商品列表-->  
+    <section class="food-container">
+      <section class="menu_container">
+        <section class="menu_left">
+         <ul>
+            <li class="menu_left_li active_li">
+            <span>热销榜</span>
+            </li>
+            <li class="menu_left_li">
+            <span>热搜榜</span>
+            </li>
+            <li class="menu_left_li">
+            <span>面条</span>
+            </li>
+             <li class="menu_left_li">
+            <span>肯德基</span>
+            </li>
+            <li class="menu_left_li">
+            <span>麦当劳</span>
+            </li>
+         </ul>
+        </section>
+        <section class="menu_right">
+          <ul>
+            <li>
+              <header class="menu_detail_header">
+              <strong>热销榜</strong>
+              </header>
+              <section class="menu_detail_list">
+                <div class="menu_detail_link" >
+                   <section class="menu_food_img">
+                     <img src="http://localhost:8000/img/1676365dc5f23022.jpg"></img>
+                   </section>
+                   <section class="menu_food_decription">
+                     
+                   </section>
+                </div>
+                <footer class="menu_detail_footer">
+
+                </footer>
+              </section>              
+            </li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </section>
+      </section>
+      <!--购物车-->
+      <section class="buy_cart_container" style="display: none;">
+        
+      </section>
+      <section class="cart_food_list" style="display: none;">
+        
+      </section>
+      <!--遮罩层-->
+      <div class="screen_cover"></div>
+   </section>
+    </body>
+</html>
