@@ -18,10 +18,10 @@
     .food-container
     {
       background-color: #f5f5f5;
-      padding-bottom: 45px;    
-      height: 500px; /*flex布局*/ 
-     }
-
+      padding-bottom: 45px; 
+      height: 400px;
+      overflow:hidden;
+    }
     .menu_container
     {
     height: 100%;
@@ -53,7 +53,7 @@
       font-size: 16px;
       color: #666;
     }
-    /*右边菜单栏*/
+    /***********右边菜单栏******************/
     .menu_right{
       flex:1;/*缩小1，变大1，0%*/     
     } 
@@ -74,9 +74,11 @@
     {
       background-color: #fff;
       padding: 14px 8px;
-      border-bottom: 1px solid #f8f8f8;
+      border-bottom: 1px solid #f8f8f8;     
+      position: relative;
       overflow: hidden;
     }
+    /*商品图片*/
     .menu_food_img 
     {
       margin-right: 10px;
@@ -85,18 +87,205 @@
       width: 48px;
       height: 48px;
       display: block;
-    }
+    }    
      .menu_detail_list .menu_detail_link{
-      display: flex;
+      display: flex; /*图片加文字描述部分*/
      }
      .menu_detail_list .menu_food_decription
      {
       flex:1;
      }
+     .food_description_head
+     {
+      margin-bottom: 4px;  
+     }
+     .food_description_head strong
+     {
+      color: #333;
+      font-weight: bold;
+     }   
+     .food_description_head .attribute_new
+     {
+      color:rgb(94,196,82);
+      position:absolute;
+      top:0;
+      left:0;
+      width: 50px;/*设置宽高*/
+      height: 50px;
+      background: #4cd964;
+      align-items: flex-end;
+      display: flex;
+      transform: rotate(-45deg) translate(-2px,-36px);     
+     } 
+     .attribute_new p
+     {
+      font-size: 12px;
+      text-align: center;
+      flex: 1;  
+      transform: scale(0.8) translate(2px,-2px);    
+     }
+     .food_description,.food_sale_rating
+     {
+      font-size: 12px;
+      color: #999;
+      line-height: 22px;
+     }   
+      .food_description
+      {
+        line-height: 14px;
+        color: #999;        
+      } 
+      /*底部价格和加入购物车*/   
+      .food_price
+      {
+          font-size: 14px;
+          color: #f60;
+          font-weight: bold;          
+      }   
+      .food_sale_rating
+      {
+        color: #333;
+      } 
+      .menu_detail_footer
+      {
+        margin-left: 56px;
+        margin-top: 6px;
+        display: flex;
+        justify-content: space-between;
+      }
+      /************底部购物车样式************/
+      .buy_cart_container
+      {
+        position: fixed;
+        background-color: #3d3d3f;
+        bottom: 0;
+        left:0;
+        z-index: 10;
+        display: flex;
+        width: 100%;
+        height: 45px;    
+        color: #fff;    
+      }
+      .cart_icon_num
+      {
+        flex: 1;
+        position: relative;
+      }
+      /*结算按钮样式*/
+      .gotopay_active{
+        background-color: #4cd964;
+      }
+      .gotopay
+      {
+        position: absolute;
+        right: 0;
+        width: 100px;
+        height: 100%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+      }
+      /*购物车图标样式*/
+      .cart_icon_container
+      {
+        display: flex;
+        position: absolute;
+        left:14px;
+        top:-14px;
+        background: #3190e8;
+        border-radius: 50%;
+        height: 56px;
+        width: 56px;        
+      }
+      .cart_list_length
+      {
+        position: absolute; 
+        top:0;   
+        background-color: #ff461d;
+        line-height: 14px;
+        text-align: center;      
+        font-size: 12px;
+        color: #fff;
+        right: 3px;
+        height: 14px;
+        width: 14px;
+        border-radius: 50%;
+      }
+      /*购物车总的费用以及配送费样式*/
+      .cart_icon_num .cart_num
+      {
+        position: absolute;
+        top:50%;
+        transform: translateY(-50%);
+        left:78px;
+      }
+     .cart_icon_num .cart_num div:nth-of-type(1) {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 2px;
+     }
+     .cart_icon_num .cart_num div:nth-of-type(2) {
+     font-size: 10px;
+     }
+     /*cover层次*/
+     .screen_cover
+     {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left:0;
+      right: 0;
+      background-color: rgba(0,0,0,0.3);
+      z-index: 6;
 
-
-
-              
+     }
+     /***********购物车的详细***********/
+     .cart_food_list
+     {
+      position: fixed;
+      width: 100%;
+      padding-bottom: 45px;
+      z-index: 8;
+      bottom: 0;
+      left: 0;
+      background-color: #fff;
+     }
+     .cart_food_list header
+     {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 12px;
+      background-color: #eceff1;
+     }
+      .cart_food_list div
+      {
+        font-size: 14px;
+      }
+      .cart_food_li
+      {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 12px;
+      }
+      .cart_list_con
+      {
+        width: 55%;
+      }
+      .cart_list_con p:nth-of-type(1)
+      {
+        font-size: 14px;
+        color: #666;
+        font-weight: bold;
+      }
+      .cart_list_price p
+      {
+        font-size: 14px;
+        color: #f60;
+        font-weight: bold;
+      }
      </style> 
     <style type="text/css">      
     </style>
@@ -127,22 +316,271 @@
         <section class="menu_right">
           <ul>
             <li>
-              <header class="menu_detail_header">
-              <strong>热销榜</strong>
-              </header>
-              <section class="menu_detail_list">
+               <header class="menu_detail_header">
+                 <strong>热销榜</strong>
+               </header>
+               <section class="menu_detail_list">
                 <div class="menu_detail_link" >
                    <section class="menu_food_img">
                      <img src="http://localhost:8000/img/1676365dc5f23022.jpg"></img>
                    </section>
+                   <!--文字描述区域-->
                    <section class="menu_food_decription">
-                     
-                   </section>
-                </div>
+                     <h3 class="food_description_head">
+                      <strong class="food_name">卡布奇若</strong>
+                     </h3>
+                     <p class="food_description">豪华肯德基套餐</p>
+                     <p class="food_sale_rating">
+                      <span>月售404份</span>
+                      <span>好评率85%</span>
+                     </p>                   
+                  </section>
+                </div> 
                 <footer class="menu_detail_footer">
-
-                </footer>
-              </section>              
+                  <section class="food_price">
+                    <span>¥20</span>
+                  </section>
+                  <!--加入购物车的模块-->
+                  <section class="cart_module">
+                    <span class="icon_reduce">-</span>
+                    <span class="cart_num">1</span>
+                    <span class="icon_add">+</span>
+                  </section>
+                </footer>                  
+               </section>   
+               <section class="menu_detail_list">
+                <div class="menu_detail_link" >
+                   <section class="menu_food_img">
+                     <img src="http://localhost:8000/img/1676365dc5f23022.jpg"></img>
+                   </section>
+                   <!--文字描述区域-->
+                   <section class="menu_food_decription">
+                     <h3 class="food_description_head">
+                      <strong class="food_name">卡布奇若</strong>
+                     </h3>
+                     <p class="food_description">豪华肯德基套餐</p>
+                     <p class="food_sale_rating">
+                      <span>月售404份</span>
+                      <span>好评率85%</span>
+                     </p>                   
+                  </section>
+                </div> 
+                <footer class="menu_detail_footer">
+                  <section class="food_price">
+                    <span>¥20</span>
+                  </section>
+                  <!--加入购物车的模块-->
+                  <section class="cart_module">
+                    <span class="icon_reduce">-</span>
+                    <span class="cart_num">1</span>
+                    <span class="icon_add">+</span>
+                  </section>
+                </footer>                  
+              </section>                                   
+            </li>
+            <li>
+               <header class="menu_detail_header">
+                 <strong>热搜榜</strong>
+               </header>
+               <section class="menu_detail_list">
+                <div class="menu_detail_link" >
+                   <section class="menu_food_img">
+                     <img   src="http://localhost:8000/img/1664a7ee97318869.jpg"></img>
+                   </section>
+                   <!--文字描述区域-->
+                   <section class="menu_food_decription">
+                     <h3 class="food_description_head">
+                      <strong class="food_name">卡布奇若</strong>
+                      <ul class="attributes_ul">
+                        <li class="attribute_new">
+                          <p style="color: #fff">新品</p>
+                        </li>
+                      </ul>
+                     </h3>
+                     <p class="food_description">豪华肯德基套餐</p>
+                     <p class="food_sale_rating">
+                      <span>月售404份</span>
+                      <span>好评率85%</span>
+                     </p>                   
+                  </section>
+                </div> 
+                <footer class="menu_detail_footer">
+                  <section class="food_price">
+                    <span>¥20</span>
+                  </section>
+                  <!--加入购物车的模块-->
+                  <section class="cart_module">
+                    <span class="icon_reduce">-</span>
+                    <span class="cart_num">1</span>
+                    <span class="icon_add">+</span>
+                  </section>
+                </footer>                  
+               </section>   
+               <section class="menu_detail_list">
+                <div class="menu_detail_link" >
+                   <section class="menu_food_img">  
+                    <img   src="http://localhost:8000/img/1664a7ee97318869.jpg"></img>
+                   </section>
+                   <!--文字描述区域-->
+                   <section class="menu_food_decription">
+                     <h3 class="food_description_head">
+                      <strong class="food_name">卡布奇若</strong>
+                     </h3>
+                     <p class="food_description">豪华肯德基套餐</p>
+                     <p class="food_sale_rating">
+                      <span>月售404份</span>
+                      <span>好评率85%</span>
+                     </p>                   
+                  </section>
+                </div> 
+                <footer class="menu_detail_footer">
+                  <section class="food_price">
+                    <span>¥20</span>
+                  </section>
+                  <!--加入购物车的模块-->
+                  <section class="cart_module">
+                    <span class="icon_reduce">-</span>
+                    <span class="cart_num">1</span>
+                    <span class="icon_add">+</span>
+                  </section>
+                </footer>                  
+              </section>                                   
+            </li>
+            <li>
+               <header class="menu_detail_header">
+                 <strong>热搜榜</strong>
+               </header>
+               <section class="menu_detail_list">
+                <div class="menu_detail_link" >
+                   <section class="menu_food_img">
+                     <img   src="http://localhost:8000/img/1664a7ee97318869.jpg"></img>
+                   </section>
+                   <!--文字描述区域-->
+                   <section class="menu_food_decription">
+                     <h3 class="food_description_head">
+                      <strong class="food_name">卡布奇若</strong>
+                      <ul class="attributes_ul">
+                        <li class="attribute_new">
+                          <p style="color: #fff">新品</p>
+                        </li>
+                      </ul>
+                     </h3>
+                     <p class="food_description">豪华肯德基套餐</p>
+                     <p class="food_sale_rating">
+                      <span>月售404份</span>
+                      <span>好评率85%</span>
+                     </p>                   
+                  </section>
+                </div> 
+                <footer class="menu_detail_footer">
+                  <section class="food_price">
+                    <span>¥20</span>
+                  </section>
+                  <!--加入购物车的模块-->
+                  <section class="cart_module">
+                    <span class="icon_reduce">-</span>
+                    <span class="cart_num">1</span>
+                    <span class="icon_add">+</span>
+                  </section>
+                </footer>                  
+               </section>   
+               <section class="menu_detail_list">
+                <div class="menu_detail_link" >
+                   <section class="menu_food_img">  
+                    <img   src="http://localhost:8000/img/1664a7ee97318869.jpg"></img>
+                   </section>
+                   <!--文字描述区域-->
+                   <section class="menu_food_decription">
+                     <h3 class="food_description_head">
+                      <strong class="food_name">卡布奇若</strong>
+                     </h3>
+                     <p class="food_description">豪华肯德基套餐</p>
+                     <p class="food_sale_rating">
+                      <span>月售404份</span>
+                      <span>好评率85%</span>
+                     </p>                   
+                  </section>
+                </div> 
+                <footer class="menu_detail_footer">
+                  <section class="food_price">
+                    <span>¥20</span>
+                  </section>
+                  <!--加入购物车的模块-->
+                  <section class="cart_module">
+                    <span class="icon_reduce">-</span>
+                    <span class="cart_num">1</span>
+                    <span class="icon_add">+</span>
+                  </section>
+                </footer>                  
+              </section>                                   
+            </li>
+            <li>
+               <header class="menu_detail_header">
+                 <strong>热搜榜</strong>
+               </header>
+               <section class="menu_detail_list">
+                <div class="menu_detail_link" >
+                   <section class="menu_food_img">
+                     <img   src="http://localhost:8000/img/1664a7ee97318869.jpg"></img>
+                   </section>
+                   <!--文字描述区域-->
+                   <section class="menu_food_decription">
+                     <h3 class="food_description_head">
+                      <strong class="food_name">卡布奇若</strong>
+                      <ul class="attributes_ul">
+                        <li class="attribute_new">
+                          <p style="color: #fff">新品</p>
+                        </li>
+                      </ul>
+                     </h3>
+                     <p class="food_description">豪华肯德基套餐</p>
+                     <p class="food_sale_rating">
+                      <span>月售404份</span>
+                      <span>好评率85%</span>
+                     </p>                   
+                  </section>
+                </div> 
+                <footer class="menu_detail_footer">
+                  <section class="food_price">
+                    <span>¥20</span>
+                  </section>
+                  <!--加入购物车的模块-->
+                  <section class="cart_module">
+                    <span class="icon_reduce">-</span>
+                    <span class="cart_num">1</span>
+                    <span class="icon_add">+</span>
+                  </section>
+                </footer>                  
+               </section>   
+               <section class="menu_detail_list">
+                <div class="menu_detail_link" >
+                   <section class="menu_food_img">  
+                    <img   src="http://localhost:8000/img/1664a7ee97318869.jpg"></img>
+                   </section>
+                   <!--文字描述区域-->
+                   <section class="menu_food_decription">
+                     <h3 class="food_description_head">
+                      <strong class="food_name">卡布奇若</strong>
+                     </h3>
+                     <p class="food_description">豪华肯德基套餐</p>
+                     <p class="food_sale_rating">
+                      <span>月售404份</span>
+                      <span>好评率85%</span>
+                     </p>                   
+                  </section>
+                </div> 
+                <footer class="menu_detail_footer">
+                  <section class="food_price">
+                    <span>¥20</span>
+                  </section>
+                  <!--加入购物车的模块-->
+                  <section class="cart_module">
+                    <span class="icon_reduce">-</span>
+                    <span class="cart_num">1</span>
+                    <span class="icon_add">+</span>
+                  </section>
+                </footer>                  
+              </section>                                   
             </li>
             <li></li>
             <li></li>
@@ -152,13 +590,61 @@
       </section>
       <!--购物车-->
       <section class="buy_cart_container" style="display: none;">
-        
+        <section class="cart_icon_num">
+          <div class="cart_icon_container">
+           <span class="cart_list_length">2</span>          
+           <i></i>     
+          </div>
+          <div class="cart_num">
+            <div>40.00元</div>
+            <div>配送费5元</div>
+          </div>
+        </section>
+        <section class="gotopay gotopay_active">
+          <a href="javascript:;" style="color: #fff" class="gotopay_btn">去结算</a>
+        </section>
       </section>
-      <section class="cart_food_list" style="display: none;">
-        
+      <!--购物车的具体内容-->
+      <section class="cart_food_list"  style="display: none;">
+        <header>
+          <h4>购物车</h4>
+          <div>
+            <span>清空</span>
+          </div>
+        </header>
+        <section class="cart_food_details">
+          <ul>
+           <li class="cart_food_li">
+              <div class="cart_list_con">
+                <p>好吃的</p>
+              </div>
+              <div class="cart_list_price">
+                <p>21</p>
+              </div>
+              <div class="cart_list_num">
+               <span class="icon_reduce">-</span>
+               <span class="cart_num">1</span>
+               <span class="icon_add">+</span>
+              </div>
+           </li>
+           <li class="cart_food_li">
+              <div class="cart_list_con">
+                <p>啦啦啦啦啦啦啦</p>
+              </div>
+              <div class="cart_list_price">
+                <p>21</p>
+              </div>
+              <div class="cart_list_num">
+               <span class="icon_reduce">-</span>
+               <span class="cart_num">1</span>
+               <span class="icon_add">+</span>
+              </div>
+           </li>            
+          </ul>
+        </section>
       </section>
       <!--遮罩层-->
-      <div class="screen_cover"></div>
+      <div class="screen_cover" style="display: none;"></div>
    </section>
-    </body>
+  </body>
 </html>
