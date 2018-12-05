@@ -6,9 +6,9 @@ import{
     SAVE_ADDRESS
 } from './mutation-types.js'
 export default{
-    async 	async getUserInfo({commit,state}){
-    
-
-    }
-
+    /**异步函数,返回用户信息 */
+  	async getUserInfo({commit,state}){
+     let res=await getUser();
+     commit(GET_USERINFO,res);
+    }  
 }

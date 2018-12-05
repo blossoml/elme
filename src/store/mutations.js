@@ -178,6 +178,7 @@ export default {
 		state.CHOOSE_ADDRESS=address;
 		state.addressIndex=index;
 	},
+	/***下单接口。。。。。。。。。。。。。。。	9+ */
 	//保存下单需要验证的返回值
 	[NEED_VALIDATION](state, needValidation) {
 		state.needValidation = needValidation;
@@ -201,23 +202,42 @@ export default {
 	},
 		//下单成功，保存订单返回信息
 	[ORDER_SUCCESS](state, order){
-
-	}
-
-
-
-	
-
-	
-
-
-
-
-
-
-	
-
-
+		 state.cartPrice=null;
+		 state.orderMessage=order;		 
+	},
+	//进入订单详情页面前保存该订单信息
+	[SAVE_ORDER](state, orderDetail) {
+		state.orderDetail = orderDetail;
+	},
+	//退出登录
+	[OUT_LOGIN](state) {
+		state.userInfo = {};
+		state.login = false;
+	},
+	//保存图片
+	[SAVE_AVANDER](state, imgPath) {
+		state.imgPath = imgPath;
+	},
+	//删除地址列表
+	[SAVE_ADDRESS](state, newAdress) {
+		state.removeAddress = newAdress
+	},
+	//添加地址name
+	[SAVE_ADDDETAIL](state, addAddress){
+		state.addAddress=addAddress;
+	},
+	//保存所选问题标题和详情
+	[SAVE_QUESTION](state, question) {
+		state.question = {...question};
+	},
+	//增加地址
+	[ADD_ADDRESS](state, obj) {
+		state.removeAddress = [obj, ...state.removeAddress];
+	},
+	//会员卡价格纪录
+	[BUY_CART](state, price) {
+		state.cartPrice = price;
+	},
 
 }
 	

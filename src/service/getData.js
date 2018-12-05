@@ -83,3 +83,4 @@ export const accountLogin = (username, password, captcha_code) => post('/v2/logi
 export const getUser=()=>post('/v1/user',{
 	user_id:getStore('user_id')
 })
+ 
