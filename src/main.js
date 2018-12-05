@@ -12,6 +12,12 @@ Vue.prototype.$get=get;
 //所以只能在每个需要发送请求的组件中引入即可。
 //Vue.prototype.$http=axios;
 //此时就能在method中直接使用$http的命令
+
+/*在main.js中注入vuex */
+import Vuex from 'vuex'
+Vue.use(Vuex)
+
+
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
