@@ -84,7 +84,10 @@ export const accountLogin = (username, password, captcha_code) => post('/v2/logi
 /**
  * 获取用户信息
  */
-export const getUser=()=>post('/v1/user',{
+export const getUser=() => post('/v1/user',{
 	user_id:getStore('user_id')
 })
- 
+/**
+ * 获取图片验证码
+ */
+export const getcaptchas=() => get('/v1/captchas');

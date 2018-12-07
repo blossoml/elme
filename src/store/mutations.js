@@ -179,6 +179,12 @@ export default {
 		state.CHOOSE_ADDRESS=address;
 		state.addressIndex=index;
 	},
+	//记录用户信息
+	[RECORD_USERINFO](state,info){
+		state.userInfo=info;
+		state.login=true;
+		setStore('user_id',info.user_id);
+	},
 	/***下单接口。。。。。。。。。。。。。。。	9+ */
 	//保存下单需要验证的返回值
 	[NEED_VALIDATION](state, needValidation) {

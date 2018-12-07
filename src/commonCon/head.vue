@@ -1,15 +1,13 @@
 <template>
     <header id="head_top">
         <!--search插槽-->
-        <slot name='search'></slot>
-        
+        <slot name='search'></slot>        
         <!--返回上一页的部分-->
         <section class="head_goback" v-if="goBack" @click="$router.go(-1)">
             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
                 <polyline points="12,18 4,9 12,0" style="fill:none;stroke:rgb(255,255,255);stroke-width:2"/>
             </svg>
         </section>
-
          <!--router-link to的值传到router.push(),所以这个值可以是一个字符串或者描述目标位置的对象-->            
         <router-link :to="userInfo?'/profile':'/login'" v-if='signinUp' class="head_login">
                <!--userInfo存在的时候显示图标-->
