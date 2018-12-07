@@ -1,7 +1,44 @@
 <template>
-    
+    <div class="loginContainer">
+        <head-top :head-title="密码登录" goBack="true">   
+        </head-top>    
+        <form class="loginForm">
+         <section class="input_container">
+             <input type="text" placeholder="账号" v-model.lazy="userAccount">
+         </section>
+         <section class="input_container">
+             <input v-if="!showPassword" type="password" placeholder="密码" v-model="passWord">
+             <input v-else type="text" placeholder="密码" v-model="passWord">
+             <div class="button_switch" :class="{change_to_text: showPassword}">
+                    <div class="circle_button" :class="{trans_to_right: showPassword}" @click="changePassWordType"></div>
+                    <span>abc</span>
+                    <span>...</span>
+            </div>
+         </section>
+         <section class="input_container captcha_code_container">
+              <input type="text" placeholder="验证码" maxlength="4" v-model="codeNumber">
+              <div class="img_change_img">
+                  <img v-show="captchaCodeImg" :src="captchaCodeImg">
+                  <div class="change_img" @click="getCaptchaCode">
+                      <p>看不清</p>
+                      <p>换一张</p>
+                  </div>
+              </div>            
+         </section>
+        </form>   
+        <p class="login_tips">
+            温馨提示：未注册过的账号，登录时将自动注册
+        </p>
+        <p class="login_tips">
+            注册过的用户可凭账号密码登录
+        </p>  
+        <div class="login_container" @click="mobileLogin">登录</div>
+        <router-link to="/forget" class="to_forget">充值密码<router-link>
+        
+   </div>   
 </template>
 <script>
+import alertTip from '@conmmonCon/alertTip'
 import headTop from '@/commonCon/head'
 import {mapState, mapMutations} from 'vuex'
 import { checkExsis,sendLogin,getcaptchas,accountLogin} from '@/service/getData'
@@ -59,7 +96,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
- @import '../common/mixin';
+ @import '../../common/mixin';
   .loginContainer{
         padding-top: 1.95rem;
         p, span, input{

@@ -4,10 +4,6 @@
     </div>
 
 </template>
-
-
-
-
 <script>
 import {mapMutations} from 'vuex'
 import headTop from '@/commonCon/head'
@@ -27,7 +23,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
- @import '../common/mixin';
+ @import '../../common/mixin';
 
 </style>
 
