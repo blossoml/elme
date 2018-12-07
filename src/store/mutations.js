@@ -29,8 +29,9 @@ import {
 	ADD_ADDRESS,
 	BUY_CART,
 } from './mutation-types.js'
-import {setStore, getStore} from '../common/mUtils'
-import { stat } from 'fs';
+
+import {setStore, getStore} from '../common/localStorage'
+
 export default {
 	// 记录当前经度纬度
 	[RECORD_ADDRESS](state,{

@@ -23,7 +23,7 @@ name: 'vhead',
 </script>
 
 <style   lang="scss">
-@import  '@/commonStyle/common.scss';
+
 
 
 </style>

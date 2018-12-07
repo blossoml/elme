@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import vhead from '@/components/head/head'
 import detail from '@/components/detail/detail'
 import ratings from '@/components/ratings/ratings'
 import seller from '@/components/seller/seller'

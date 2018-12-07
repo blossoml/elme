@@ -2,14 +2,15 @@
 //px转化为rem
 //假如设计稿宽是640,那么html字体大小则被1re设为64px。原始值/根元素字体大小值
 //flexible.js将视觉稿分为100a。为了兼容vw和vh。1rem=10a。字体用px单位，宽高用rem
-@function px2rem($px, $base-font-size:75px) {
+//分成10份
+@function px2rem($px, $base-font-size:37.5px) {
     @if (unitless($px)) {
       @warn "Assuming #{$px} to be in pixels, attempting to convert it into pixels for you";
       @return px2rem($px + 0px); // That may fail.
     } @else if (unit($px) == rem) {
       @return $px;
     }
-    @return ($px / $base-font-size) * m;
+    @return ($px / $base-font-size) ;
 }
 
 /*字体处理*/
@@ -33,3 +34,73 @@
     }
 }
 
+$blue: #3190e8;  
+$bc: #e4e4e4;
+$fc:#fff;
+
+// 背景图片地址和大小
+@mixin bis($url) { 
+	background-image: url($url);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+@mixin borderRadius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    -o-border-radius: $radius;
+    border-radius: $radius;
+}
+//定位全屏
+@mixin allcover{
+	position:absolute;
+	top:0;
+	right:0;
+}
+
+//定位上下左右居中
+@mixin center {  
+	position: absolute;
+	top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+//定位上下居中
+@mixin ct {  
+	position: absolute;
+	top: 50%;
+    transform: translateY(-50%);
+}
+
+//定位左右居中
+@mixin cl {  
+	position: absolute;
+	left: 50%;
+    transform: translateX(-50%);
+}
+
+//宽高
+@mixin wh($width, $height){
+	width: $width;
+	height: $height;
+}
+
+//字体大小、行高、字体
+@mixin font($size, $line-height, $family: 'Microsoft YaHei') {  
+	font: #{$size}/#{$line-height} $family;
+}
+
+//字体大小，颜色
+@mixin sc($size, $color){
+	font-size: $size;
+	color: $color;
+}
+
+//flex 布局和 子元素 对其方式
+@mixin fj($type: space-between){
+	display: flex;
+	justify-content: $type;
+
+}

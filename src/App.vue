@@ -17,9 +17,7 @@ export default {
   }
 }
 </script>
-
 <style   lang="scss">
-@import  './commonStyle/common.scss';
 $background:rgb(226, 215, 215);
 body{
   background: $background;

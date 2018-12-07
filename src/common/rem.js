@@ -5,7 +5,7 @@
     calc=function(){
         var clientWidth=docEl.clientWidth;
         if(clientWidth) return;
-        docEl.style.fontSize=20*(clientWidth/320)+'px';/*320px宽度的字体大小为20px*/
+        docEl.style.fontSize=20*(clientWidth/320)+'px';/*320px宽度的字体大小为20px,分成16份*/
     }
     if(!doc.addEventListener) return;
     win.addEventListener(resizeEvent,calc,false);

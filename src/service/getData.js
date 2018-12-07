@@ -5,7 +5,7 @@
  */
 import {get,post} from '../util/util.js' 
 /**获取localStorage项目*/
-import {getStore} from '../common/mUtils.js' 
+import {getStore} from '../common/localStorage' 
 
 /**
  * 获取当前所在城市
