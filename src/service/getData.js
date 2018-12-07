@@ -1,4 +1,8 @@
 
+
+/**
+ * 获取数据
+ */
 import {get,post} from '../util/util.js' 
 /**获取localStorage项目*/
 import {getStore} from '../common/mUtils.js' 

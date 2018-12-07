@@ -8,13 +8,13 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-
-
 module.exports = {
   context: path.resolve(__dirname, '../'),
+  //配置入口文件
   entry: {
     app: './src/main.js'
   },
+  //编译后的文件路径
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
@@ -22,6 +22,7 @@ module.exports = {
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
+  //定义了解析模块路径时的配置，常用的就是extensions,可以用来指定模块的后缀，这样在引入模块时就不需要写后缀，全自动实例
   resolve: {
     extensions: ['.js', '.vue', '.json','.scss'],
     alias: {
@@ -29,6 +30,7 @@ module.exports = {
       '@': resolve('src'),
     }
   },
+  //编译规则
   module: {
     rules: [
       {
