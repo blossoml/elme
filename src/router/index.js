@@ -1,39 +1,27 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import detail from '@/components/detail/detail'
-import ratings from '@/components/ratings/ratings'
-import seller from '@/components/seller/seller'
-import goods from '@/components/goods/goods'
-//使用注册路由
-Vue.use(Router)
-export default new Router({
-  mode: 'history',
-  routes: [
+import App from '../App'
+
+import HelloWorld from '../components/HelloWorld'
+const login = r => require.ensure([], () => r(require('../page/login/login')), 'login')
+
+export default[{
+  path:'/',
+  component: App, //顶层路由，对应index.html 
+  children:[//二级路由,对应app.vue
+    //地址为空的时候
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }, 
-    {
-      path: '/ratings',
-      name: 'ratings',
-      component: ratings
+    path:'',
+    redirect:'/HelloWorld'
     },
     {
-      path: '/seller',
-      name: 'seller',
-      component: seller
-    } ,
+      path:'/HelloWorld',
+      component: HelloWorld,
+      meta: { keepAlive: false },
+    },
+    // //登录注册页
     {
-      path: '/detail',
-      name: 'detail',
-      component: detail
-    } ,
-    {
-      path: '/goods',
-      name: 'goods',
-      component: goods
-    } 
- ]
-})
+      path: '/login',
+      component: login
+   },
+  ]
+}]
+ 

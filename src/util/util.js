@@ -3,13 +3,15 @@ import { resolve } from "path";
 //axios配置
 Axios.defaults.timeout=5000;
 Axios.defaults.baseURL='http://cangdu.org:8001/';
+Axios.defaults.withCredentials=true;//允许携带cookies信息
 //http request 拦截器
 Axios.interceptors.request.use(
     config=>{     
        // const token=getCookies('session');
         config.data=JSON.stringify(config.data);
         config.headers={
-        'Content-Type':'application/x-www-form-urlencoded'
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         }
         /*if(token)
         {
@@ -33,13 +35,13 @@ Axios.interceptors.response.use(response=>{
 },error=>{
     return Promise.reject(error)
 })
-//get
+//get   返回promise对象。
 export function get(url,params={}){
     return new Promise((resolve,reject)=>{
         Axios.get(url,{
             params:params
         }).then(response=>{
-            resolve(response);
+            resolve(response.data);
         }).catch(err=>{
             reject(err);
         })
@@ -49,8 +51,9 @@ export function get(url,params={}){
 export function post(url,data={}){
     return new Promise((resolve,reject)=>{
         Axios.post(url,data)
-        .then(response=>{
-            resolve(response);
+        .then(response=>{           
+            console.log('dashjklj');
+            resolve(response.data);
         },err=>{
             reject(err);
         })   
@@ -67,12 +70,12 @@ export function patch(url,data={}){
         })   
     })
 }
-//post请求方法
+//put请求方法
 export function put(url,data={}){
     return new Promise((resolve,reject)=>{
         Axios.put(url,data)
         .then(response=>{
-            resolve(response);
+            resolve(response.data);
         },err=>{
             reject(err);
         })   

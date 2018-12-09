@@ -1,7 +1,7 @@
 <template>
-    <div class="loginContainer">
-        <head-top :head-title="密码登录" goBack="true">   
-        </head-top>    
+    <div class="loginContainer">  
+        <head-Top head-title="密码登录"  goBack="true">   
+        </head-Top>    
         <form class="loginForm">
          <section class="input_container">
              <input type="text" placeholder="账号" v-model.lazy="userAccount">
@@ -18,11 +18,11 @@
          <section class="input_container captcha_code_container">
               <input type="text" placeholder="验证码" maxlength="4" v-model="codeNumber">
               <div class="img_change_img">
-                  <img v-show="captchaCodeImg" :src="captchaCodeImg">
+                  <img v-show="captchaCodeImg" :src="captchaCodeImg"><!--验证码图片-->
                   <div class="change_img" @click="getCaptchaCode">
                       <p>看不清</p>
                       <p>换一张</p>
-                  </div>
+                  </div>  
               </div>            
          </section>
         </form>   
@@ -33,12 +33,12 @@
             注册过的用户可凭账号密码登录
         </p>  
         <div class="login_container" @click="mobileLogin">登录</div>
-        <router-link to="/forget" class="to_forget">充值密码<router-link>
-        
-   </div>   
+        <router-link to="/forget" class="to_forget">重置密码</router-link>  
+        <alert-tip  v-if="showAlert" :showHide="showAlert"  @closeTip="closeTip" :alertText="alertText"></alert-tip>
+ </div>   
 </template>
 <script>
-import alertTip from '@conmmonCon/alertTip'
+import alertTip from '@/commonCon/alertTip'
 import headTop from '@/commonCon/head'
 import {mapState, mapMutations} from 'vuex'
 import { checkExsis,sendLogin,getcaptchas,accountLogin} from '@/service/getData'
@@ -65,7 +65,8 @@ export default {
         this.getCaptchaCode();
     },
     components:{
-        headTop
+        headTop,
+        alertTip
     },
     computed:{
         //判断手机号码格式
@@ -84,21 +85,52 @@ export default {
         //获取验证码图片
         async getCaptchaCode()
         {
-            let res=await getcaptchas();
+            let res=await getcaptchas();          
             this.captchaCodeImg=res.code;
         },
         //发送登录信息
         async mobileLogin()
         {
-            
-        }
+            if(!this.userAccount){
+                this.showAlert=true;
+                this.alertText='请输入手机号/邮箱/用户名'      
+                return          
+            }else if(!this.passWord)
+            {
+                this.showAlert=true;
+                this.alertText='请输入密码'
+                return
+            }else if(!this.codeNumber){
+                this.showAlert=true;
+                this.alertText='请输入验证码';
+                return
+            }   
+            //用户名登录,登录之后执行  mutation动作 RECORD_USERINFO
+            this.userInfo=await accountLogin(this.userAccount, this.passWord, this.codeNumber);  
+            //如果返回的值不正确，那么弹出提示框,返回值正确则返回上一页
+            if(!this.userInfo.user_id)
+            {
+             this.showAlert=true;
+             this.alertText=this.userInfo.message;
+             this.getCaptchaCode();           
+            }else
+            {
+                this.RECORD_USERINFO(this.userInfo);
+                this.$router.go(-1);//后退一步
+            }
+         },
+         //关闭提示框
+         closeTip(){
+             this.showAlert=false;
+         }
     }      
 }
 </script>
 <style lang="scss" scoped>
+ $fenmu: 1.6;  
  @import '../../common/mixin';
   .loginContainer{
-        padding-top: 1.95rem;
+        padding-top: 1.95rem/$fenmu;
         p, span, input{
             font-family: Helvetica Neue,Tahoma,Arial;
         }
@@ -106,107 +138,107 @@ export default {
     .change_login{
         position: absolute;
         @include ct;
-        right: 0.75rem;
-        @include sc(.7rem, #fff);
+        right: 0.75rem/$fenmu;
+        @include sc(.7rem/$fenmu, #fff);
     }
     .loginForm{
         background-color: #fff;
-        margin-top: .6rem;
+        margin-top: .6rem/$fenmu;
         .input_container{
             display: flex;
             justify-content: space-between;
-            padding: .6rem .8rem;
+            padding: .6rem/$fenmu .8rem/$fenmu;
             border-bottom: 1px solid #f1f1f1;
             input{
-                @include sc(.7rem, #666);
+                @include sc(.7rem/$fenmu, #666);
             }
             button{
-                @include sc(.65rem, #fff);
+                @include sc(.65rem/$fenmu, #fff);
                 font-family: Helvetica Neue,Tahoma,Arial;
-                padding: .28rem .4rem;
+                padding: .28rem/$fenmu .4rem/$fenmu;
                 border: 1px;
-                border-radius: 0.15rem;
+                border-radius: 0.15rem/$fenmu;
             }
             .right_phone_number{
                 background-color: #4cd964;
             }
         }
         .phone_number{
-            padding: .3rem .8rem;
+            padding: .3rem/$fenmu .8rem/$fenmu;
         }
         .captcha_code_container{
-            height: 2.2rem;
+            height: 2.2rem/$fenmu;
             .img_change_img{
                 display: flex;
                 align-items: center;
                 img{
-                    @include wh(3.5rem, 1.5rem);
-                    margin-right: .2rem;
+                    @include wh(3.5rem/$fenmu, 1.5rem/$fenmu);
+                    margin-right: .2rem/$fenmu;
                 }
                 .change_img{
                     display: flex;
                     flex-direction: 'column';
                     flex-wrap: wrap;
-                    width: 2rem;
+                    width: 2rem/$fenmu;
                     justify-content: center;
                     p{
-                        @include sc(.55rem, #666);
+                        @include sc(.55rem/$fenmu, #666);
                     }
                     p:nth-of-type(2){
                         color: #3b95e9;
-                        margin-top: .2rem;
+                        margin-top: .2rem/$fenmu;
                     }
                 }
             }
         }
     }
     .login_tips{
-        @include sc(.5rem, red);
-        padding: .4rem .6rem;
-        line-height: .5rem;
+        @include sc(.5rem/$fenmu, red);
+        padding: .4rem/$fenmu .6rem/$fenmu;
+        line-height: .5rem/$fenmu;
         a{
             color: #3b95e9;
         }
     }
     .login_container{
-        margin: 0 .5rem 1rem;
-        @include sc(.7rem, #fff);
+        margin: 0 .5rem/$fenmu 1rem/$fenmu;
+        @include sc(.7rem/$fenmu, #fff);
         background-color: #4cd964;
-        padding: .5rem 0;
+        padding: .5rem/$fenmu 0;
         border: 1px;
-        border-radius: 0.15rem;
+        border-radius: 0.15rem/$fenmu;
         text-align: center;
     }
     .button_switch{
         background-color: #ccc;
         display: flex;
         justify-content: center;
-        @include wh(2rem, .7rem);
-        padding: 0 .2rem;
+        @include wh(2rem/$fenmu, .7rem/$fenmu);
+        padding: 0 .2rem/$fenmu;
         border: 1px;
-        border-radius: 0.5rem;
+        border-radius: 0.5rem/$fenmu;
         position: relative;
         .circle_button{
             transition: all .3s;
             position: absolute;
-            top: -0.2rem;
+            top: -0.2rem/$fenmu;
             z-index: 1;
-            left: -0.3rem;
-            @include wh(1.2rem, 1.2rem);
-            box-shadow: 0 0.026667rem 0.053333rem 0 rgba(0,0,0,.1);
+            left: -0.3rem/$fenmu;
+            @include wh(1.2rem/$fenmu, 1.2rem/$fenmu);
+            box-shadow: 0 0.026667rem/$fenmu 0.053333rem/$fenmu 0 rgba(0,0,0,.1);
             background-color: #f1f1f1;
             border-radius: 50%;
         }
         .trans_to_right{
-            transform: translateX(1.3rem);
+            transform: translateX(1.3rem/$fenmu);
         }
         span{
-            @include sc(.45rem, #fff);
-            transform: translateY(.05rem);
-            line-height: .6rem;
+            @include sc(.45rem/$fenmu, #fff);
+            transform: translateY(.05rem/$fenmu);
+            line-height: .6rem/$fenmu;
         }
         span:nth-of-type(2){
-            transform: translateY(-.08rem);
+            transform: translateY(-.08rem/$fenmu);
         }
     }
     .change_to_text{
@@ -214,7 +246,7 @@ export default {
     }
     .to_forget{
         float: right;
-        @include sc(.6rem, #3b95e9);
-        margin-right: .3rem;
+        @include sc(.6rem/$fenmu, #3b95e9);
+        margin-right: .3rem/$fenmu;
     }
 </style>

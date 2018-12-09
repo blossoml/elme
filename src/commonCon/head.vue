@@ -47,31 +47,32 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
- @import '../common/mixin';
+ @import '../common/mixin'; 
+  $fenmu: 1.6;  
   #head_top{
         background-color: $blue;
         position: fixed;
         z-index: 100;
         left: 0;
         top: 0;
-        @include wh(100%, 1.95rem);
+        @include wh(100%, 1.95rem/$fenmu);
     }
     .head_goback{
-        left: 0.4rem;
-        @include wh(0.6rem, 1rem);
-        line-height: 2.2rem;
-        margin-left: .4rem;
+        left: 0.4rem/$fenmu;
+        @include wh(0.6rem/$fenmu, 1rem/$fenmu);
+        line-height: 2.2rem/$fenmu;
+        margin-left: .4rem/$fenmu;
     }
     .head_login{
-        right: 0.55rem;
-        @include sc(0.65rem, #fff);
+        right: 0.55rem/$fenmu;
+        @include sc(0.65rem/$fenmu, #fff);
         @include ct;
         .login_span{
             color: #fff;
         }
         .user_avatar{
             fill: #fff;
-            @include wh(.8rem, .8rem);
+            @include wh(.8rem/$fenmu, .8rem/$fenmu);
         }
     }
     .title_head{
@@ -80,7 +81,7 @@ export default {
         color: #fff;
         text-align: center;
         .title_text{
-            @include sc(0.8rem, #fff);
+            @include sc(0.8rem/$fenmu, #fff);
             text-align: center;
             font-weight: bold;
         }

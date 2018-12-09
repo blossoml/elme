@@ -185,7 +185,7 @@ export default {
 		state.login=true;
 		setStore('user_id',info.user_id);
 	},
-	/***下单接口。。。。。。。。。。。。。。。	9+ */
+	/***下单接口。。。。。。。。。。。。。。。 */
 	//保存下单需要验证的返回值
 	[NEED_VALIDATION](state, needValidation) {
 		state.needValidation = needValidation;

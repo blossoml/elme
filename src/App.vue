@@ -1,33 +1,27 @@
 <template>
-  <div id="app">  
-    <v-header>   </v-header>   
-    <router-link to="/goods">商品</router-link>
-    <router-link to="/ratings">评价</router-link>
-    <router-link to="/seller">商家</router-link>
-    <router-view/>  
+  <div id="app">   
+    <transition name="route-fade" mode="out-in">
+      <!--out-in：当前元素先进行过渡，完成之后新元素过渡进入。-->     
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+    </transition>
+    <transition name="router-fade" mode="out-in">
+      <router-view v-if="!$route.meta.keepAlive"></router-view>
+    </transition>
   </div>
 </template>
-
 <script>
-import header from './components/head/head.vue'
-export default {
-  name: 'App',
-  components:{
-    'v-header':header /*组件注册*/
+ 	export default {
+
   }
-}
 </script>
 <style   lang="scss">
-$background:rgb(226, 215, 215);
-body{
-  background: $background;
+@import  './common/common.scss';
+.router-fade-enter-active , .router-fade-leave-active {
+  transition:opcity .3s;
 }
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.router-fade-enter, .router-fade-leave-to{
+  	opacity: 0;
 }
 </style>
