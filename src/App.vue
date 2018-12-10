@@ -19,7 +19,7 @@
 <style   lang="scss">
 @import  './common/common.scss';
 .router-fade-enter-active , .router-fade-leave-active {
-  transition:opcity .3s;
+  transition:opacity .3s;
 }
 .router-fade-enter, .router-fade-leave-to{
   	opacity: 0;

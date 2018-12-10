@@ -2,7 +2,8 @@ import App from '../App'
 
 import HelloWorld from '../components/HelloWorld'
 const login = r => require.ensure([], () => r(require('../page/login/login')), 'login')
-
+const forget = r => require.ensure([], () => r(require('../page/forget/forget')), 'forget')
+const msite = r => require.ensure([], () => r(require('../page/msite/msite')), 'msite')
 export default[{
   path:'/',
   component: App, //顶层路由，对应index.html 
@@ -17,11 +18,22 @@ export default[{
       component: HelloWorld,
       meta: { keepAlive: false },
     },
+      //修改密码页
+    {
+        path: '/forget',
+        component: forget
+    },
     // //登录注册页
     {
       path: '/login',
       component: login
-   },
+    },
+    //所有商铺列表页
+    {
+      path: '/msite',
+      component: msite,
+      meta: { keepAlive: true },
+     },
   ]
 }]
  

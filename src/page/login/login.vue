@@ -41,7 +41,7 @@
 import alertTip from '@/commonCon/alertTip'
 import headTop from '@/commonCon/head'
 import {mapState, mapMutations} from 'vuex'
-import { checkExsis,sendLogin,getcaptchas,accountLogin} from '@/service/getData'
+import {checkExsis,sendLogin,getcaptchas,accountLogin} from '@/service/getData'
 export default {
     data()
     {

@@ -7,7 +7,7 @@ import store from './store/'
 import FastClick from 'fastclick'
 //移动设备游览器默认会在用户点击屏幕大约延迟300ms后才会触发点击事件
 //是为了检查用户是否在做双击。为了能立即响应用户的点击事件，用fastclick
-import 'lib-flexible'  //使用flexibl e.js
+import 'lib-flexible'  //使用flexible.js
 import {post,get} from './util/util'
 
 Vue.prototype.$post=post;//定义全局变量

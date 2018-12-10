@@ -127,7 +127,7 @@ export default {
 	 },
 	 //记录用户信息存入vuex
 	 [GET_USERINFO](state, info) {
-		 /**如果存在用户信息且用户名不相等返回*/
+		 /**如果存在用户信息且账户不等返回*/
 		 if(state.userInfo&&(state.userInfo.username !== info.username)){
 			 return;
 		 }
@@ -163,10 +163,12 @@ export default {
 	[CHOOSE_SEARCH_ADDRESS](state, place) {
 		state.searchAddress = place;
 	},
+
 	//保存geohash
 	[SAVE_GEOHASH](state, geohash) {
 		state.geohash = geohash;		
 	},
+
 	//确认订单页添加新的的地址
 	[CONFIRM_ADDRESS](state, newAddress) {
 		state.newAddress.push(newAddress);
@@ -225,6 +227,7 @@ export default {
 	[SAVE_AVANDER](state, imgPath) {
 		state.imgPath = imgPath;
 	},
+	
 	//删除地址列表
 	[SAVE_ADDRESS](state, newAdress) {
 		state.removeAddress = newAdress

@@ -8,6 +8,22 @@ import {get,post} from '../util/util.js'
 import {getStore} from '../common/localStorage' 
 
 /**
+ * 获取msite页面地址信息
+ */
+
+export const msiteAddress = geohash => get('/v2/pois/' + geohash);
+
+/**
+ * 获取msite页面食品分类列表
+ */
+export const msiteFoodTypes = geohash => get('/v2/index_entry', {
+	geohash,
+	group_type: '1',
+	'flags[]': 'F'
+});
+
+
+/**
  * 获取当前所在城市
  */ 
 export const  currentcity=number=>get('/v1/cities/' + number);
@@ -91,3 +107,7 @@ export const getUser=() => get('/v1/user',{
  * 获取图片验证码
  */
 export const getcaptchas=() => post('/v1/captchas');
+/**
+ * 改密码
+ */
+export const changePassword = (username, oldpassWord, newpassword, confirmpassword, captcha_code) => post('/v2/changepassword', {username, oldpassWord, newpassword, confirmpassword, captcha_code});

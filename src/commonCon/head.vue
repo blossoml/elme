@@ -1,7 +1,7 @@
 <template>
-    <header id="head_top">
+    <header id="head_top">      
         <!--search插槽-->
-        <slot name='search'></slot>        
+        <slot name='search'></slot>   
         <!--返回上一页的部分-->
         <section class="head_goback" v-if="goBack" @click="$router.go(-1)">
             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
@@ -16,9 +16,12 @@
                </svg>
                <span class="login_span" v-else>登录|注册</span>
         </router-link>
+        <!--标题部分-->
         <section class="title_head ellipsis" v-if="headTitle">
             <span class="title_text">{{headTitle}}</span>
-        </section>      
+        </section>   
+        <!--首页标题插槽-->   
+        <slot name="msite-title"></slot>
    </header>
 </template>
 <script>
