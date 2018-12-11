@@ -85,11 +85,7 @@ export default {
         async initData(){
             //获取数据
             let res=await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
-            this.shopListArr=[...res];
-            if(res.length<20)
-            {
-                this.touchend=true;
-            }
+            this.shopListArr=[...res];         
             this.hideLoading();           
         },
         //监听父级传来的数据发生变化时，触发此函数重新根据属性值获取数据
@@ -102,27 +98,20 @@ export default {
 			this.shopListArr = [...res];
         },
         		//到达底部加载更多数据
-		async loaderMore(){
-			if (this.touchend) {
-				return
-			}
+		async loaderMore(){		
 			//防止重复请求
 			if (this.preventRepeatReuqest) {
 				return
-			}
+            }
 			this.showLoading = true;
 			this.preventRepeatReuqest = true;
 
 			//数据的定位加20位
-			this.offset += 20;
+			this.offset += 10;
 			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
 			this.hideLoading();
-			this.shopListArr = [...this.shopListArr, ...res];
-			//当获取数据小于20，说明没有更多数据，不需要再次请求数据
-			if (res.length < 20) {
-				this.touchend = true;
-				return
-			}
+            this.shopListArr = [...this.shopListArr, ...res];
+            			
 			this.preventRepeatReuqest = false;
         },
         hideLoading(){
