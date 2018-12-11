@@ -52,7 +52,6 @@
 </template>
 
 <script>
-
 import {mapState} from 'vuex'
 import {shopList} from '@/service/getData'
 import loading from './loading'

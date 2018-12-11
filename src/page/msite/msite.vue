@@ -1,7 +1,5 @@
 <template>
-<div>
-    <div class="scrollWrap" :style="{height:bodyHeight+'px'}" >
-      <div class="scroll">
+<div class="con" :style="{height:bodyHeight+'px'}"> <!--固定高度区域-->    
          <head-top signin-up='msite'>
             <!--链接到搜索页面 search插槽-->
             <router-link :to="'/search/geohash'" class="link_search" slot="search">
@@ -15,6 +13,7 @@
                 <span class="title_text ellipsis">{{msiteTitle}}</span>
             </router-link>        
          </head-top>
+        <div class="scroll"><!--可以改变transitionY的区域-->
          <nav class="msite_nav">
          <div class="swiper-container" v-if="foodTypes.length">
             <div class="swiper-wrapper">
@@ -39,8 +38,7 @@
                 </header>
                 <shop-list v-if="hasGetData" :geohash="geohash"></shop-list>
          </div>   
-      </div>  
-     </div>
+    </div> 
 <foot-guide></foot-guide>
 </div>
 </template>
@@ -122,8 +120,11 @@ export default {
 <style lang="scss" scoped>
  $fenmu: 1.6;  
  @import '../../common/mixin';
-    .scrollWrap{
+    .con{
         overflow: hidden;
+    } 
+    .scroll{
+        position: relative;
     }
 	.link_search{
 		left: .8rem/$fenmu;
