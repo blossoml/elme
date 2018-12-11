@@ -28,6 +28,15 @@
             <div class="swiper-pagination"></div> 
         </div>  
     </nav>
+    	<div class="shop_list_container">
+	    	<header class="shop_header">
+	    		<svg class="shop_icon">
+	    			<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#shop"></use>
+	    		</svg>
+	    		<span class="shop_header_title">附近商家</span>
+	    	</header>
+	    	<shop-list v-if="hasGetData" :geohash="geohash"></shop-list>
+    	</div>   
 <foot-guide></foot-guide>
 </div>
 </template>
@@ -36,7 +45,7 @@ import Swiper from 'swiper'
 import "../../../node_modules/swiper/dist/css/swiper.css";
 import {mapMutations, mapState} from 'vuex'  //获取状态信息，以及更改状态信息
 import footGuide from '@/commonCon/footGuide'
-//import shopList from '@/commonCon/shoplist'
+import shopList from '@/commonCon/shoplist'
 import headTop from '@/commonCon/head'
 import {msiteAddress, msiteFoodTypes, cityGuess} from '@/service/getData'
 export default {
@@ -83,7 +92,8 @@ export default {
     },
      components: {
     	headTop,    	
-    	footGuide,
+        footGuide,
+        shopList
     },
     methods:{
          ...mapState([
