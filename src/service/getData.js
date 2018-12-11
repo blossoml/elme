@@ -67,7 +67,7 @@ export const shopList = (latitude, longitude, offset, restaurant_category_id = '
 		order_by,
 		'delivery_mode[]': delivery_mode + supportStr
 	};
-	return post('/shopping/restaurants', data);
+	return get('/shopping/restaurants', data);
 };
 /**
  * 获取店铺搜索结果

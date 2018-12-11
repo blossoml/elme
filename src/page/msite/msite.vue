@@ -36,8 +36,7 @@
 	    		<span class="shop_header_title">附近商家</span>
 	    	</header>
 	    	<shop-list v-if="hasGetData" :geohash="geohash"></shop-list>
-    	</div>
-   
+    	</div>   
 <foot-guide></foot-guide>
 </div>
 </template>
