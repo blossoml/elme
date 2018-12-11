@@ -1,50 +1,50 @@
 <template>
 	<div class="shoplist_container">
-     <ul v-load-more="loaderMore" v-if="shopListArr.length" type="1">
-         <router-link :to="{path: 'shop', query:{geohash, id: item.id}}" v-for="item in shopListArr" tag='li' :key="item.id" class="shop_li">
-                <section>
-					<img :src="imgBaseUrl + item.image_path" class="shop_img">
-				</section>
-				<hgroup class="shop_right">
-					<header class="shop_detail_header">
-						<h4 :class="item.is_premium? 'premium': ''"  class="shop_title ellipsis">{{item.name}}</h4>
-						<ul class="shop_detail_ul">
-							<li v-for="item in item.supports" :key="item.id" class="supports">{{item.icon_name}}</li>
-						</ul>
-					</header>
-					<h5 class="rating_order_num">
-						<section class="rating_order_num_left">
-							<section class="rating_section">							
-								<span class="rating_num">{{item.rating}}</span>
+	<ul  v-if="shopListArr.length" type="1" id="">
+			<router-link :to="{path: 'shop', query:{geohash, id: item.id}}" v-for="item in shopListArr" tag='li' :key="item.id" class="shop_li">
+					<section>
+						<img :src="imgBaseUrl + item.image_path" class="shop_img">
+					</section>
+					<hgroup class="shop_right">
+						<header class="shop_detail_header">
+							<h4 :class="item.is_premium? 'premium': ''"  class="shop_title ellipsis">{{item.name}}</h4>
+							<ul class="shop_detail_ul">
+								<li v-for="item in item.supports" :key="item.id" class="supports">{{item.icon_name}}</li>
+							</ul>
+						</header>
+						<h5 class="rating_order_num">
+							<section class="rating_order_num_left">
+								<section class="rating_section">							
+									<span class="rating_num">{{item.rating}}</span>
+								</section>
+								<section class="order_section">
+									月售{{item.recent_order_num}}单
+								</section>
 							</section>
-							<section class="order_section">
-								月售{{item.recent_order_num}}单
+							<section class="rating_order_num_right">
+								<span class="delivery_style delivery_left" v-if="item.delivery_mode">{{item.delivery_mode.text}}</span>
+								<span class="delivery_style delivery_right" v-if="zhunshi(item.supports)">准时达</span>
 							</section>
-						</section>
-						<section class="rating_order_num_right">
-							<span class="delivery_style delivery_left" v-if="item.delivery_mode">{{item.delivery_mode.text}}</span>
-							<span class="delivery_style delivery_right" v-if="zhunshi(item.supports)">准时达</span>
-						</section>
-					</h5>
-					<h5 class="fee_distance">
-						<p class="fee">
-							¥{{item.float_minimum_order_amount}}起送
-							<span class="segmentation">/</span>
-							{{item.piecewise_agent_fee.tips}}
-						</p>
-						<p class="distance_time">
-							<span v-if="Number(item.distance)">{{item.distance > 1000? (item.distance/1000).toFixed(2) + 'km': item.distance + 'm'}}
+						</h5>
+						<h5 class="fee_distance">
+							<p class="fee">
+								¥{{item.float_minimum_order_amount}}起送
 								<span class="segmentation">/</span>
-							</span>
-							<span v-else>{{item.distance}}</span>
-							<span class="segmentation">/</span>
-							<span class="order_time">{{item.order_lead_time}}</span>
-						</p>
-					</h5>
-				</hgroup>
-         </router-link>
-     </ul>
-     <p v-if="touchend" class="empty_data">没有更多了</p>
+								{{item.piecewise_agent_fee.tips}}
+							</p>
+							<p class="distance_time">
+								<span v-if="Number(item.distance)">{{item.distance > 1000? (item.distance/1000).toFixed(2) + 'km': item.distance + 'm'}}
+									<span class="segmentation">/</span>
+								</span>
+								<span v-else>{{item.distance}}</span>
+								<span class="segmentation">/</span>
+								<span class="order_time">{{item.order_lead_time}}</span>
+							</p>
+						</h5>
+					</hgroup>
+			</router-link>
+		</ul>	     
+	
      <transition name="loading">
 		<!--<loading v-show="showLoading"></loading>-->
     </transition>
@@ -74,7 +74,9 @@ export default {
     components:{
         loading
     },
-    /**接收参数*/
+    /**接收参数
+	 * 目录id,排序id,配送方式
+	*/
     props: ['restaurantCategoryId', 'restaurantCategoryIds', 'sortByType', 'deliveryMode', 'supportIds', 'confirmSelect', 'geohash'],
     computed:{
         ...mapState([
@@ -92,6 +94,7 @@ export default {
 		async listenPropChange(){
 			this.showLoading = true;
 			this.offset = 0;
+			//目录id,排序id,配送方式，商家属性
 			let res = await shopList(this.latitude, this.longitude, this.offset, '', this.restaurantCategoryIds, this.sortByType, this.deliveryMode, this.supportIds);
 			this.hideLoading();
 			//考虑到本地模拟数据是引用类型，所以返回一个新的数组
@@ -105,7 +108,6 @@ export default {
             }
 			this.showLoading = true;
 			this.preventRepeatReuqest = true;
-
 			//数据的定位加20位
 			this.offset += 10;
 			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
@@ -151,6 +153,7 @@ export default {
 <style lang="scss" scoped>
      @import '../common/mixin'; 
      $fenmu: 1.6;  
+	 
 	.shoplist_container{
 		background-color: #fff;
 		margin-bottom: 2rem/$fenmu;

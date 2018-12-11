@@ -50,7 +50,7 @@ group_type:'1',
  */
 export const shopList = (latitude, longitude, offset, restaurant_category_id = '', restaurant_category_ids = '', order_by = '', delivery_mode = '', support_ids = []) => {
 	let supportStr = '';
-	support_ids.forEach(item => {
+	support_ids.forEach(item => { 
 		if (item.status) {
 			supportStr += '&support_ids[]=' + item.id;
 		}
@@ -58,26 +58,27 @@ export const shopList = (latitude, longitude, offset, restaurant_category_id = '
 	let data = {
 		latitude,
 		longitude,
-		offset,
+		offset,/*偏移量*/
 		limit: '20',
 		'extras[]': 'activities',
 		keyword: '',
 		restaurant_category_id,
-		'restaurant_category_ids[]': restaurant_category_ids,
-		order_by,
-		'delivery_mode[]': delivery_mode + supportStr
+		'restaurant_category_ids[]': restaurant_category_ids,/*目录id*/
+		order_by,/*排序选项*/
+		'delivery_mode[]': delivery_mode + supportStr/*配送方式*/
 	};
 	return get('/shopping/restaurants', data);
 };
 /**
  * 获取店铺搜索结果
  */
-export const searchRestastaurant=(geohash, keyword) => post('/v4/restaurants', {
+export const searchRestaurant=(geohash, keyword) => post('/v4/restaurants', {
 	'extras[]': 'restaurant_activity',
-	geohash,
-	keyword,
+	geohash,/** */
+	keyword,/*关键词*/
 	type: 'search'
 });
+
 /**
  * 获取food的配送方式
  */
