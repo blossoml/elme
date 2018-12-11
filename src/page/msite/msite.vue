@@ -93,7 +93,8 @@ export default {
     },
      components: {
     	headTop,    	
-    	footGuide,
+        footGuide,
+        shopList
     },
     methods:{
          ...mapState([

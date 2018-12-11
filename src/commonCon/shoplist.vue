@@ -46,7 +46,7 @@
      </ul>
      <p v-if="touchend" class="empty_data">没有更多了</p>
      <transition name="loading">
-			<loading v-show="showLoading"></loading>
+		<!--<loading v-show="showLoading"></loading>-->
     </transition>
 	</div>	
 </template>
@@ -54,8 +54,7 @@
 <script>
 
 import {mapState} from 'vuex'
-import {shopList} from 'src/service/getData'
-import {loadMore, getImgPath} from './mixin'
+import {shopList} from '@/service/getData'
 import loading from './loading'
 
 export default {
@@ -63,8 +62,7 @@ export default {
 		return {
 			offset: 0, // 批次加载店铺列表，每次加载20个 limit = 20
 			shopListArr:[], // 店铺列表数据
-			preventRepeatReuqest: false, //到达底部加载数据，防止重复加载
-			showBackStatus: false, //显示返回顶部按钮
+			preventRepeatReuqest: false, //到达底部加载数据，防止重复加载		
 			showLoading: true, //显示加载动画
 			touchend: false, //没有更多数据
 			imgBaseUrl:'//elm.cangdu.org/img/',
@@ -76,8 +74,8 @@ export default {
     components:{
         loading
     },
+    /**接收参数*/
     props: ['restaurantCategoryId', 'restaurantCategoryIds', 'sortByType', 'deliveryMode', 'supportIds', 'confirmSelect', 'geohash'],
-    mixins:[],
     computed:{
         ...mapState([
 			'latitude','longitude'
@@ -92,11 +90,7 @@ export default {
             {
                 this.touchend=true;
             }
-            this.hideLoading();
-            //开始监听scrolltop的值，达到一定程度后显示返回
-            showBack(status => {
-				this.showBackStatus = status;
-			});
+            this.hideLoading();           
         },
         //监听父级传来的数据发生变化时，触发此函数重新根据属性值获取数据
 		async listenPropChange(){
@@ -130,8 +124,24 @@ export default {
 				return
 			}
 			this.preventRepeatReuqest = false;
+        },
+        hideLoading(){
+			this.showLoading = false;
+        },
+        zhunshi(supports){
+			let zhunStatus;
+			if ((supports instanceof Array) && supports.length) {
+ 				supports.forEach(item => {
+ 					if (item.icon_name === '准') {
+ 						zhunStatus = true;
+ 					}
+ 				})
+			}else{
+				zhunStatus = false;
+			}
+			return zhunStatus
 		},
-    },
+     },
     watch: {
 		//监听父级传来的restaurantCategoryIds，当值发生变化的时候重新获取餐馆数据，作用于排序和筛选
 		restaurantCategoryIds: function (value){
