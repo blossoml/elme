@@ -59,7 +59,7 @@ export const shopList = (latitude, longitude, offset, restaurant_category_id = '
 		latitude,
 		longitude,
 		offset,/*偏移量*/
-		limit: '20',
+		limit: '12',
 		'extras[]': 'activities',
 		keyword: '',
 		restaurant_category_id,

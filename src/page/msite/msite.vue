@@ -1,5 +1,6 @@
 <template>
-<div class="con" :style="{height:bodyHeight+'px'}"> <!--固定高度区域-->    
+<div class="con" :style="{height:bodyHeight+'px'}"> <!--固定高度区域-->   
+  <div class="scroll"><!--可以改变transitionY的区域--> 
          <head-top signin-up='msite'>
             <!--链接到搜索页面 search插槽-->
             <router-link :to="'/search/geohash'" class="link_search" slot="search">
@@ -12,8 +13,7 @@
             <router-link to="/home" slot="msite-title" class="msite_title">
                 <span class="title_text ellipsis">{{msiteTitle}}</span>
             </router-link>        
-         </head-top>
-        <div class="scroll"><!--可以改变transitionY的区域-->
+         </head-top>      
          <nav class="msite_nav">
          <div class="swiper-container" v-if="foodTypes.length">
             <div class="swiper-wrapper">

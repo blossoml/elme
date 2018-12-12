@@ -1,3 +1,5 @@
+import { EWOULDBLOCK } from "constants";
+
 /**
  * 存储localStorage
  */
@@ -126,7 +128,8 @@ export const cssTransform=(el,attr,val)=>{
                     sVal +=s+"("+el.transform[s]+") ";
                     break;	
             }                   
-        }  el.style.WebkitTransform = el.style.transform = sVal;   
+        } //设置transform 的值
+         el.style.WebkitTransform = el.style.transform = sVal;   
     }else{
         val  = el.transform[attr];
         if(typeof val == "undefined" ) {
@@ -139,6 +142,120 @@ export const cssTransform=(el,attr,val)=>{
 		return val;
     }
 } 
+/**
+ *滑动行为
+ *最大移动距离为document.querySelector('.scroll').offsetHeight+document.querySelector('#foot_guide').offsetHeight-667
+ */
+/*
+		start 手指按下
+		in 滑动中
+		end 手指抬起
+		over 滑动结束
+*/
+export const move=(target,time,type)=>{
+    var t=0;
+    var b=cssTransform(child,'translateY');
+
+}
+
+export const mscroll=(wrap,callback,footerel)=>{
+    var child=wrap.children[0];
+    var startPoint=0;
+    var startY=0;
+    var minY=wrap.clientHeight-footerel.offsetHeight-child.offsetHeight;
+    var step=1;
+    var lastY=0;
+    var lastDis=0;
+    var lastTimeDis=1;
+    var isMove=true;
+    var isFirst=true;
+    var Tween = {
+		easeOut: function(t, b, c, d){
+			return -c * ((t=t/d-1)*t*t*t - 1) + b;
+		},
+		backOut: function(t, b, c, d, s){
+			if (typeof s == 'undefined') {
+				s = 1.70158;  
+			}
+			return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+		} 
+    };
+    cssTransform(child,"translateZ",0.01);
+    wrap.addEventListener('touchstart',function(e){
+        minY=wrap.clientHeight-footerel.offsetHeight-child.offsetHeight;
+        clearInterval(child.scroll);
+        if(callBack&&callBack.start){
+            callBack.start();
+        }//开始运动的坐标位置
+        startPoint={pageY:e.changedTouches[0].pageY,pageX:e.changedTouches[0].pageX};
+        startY=cssTransform(child,"translateY");//开始运动的偏移量
+        step=1;//步长
+        lastY=startPoint.pageY;
+        lastTime=new Date().getTime();
+        lastDis=0;
+        lastTimeDis=1;
+        isMove=true;//判断是竖向拉动
+        isFirst=true;
+    })
+    wrap.addEventListener('touchmove',function(e){
+        if(!isMove)
+        {
+            return;
+        }
+        var nowPoint=e.changedTouches[0];
+        var disX=nowPoint.pageY-startPoint.pageY;
+        var disY = nowPoint.pageY - startPoint.pageY;
+        if(isFirst){
+            isFirst=false;
+            if(Math.abs(disY)<Math.abs(disX)){
+                isMove=false;
+                return;
+            }
+        }
+        var t=startY+disY;
+        var nowTime=new Date().getTime();
+        if(t>0)/*下拉拉到顶部了*/{
+            step=1-t/wrap.clientHeight;
+            t=parseInt(t*step);
+        }
+        if(t<minY)/*上拉拉到底部了 */
+        {
+            var over=minY-t;
+            step=1-over/clientHeight;//步长
+            over=parseInt(over*step);
+            t=minY-over;//translateY的值
+        }
+        lastDis=nowPoint.pageY-lastY;//最后的距离差
+        lastTimeDis = nowTime - lastTime; //最后的时间差
+        lastY=nowPoint.pageY;//最后的Y坐标值
+        lastTime=nowTime;//改变最后时间
+        cssTransform(child,"translateY",t);
+        if(callBack&&callBack.in){
+            callBack.in();
+        }
+    });
+    wrap.addEventListener('touchend',function(){//松手后的缓冲运动
+        var speed=(lastDis/lastTimeDis)*120; //速度
+        speed = isNaN(speed)?0:speed;
+        var t = cssTransform(child,"translateY");
+        var target=t+speed;
+        var type="easeOut";
+        var time=Math.abs(speed*.9);//速度和时间相乘
+        time= time<300?300:time;
+        if(target>0){
+            target=0;
+            type="backOut";
+        }
+        if(target < minY) {
+            target = minY;
+            type ="backOut";
+        }
+        move(target,time,type);
+		if(callBack&&callBack.end){
+				callBack.end();
+	    }        
+    })
+}
 
 /**
  * 页面到到达底部需要加载更多
