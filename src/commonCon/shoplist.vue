@@ -43,9 +43,9 @@
 						</h5>
 					</hgroup>
 			</router-link>
-		</ul>	     
+	</ul>        
 	
-     <transition name="loading">
+    <transition name="loading">
 		<!--<loading v-show="showLoading"></loading>-->
     </transition>
 	</div>	
@@ -60,8 +60,7 @@ export default {
 	data(){
 		return {
 			offset: 0, // 批次加载店铺列表，每次加载20个 limit = 20
-			shopListArr:[], // 店铺列表数据
-			preventRepeatReuqest: false, //到达底部加载数据，防止重复加载		
+			shopListArr:[], // 店铺列表数据					
 			showLoading: true, //显示加载动画
 			touchend: false, //没有更多数据
 			imgBaseUrl:'//elm.cangdu.org/img/',
@@ -99,22 +98,13 @@ export default {
 			//考虑到本地模拟数据是引用类型，所以返回一个新的数组
 			this.shopListArr = [...res];
         },
-        		//到达底部加载更多数据
-		async loaderMore(){		
-			//防止重复请求
-			if (this.preventRepeatReuqest) {
-				return
-            }
-			this.showLoading = true;
-			this.preventRepeatReuqest = true;
-			//数据的定位加20位
+        //到达底部加载更多数据
+		async loaderMore(){	
+			//数据的定位加10位
 			this.offset += 10;
-			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
-			this.hideLoading();
-            this.shopListArr = [...this.shopListArr, ...res];
-            			
-			this.preventRepeatReuqest = false;
-        },
+			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);			
+            this.shopListArr = [...this.shopListArr, ...res];           			
+		},
         hideLoading(){
 			this.showLoading = false;
         },
