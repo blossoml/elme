@@ -39,7 +39,7 @@
                 <shop-list v-if="hasGetData" :geohash="geohash"></shop-list>
          </div>   
     </div> 
-<foot-guide></foot-guide>
+<foot-guide class="footCon"></foot-guide>
 </div>
 </template>
 <script>
@@ -49,6 +49,7 @@ import {mapMutations, mapState} from 'vuex'  //获取状态信息，以及更改
 import footGuide from '@/commonCon/footGuide'
 import shopList from '@/commonCon/shoplist'
 import headTop from '@/commonCon/head'
+import { mscroll } from '@/common/localStorage'
 import {msiteAddress, msiteFoodTypes, cityGuess} from '@/service/getData'
 export default {
     data()
@@ -71,6 +72,9 @@ export default {
         this.hasGetData=true;   //地理位置获取成功 
     },    
     mounted(){    
+        var wrap=document.querySelector('.con');
+        var footerel=document.querySelector('#foot_guide');      
+        mscroll(wrap,{},footerel);
         this.bodyHeight=document.body.clientHeight;    
         //获取导航的食品分类列表
          msiteFoodTypes(this.geohash).then(res=>{            

@@ -108,9 +108,9 @@ export const cssTransform=(el,attr,val)=>{
     if(!el.transform){
 		el.transform = {};
 	}
-    if(arguments.length>2) {
-        el.transform[attr]=val;
-        var sval="";
+    if(val) {
+        let sVal="";
+        el.transform[attr]=val;       
         for(var s in el.transform)
         { switch(s){
                 case "rotate":
@@ -146,26 +146,17 @@ export const cssTransform=(el,attr,val)=>{
  *滑动行为
  *最大移动距离为document.querySelector('.scroll').offsetHeight+document.querySelector('#foot_guide').offsetHeight-667
  */
-/*
-		start 手指按下
-		in 滑动中
-		end 手指抬起
-		over 滑动结束
-*/
-export const move=(target,time,type)=>{
-    var t=0;
-    var b=cssTransform(child,'translateY');
 
-}
-
-export const mscroll=(wrap,callback,footerel)=>{
+export const mscroll=(wrap,callBack,footerel)=>{
     var child=wrap.children[0];
     var startPoint=0;
     var startY=0;
+
     var minY=wrap.clientHeight-footerel.offsetHeight-child.offsetHeight;
     var step=1;
     var lastY=0;
     var lastDis=0;
+    var lastTime=0;
     var lastTimeDis=1;
     var isMove=true;
     var isFirst=true;
@@ -221,7 +212,7 @@ export const mscroll=(wrap,callback,footerel)=>{
         if(t<minY)/*上拉拉到底部了 */
         {
             var over=minY-t;
-            step=1-over/clientHeight;//步长
+            step=1-over/wrap.clientHeight;//步长
             over=parseInt(over*step);
             t=minY-over;//translateY的值
         }
@@ -240,8 +231,8 @@ export const mscroll=(wrap,callback,footerel)=>{
         var t = cssTransform(child,"translateY");
         var target=t+speed;
         var type="easeOut";
-        var time=Math.abs(speed*.9);//速度和时间相乘
-        time= time<300?300:time;
+        var time=Math.abs(speed*.9);//抛物线
+        time= time<300?300:time;//时间限制在300秒
         if(target>0){
             target=0;
             type="backOut";
@@ -255,6 +246,36 @@ export const mscroll=(wrap,callback,footerel)=>{
 				callBack.end();
 	    }        
     })
+    /*
+		start 手指按下
+		in 滑动中
+		end 手指抬起
+		over 滑动结束
+    */
+    function move(target,time,type) {
+		var t = 0;//当前时间
+		var b = cssTransform(child,"translateY");//初始值
+		var c = target - b;//变化量
+        var d = Math.ceil(time/20);//持续时间
+        clearInterval(child.scroll);
+        child.scroll = setInterval(
+			function() {
+				t++;
+				if(t > d) {
+					clearInterval(child.scroll);
+					if(callBack&&callBack.over){
+						callBack.over();
+					}
+				} else {
+					var top = Tween[type](t,b,c,d);
+					cssTransform(child,"translateY",top);
+					if(callBack&&callBack.in){
+						callBack.in();
+					}
+				}
+			},20
+		);
+    }
 }
 
 /**
