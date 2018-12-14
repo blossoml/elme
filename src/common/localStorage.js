@@ -160,6 +160,7 @@ export const mscroll=(wrap,callBack,footerel)=>{
     var lastTimeDis=1;
     var isMove=true;
     var isFirst=true;
+    var notClick=false;//判断是否为点击事件或者滑动事件
     var Tween = {
 		easeOut: function(t, b, c, d){
 			return -c * ((t=t/d-1)*t*t*t - 1) + b;
@@ -187,8 +188,10 @@ export const mscroll=(wrap,callBack,footerel)=>{
         lastTimeDis=1;
         isMove=true;//判断是竖向拉动
         isFirst=true;
+        notClick=false;
     })
     wrap.addEventListener('touchmove',function(e){
+        notClick=true;
         if(!isMove)
         {
             return;
@@ -221,11 +224,14 @@ export const mscroll=(wrap,callBack,footerel)=>{
         lastY=nowPoint.pageY;//最后的Y坐标值
         lastTime=nowTime;//改变最后时间
         cssTransform(child,"translateY",t);
-        if(callBack&&callBack.in){
+        if(callBack&&callBack.in){       
             callBack.in();
         }
     });
-    wrap.addEventListener('touchend',function(){//松手后的缓冲运动
+    wrap.addEventListener('touchend',function(e){//松手后的缓冲运动
+        if(!notClick){
+            return;         
+        }
         var speed=(lastDis/lastTimeDis)*120; //速度
         speed = isNaN(speed)?0:speed;
         var t = cssTransform(child,"translateY");
@@ -243,8 +249,8 @@ export const mscroll=(wrap,callBack,footerel)=>{
         }
         move(target,time,type);
 		if(callBack&&callBack.end){
-				callBack.end();
-	    }        
+            callBack.end();
+        }      
     })
     /*
 		start 手指按下
@@ -269,7 +275,7 @@ export const mscroll=(wrap,callBack,footerel)=>{
 				} else {
 					var top = Tween[type](t,b,c,d);
 					cssTransform(child,"translateY",top);
-					if(callBack&&callBack.in){
+                    if(callBack&&callBack.in){
 						callBack.in();
 					}
 				}

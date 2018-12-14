@@ -36,7 +36,7 @@
                     </svg>
                     <span class="shop_header_title">附近商家</span>
                 </header>
-                <shop-list v-if="hasGetData" :geohash="geohash" ref="shopref"></shop-list>
+                <shop-list v-if="hasGetData" :geohash="geohash" ref="shopref" @loadOver=over></shop-list>
          </div>  
          <p class="loadTips">{{loadText}}</p> 
     </div> 
@@ -50,7 +50,7 @@ import {mapMutations, mapState} from 'vuex'  //获取状态信息，以及更改
 import footGuide from '@/commonCon/footGuide'
 import shopList from '@/commonCon/shoplist'
 import headTop from '@/commonCon/head'
-import { mscroll } from '@/common/localStorage'
+import { mscroll,cssTransform } from '@/common/localStorage'
 import {msiteAddress, msiteFoodTypes, cityGuess} from '@/service/getData'
 export default {
     data()
@@ -62,7 +62,8 @@ export default {
             imgBaseUrl: 'https://fuss10.elemecdn.com', //图片域名地址  
             bodyHeight:0 ,
             loadText:"下拉加载更多...",
-            isLoad:false    
+            isLoad:false ,
+            LoadOver:false
         }
     },
     async beforeMount(){       
@@ -74,22 +75,39 @@ export default {
         this.RECORD_ADDRESS(res);        
         this.hasGetData=true;   //地理位置获取成功 
     },    
-    mounted(){   
+    mounted(){  
+        let that=this; 
         this.bodyHeight=document.body.clientHeight;    
         let wrap=document.querySelector('.con');
         let footerel=document.querySelector('#foot_guide');  
-        var child=wrap.children[0];        
-        let isLoad=false;  
-        let  callBack=function(){
-            if(footerel.offsetHeight+child.offsetHeight-wrap.clientHeight<window.screenTop)
-            {
-                if(!isLoad){
-                this.$refs.loaderMore();
-                isLoad=true;
-                }                 
-            }                         
+        let child=wrap.children[0];    
+        let  callBack={
+           start:function(){              
+             that.isLoad=false;         
+           },
+           in:function(){ 
+               if(!that.isLoad&&!that.LoadOver){              
+                  if(footerel.offsetHeight+child.offsetHeight-wrap.clientHeight<-cssTransform(child,'translateY'))
+                   {  
+                       that.$refs.shopref.loaderMore();                      
+                       that.isLoad=true;
+                   } 
+               }              
+           },
+           end:function(){
+              if(!that.isLoad&&!that.LoadOver){
+                   if(footerel.offsetHeight+child.offsetHeight-wrap.clientHeight<-cssTransform(child,'translateY'))
+                   {                       
+                        that.$refs.shopref.loaderMore();
+                        that.isLoad=true;             
+                   }
+               }
+           },
+           over:function(){
+
+           }                     
         };
-        mscroll(wrap,{},footerel);
+        mscroll(wrap,callBack,footerel);       
         //获取导航的食品分类列表
          msiteFoodTypes(this.geohash).then(res=>{            
              let resArr=[...res];//返回一个新的数组
@@ -109,6 +127,9 @@ export default {
                 direction: 'horizontal', // 垂直切换选项
 		       });
            })
+    },
+    beforeDestroy:{
+    
     },
      components: {
     	headTop,    	
@@ -131,6 +152,10 @@ export default {
              {
                  return '';
              }
+         },
+         over:function(){
+             this.LoadOver=true;
+             this.loadText="暂无更多数据"
          }
     }
 }

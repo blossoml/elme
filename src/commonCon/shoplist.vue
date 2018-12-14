@@ -1,7 +1,7 @@
 <template>
 	<div class="shoplist_container">
 	<ul  v-if="shopListArr.length" type="1" id="">
-			<router-link :to="{path: 'shop', query:{geohash, id: item.id}}" v-for="item in shopListArr" tag='li' :key="item.id" class="shop_li">
+			<router-link :to="{path: 'shop', query:{geohash, id: item.id}}" v-for="(item,index) in shopListArr" tag='li' :key="index" class="shop_li">
 					<section>
 						<img :src="imgBaseUrl + item.image_path" class="shop_img">
 					</section>
@@ -53,7 +53,7 @@
 
 <script>
 import {mapState} from 'vuex'
-import {shopList} from '@/service/getData'
+import {shopList,cssTransform} from '@/service/getData'
 import loading from './loading'
 
 export default {
@@ -103,7 +103,11 @@ export default {
 			//数据的定位加10位
 			this.offset += 10;
 			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);			
-            this.shopListArr = [...this.shopListArr, ...res];           			
+			this.shopListArr = [...this.shopListArr, ...res];  
+			if(res.length==0)
+			{
+				this.$emit("loadOver");
+			}
 		},
         hideLoading(){
 			this.showLoading = false;
