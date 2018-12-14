@@ -36,7 +36,7 @@
                     </svg>
                     <span class="shop_header_title">附近商家</span>
                 </header>
-                <shop-list v-if="hasGetData" :geohash="geohash"></shop-list>
+                <shop-list v-if="hasGetData" :geohash="geohash" ref="shopref"></shop-list>
          </div>  
          <p class="loadTips">{{loadText}}</p> 
     </div> 
@@ -61,7 +61,8 @@ export default {
             hasGetData: false, //是否已经获取地理位置数据，成功之后再获取商铺列表信息
             imgBaseUrl: 'https://fuss10.elemecdn.com', //图片域名地址  
             bodyHeight:0 ,
-            loadText:"下拉加载更多..."     
+            loadText:"下拉加载更多...",
+            isLoad:false    
         }
     },
     async beforeMount(){       
@@ -77,21 +78,17 @@ export default {
         this.bodyHeight=document.body.clientHeight;    
         let wrap=document.querySelector('.con');
         let footerel=document.querySelector('#foot_guide');  
+        var child=wrap.children[0];        
         let isLoad=false;  
-        let  callBack={
-            start:function(){
-
-            },
-            in:function(){
-				
-			},
-			end: function() {
-			
-			},
-			over: function() {
-			
-			}            
-        }
+        let  callBack=function(){
+            if(footerel.offsetHeight+child.offsetHeight-wrap.clientHeight<window.screenTop)
+            {
+                if(!isLoad){
+                this.$refs.loaderMore();
+                isLoad=true;
+                }                 
+            }                         
+        };
         mscroll(wrap,{},footerel);
         //获取导航的食品分类列表
          msiteFoodTypes(this.geohash).then(res=>{            
