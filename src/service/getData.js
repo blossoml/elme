@@ -72,7 +72,7 @@ export const shopList = (latitude, longitude, offset, restaurant_category_id = '
 /**
  * 获取店铺搜索结果
  */
-export const searchRestaurant=(geohash, keyword) => post('/v4/restaurants', {
+export const searchRestaurant=(geohash, keyword) => get('/v4/restaurants', {
 	'extras[]': 'restaurant_activity',
 	geohash,/** */
 	keyword,/*关键词*/

@@ -46,10 +46,11 @@
                         <line x1="18" y1="8" x2="8" y2="18" style="stroke:#999;stroke-width:3" />
                     </svg>
               </li>              
-          </ul>
+          </ul>     
+      <footer class="clear_history" @click="clearAllHistory">清空搜索历史</footer>
       </section>
-      <footer class="clear_history" @click="clearAllHistory">清空历史</footer>
-      <foot-guide></foot-guide>
+      <div class="search_none" v-if="emptyResult">很抱歉！无搜索结果</div>
+      <foot-guide></foot-guide>    
     </div>   
 </template>
 <script>
@@ -64,7 +65,7 @@ export default {
             geohash:'',//msite页面传递过来的地址
             searchValue:'',//搜索内容
             restaurantList:[],//搜索返回的结果
-            imgBaseUrl: 'https://fuss10.elemecdn.com', //图片域名地址  
+            imgBaseUrl: '//elm.cangdu.org/img/', //图片域名地址  
             searchHistory:[],//搜索历史记录
             showHistory:true,//是否显示历史记录
             emptyResult:false//搜索结果为空时候            
@@ -73,8 +74,9 @@ export default {
     created(){
 
     },
-    mounted(){
-        this.geohash=this.$router.params.geohash;//获取传递过来的hash地址
+    mounted(){        
+        this.geohash=this.$route.params.geohash;//获取传递过来的hash地址        
+        console.log( this.geohash);
         //获取搜索历史记录
         if(getStore('searchHistory'))
         {
@@ -87,17 +89,17 @@ export default {
     },
     methods:{
         //点击提交按钮，搜索结果并显示，同时将搜索内容存入历史记录
-        async:searchTarget(historyValue){
+        async searchTarget(historyValue) {
             if(historyValue){
                 this.searchValue=historyValue
-            }else if(!this.searchValue)
-            {
+            }  else if(!this.searchValue){
+                //searchValue不存在，historyValue也不存在
                 return;
-            }
+            }           
             //隐藏历史记录
             this.showHistory=false;
             //获取搜索结果
-            this.restaurantList=await searchRestaurant(this.geohash,this.sesearchValue);
+            this.restaurantList=await searchRestaurant(this.geohash,this.searchValue);
             this.emptyResult=!this.restaurantList.length;
             /**
              * 点击搜索结果进入下一页面时候进行判断是否已经有一样的历史记录
@@ -106,21 +108,45 @@ export default {
             let history=getStore('searchHistory');
             if(history){
                 let repeat=false;
-               
-
+                this.searchHistory.forEach((item)=>{
+                    if(item==this.searchValue)
+                    {
+                        repeat=true;
+                    }
+                })
+                if(!repeat){               
+                    this.searchHistory.push(this.searchValue);
+                }
+            }else{
+                this.searchHistory.push(this.searchValue);
+            }  
+            setStore('searchHistory',this.searchHistory);
+        },   
+        //搜索结束后，删除内容知道为空时候清空搜索结果，并显示历史记录
+        checkInput(){
+            if (this.searchValue === '') {
+                this.showHistory=true;
+                this.restaurantList=[];//清空搜索结果
+                this.emptyResult=false;//隐藏搜索为空提示
             }
-
-        
-        }
-      
-    }   
-
+        },
+        //点击删除按钮，删除当前历史记录
+        deleteHistory(index){
+            this.searchHistory.splice(index,1);
+            setStore('searchHistory',this.searchHistory);
+        },
+        //清除所有历史记录
+        clearAllHistory(){
+            this.searchHistory=[];
+            setStore('searchHistory',this.searchHistory);
+        },
+    }
 }
 </script>
 <style lang="scss" scoped>
-     @import '../common/mixin'; 
-     $fenmu: 1.6;
-	.search_page{
+      $fenmu: 1.6;  
+     @import '../../common/mixin';
+	    .search_page{
         margin-bottom: 2rem/$fenmu;
     }
     .search_form{

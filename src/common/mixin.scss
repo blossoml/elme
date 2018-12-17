@@ -37,7 +37,7 @@
 $blue: #3190e8;  
 $bc: #e4e4e4;
 $fc:#fff;
-
+$fenmu:1.6;
 // 背景图片地址和大小
 @mixin bis($url) { 
 	background-image: url($url);
@@ -102,5 +102,4 @@ $fc:#fff;
 @mixin fj($type: space-between){
 	display: flex;
 	justify-content: $type;
-
 }

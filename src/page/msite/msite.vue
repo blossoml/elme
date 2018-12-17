@@ -67,7 +67,7 @@ export default {
         }
     },
     async beforeMount(){       
-        this.geohash='31.22299,121.36025';
+        this.geohash='31.223634,121.474443';
         this.SAVE_GEOHASH(this.geohash);
         let res=await msiteAddress(this.geohash);
         this.msiteTitle=res.name;

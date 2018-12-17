@@ -4,6 +4,7 @@ import HelloWorld from '../components/HelloWorld'
 const login = r => require.ensure([], () => r(require('../page/login/login')), 'login')
 const forget = r => require.ensure([], () => r(require('../page/forget/forget')), 'forget')
 const msite = r => require.ensure([], () => r(require('../page/msite/msite')), 'msite')
+const search = r => require.ensure([], () => r(require('../page/search/search')), 'search')
 export default[{
   path:'/',
   component: App, //顶层路由，对应index.html 
@@ -33,6 +34,11 @@ export default[{
       path: '/msite',
       component: msite,
       meta: { keepAlive: true },
+     },
+     //搜索页面
+     {
+      path: '/search/:geohash',
+      component: search     
      },
   ]
 }]
