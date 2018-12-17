@@ -78,6 +78,14 @@ export const searchRestaurant=(geohash, keyword) => get('/v4/restaurants', {
 	keyword,/*关键词*/
 	type: 'search'
 });
+/**
+ * 获取food页面的 category 种类列表
+ */
+
+export const foodCategory = (latitude, longitude) => get('/shopping/v2/restaurant/category', {
+	latitude,
+	longitude
+});
 
 /**
  * 获取food的配送方式

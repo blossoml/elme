@@ -4,14 +4,14 @@
          <!--分类-->
          <section class="sort_container">
              <div class="sort_item" :class="{choose_type:sortBy=='food'}">
-               <div class="sort_item_container" @click="chooseType('food')">
-                  <!--头部分类行-->
+                <div class="sort_item_container" @click="chooseType('food')">
+                    <!--头部分类行-->
                   <div class="sort_item_border">
-    					<span :class="{category_title: sortBy == 'food'}">{{foodTitle}}</span>
-		    			<svg width="10" height="10" xmlns="http://www.w3.org/2000/svg" version="1.1" class="sort_icon">
-			    			<polygon points="0,3 10,3 5,8"/>
-			    		</svg>
-    				</div>
+                    <span :class="{category_title: sortBy == 'food'}">{{foodTitle}}</span>
+                    <svg width="10" height="10" xmlns="http://www.w3.org/2000/svg" version="1.1" class="sort_icon">
+                      <polygon points="0,3 10,3 5,8"/>
+                    </svg>
+                  </div>
                 </div>
                <transition name="showlist" v-show="category">
                 	<section v-show="sortBy == 'food'" class="category_container sort_detail_type">
@@ -50,7 +50,7 @@
              </div>
          <!--排序-->
          <div class="sort_item" :class="{choose_type:sortBy == 'sort'}">">
-             	<div class="sort_item_container" @click="chooseType('sort')">
+            <div class="sort_item_container" @click="chooseType('sort')">
     				<div class="sort_item_border">
 		    			<span :class="{category_title: sortBy == 'sort'}">排序</span>
 		    			<svg width="10" height="10" xmlns="http://www.w3.org/2000/svg" version="1.1" class="sort_icon">
@@ -131,13 +131,18 @@
                     </section>
                 </transition>
                 <section class="shop_list_container">
-	            <shop-list :geohash="geohash" :restaurantCategoryId="restaurant_category_id" :restaurantCategoryIds="restaurant_category_ids" :sortByType='sortByType' :deliveryMode="delivery_mode" :confirmSelect="confirmStatus" :supportIds="support_ids" v-if="latitude"></shop-list>
+	            <shop-list :geohash="geohash" :restaurantCategoryId="restaurant_category_id" :restaurantCategoryIds="restaurant_category_ids" :sortByType='sortByType' :deliveryMode="delivery_mode" :confirmSelect="confirmStatus" :supportIds="support_ids" v-if="latitude"
+
+              ></shop-list>
     	        </section>
          </div>
          </section>
         <transition name="showcover">
     		<div class="back_cover" v-show="sortBy"></div>
-    	</transition>        
+    	</transition>      
+       <section class="shop_list_container">
+	    	<shop-list :geohash="geohash" :restaurantCategoryId="restaurant_category_id" :restaurantCategoryIds="restaurant_category_ids" :sortByType='sortByType' :deliveryMode="delivery_mode" :confirmSelect="confirmStatus" :supportIds="support_ids" v-if="latitude"></shop-list>
+    	</section>  
       </div> 
 </template>
 <script>
@@ -168,6 +173,7 @@ export default {
             sortByType:null,//根据何种方式排序
             Delivery:null,//配送方式数据
             Activity:null,//商家支持活动数据
+            
             delivery_mode: null, // 选中的配送方式
             support_ids:[],//选中商铺活动列表
             filterNum:0,//所选中的所有样式的集合
@@ -177,8 +183,82 @@ export default {
     created(){
         this.initData();
     },
+    mixins: [getImgPath],
+    components:{
+      headTop,
+      shopList
+    },
+    computed:{
+      ...mapState(["latitude", "longitude"])
+    },
     methods:{
-
+    ...mapMutations(["RECORD_ADDRESS"]),
+    //初始化数据
+    async initData(){
+    //获取从页面传递过来的参数    
+      this.geohash=this.$route.query.geohash;
+      this.headTitle=this.$route.query.title;
+      this.foodTitle=this.headTitle;
+      this.restaurant_category_id=this.$route.query.restaurant_category_id;
+        //获取位置信息
+        if(!this.latitude)  {   
+        let res= await msiteAddress(this.geohash);
+        //记录当前精度维度记录进vuex
+          this.RECORD_ADDRESS(res);
+        }
+        //获取目录分类左侧的数据
+         this.category=await foodCategory(this.latitude,this.longitude);
+         //初始化当前category分类左侧默认选择项，在右侧展示出其sub_categories列表
+         this.category.forEach(item=>{
+           if(this.restaurant_category_id==item.id)
+           {
+             this.categoryDetail=item.sub_categories;
+           }
+         })
+         //获取筛选列表的配送方式
+          this.Delivery = await foodDelivery(this.latitude, this.longitude);
+          //获取suports-ids状态
+          this.Activity = await foodActivity(this.latitude, this.longitude);
+          //记录商铺活动的id,默认不选中,点击状态取反，status为true时为选中状态
+          this.Activity.forEach((intem,index)=>{
+            this.support_ids[index]={ status: false, id: item.id };
+          });
+      },
+      //点击顶部三个选项，展示不同的列表，选中当前选项进行展示，同时收回其他选项
+      async chooseType(type){
+        if(this.sortBy!=type){      
+          this.sortBy=type;
+          //food选项头部标题发生改变，需要特殊处理       
+          if(type=="food"){
+            this.foodTitle="分类"
+          }else{
+              //将foodTitle 和 headTitle 进行同步
+              this.foodTitle=this.headTitle;
+          }
+        } else{
+                //再次点击相同选项时收回列表
+         this.sortBy = "";
+         if (type == "food") {
+          //将foodTitle 和 headTitle 进行同步
+          this.foodTitle = this.headTitle;
+         }
+        }              
+      },
+      //选中Category左侧列表的某个选项时，右侧渲染相应的sub_categories列表
+       selectCategoryName(id, index) {
+      //第一个选项 -- 全部商家 因为没有自己的列表，所以点击则默认获取选所有数据
+         if(index===0)
+         {
+             this.restaurant_category_ids = null;
+             this.sortBy = "";//sortby为空             
+              //不是第一个选项时，右侧展示其子级sub_categories的列表
+         }else
+         {
+            this.restaurant_category_id = id;
+            this.categoryDetail =this.category[index].sub_categories;
+         }
+       },
+       
     }
 }
 </script>
@@ -241,7 +321,7 @@ export default {
   .showlist-enter,
   .showlist-leave-to {
     opacity: 0;
-    transform: translateY(-100%);
+    transform: translateY(-100%); 
   }
   .sort_detail_type {
     width: 100%;
@@ -419,7 +499,7 @@ export default {
 }
 .showcover-enter-active,
 .showcover-leave-active {
-  transition: opacity 0.3s;
+  transition: opacity 0.3s;//0.3s
 }
 .showcover-enter,
 .showcover-leave-to {
