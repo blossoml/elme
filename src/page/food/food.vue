@@ -19,8 +19,7 @@
                             <ul>
                                 <li v-for="(item,index) in category" :key="index" 
                                 class="category_left_li" :class="{category_active:restaurant_category_id == item.id}"
-                                @click="selectCategoryName(item.id, index)"><!--点击事件传递id和index-->
-                                > 
+                                @click="selectCategoryName(item.id, index)"><!--点击事件传递id和index-->                                
                                 <section>
                                  <img :src="getImgPath(item.image_url)" v-if="index"  class="category_icon"><!--icon-->
                                  <span>{{item.name}}</span>
@@ -49,7 +48,7 @@
                </transition>
              </div>
          <!--排序-->
-         <div class="sort_item" :class="{choose_type:sortBy == 'sort'}">">
+         <div class="sort_item" :class="{choose_type:sortBy == 'sort'}">
             <div class="sort_item_container" @click="chooseType('sort')">
     				<div class="sort_item_border">
 		    			<span :class="{category_title: sortBy == 'sort'}">排序</span>
@@ -58,21 +57,21 @@
 			    		</svg>
     				</div>
     			</div>
-                <transition name="showlist">
-                    <section v-show="sortBy == 'sort'" class="sort_detail_type">
-                        <ul class="sort_list_container" @click="sortList($event)">
-                            <li class="sort_list_li">
-                            <svg>
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#default"></use>
-                            </svg>
-                            <p data="0" :class="{sort_select: sortByType == 0}">
-                                <span>智能排序</span>
-                                <svg v-if="sortByType == 0">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#selected"></use>
-                                </svg>
-                            </p>
-                           </li>
-                        	<li class="sort_list_li">
+              	<transition name="showlist">
+	    			<section v-show="sortBy == 'sort'" class="sort_detail_type">
+	    				<ul class="sort_list_container" @click="sortList($event)">
+	    					<li class="sort_list_li">
+	    						<svg>
+									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#default"></use>
+								</svg>
+	    						<p data="0" :class="{sort_select: sortByType == 0}">
+	    							<span>智能排序</span>
+	    							<svg v-if="sortByType == 0">
+										<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#selected"></use>
+									</svg>
+	    						</p>
+	    					</li>
+	    					<li class="sort_list_li">
 	    						<svg>
 									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#distance"></use>
 								</svg>
@@ -127,14 +126,9 @@
 									</svg>
 	    						</p>
 	    					</li>
-                        </ul>
-                    </section>
-                </transition>
-                <section class="shop_list_container">
-	            <shop-list :geohash="geohash" :restaurantCategoryId="restaurant_category_id" :restaurantCategoryIds="restaurant_category_ids" :sortByType='sortByType' :deliveryMode="delivery_mode" :confirmSelect="confirmStatus" :supportIds="support_ids" v-if="latitude"
-
-              ></shop-list>
-    	        </section>
+	    				</ul>
+	    			</section>
+	    		</transition>  
          </div>
          </section>
         <transition name="showcover">
@@ -172,8 +166,7 @@ export default {
             categoryDetail:null,// category分类右侧的详细数据
             sortByType:null,//根据何种方式排序
             Delivery:null,//配送方式数据
-            Activity:null,//商家支持活动数据
-            
+            Activity:null,//商家支持活动数据            
             delivery_mode: null, // 选中的配送方式
             support_ids:[],//选中商铺活动列表
             filterNum:0,//所选中的所有样式的集合
@@ -227,8 +220,7 @@ export default {
       //点击顶部三个选项，展示不同的列表，选中当前选项进行展示，同时收回其他选项
       async chooseType(type){
         if(this.sortBy!=type){      
-          this.sortBy=type;
-          //food选项头部标题发生改变，需要特殊处理       
+          this.sortBy=type;          
           if(type=="food"){
             this.foodTitle="分类"
           }else{
@@ -249,15 +241,37 @@ export default {
       //第一个选项 -- 全部商家 因为没有自己的列表，所以点击则默认获取选所有数据
          if(index===0)
          {
-             this.restaurant_category_ids = null;
-             this.sortBy = "";//sortby为空             
-              //不是第一个选项时，右侧展示其子级sub_categories的列表
+             this.restaurant_category_ids = null;//改变分类ids
+             this.sortBy = "";//sortby为空            
          }else
          {
+            //展示右侧
             this.restaurant_category_id = id;
             this.categoryDetail =this.category[index].sub_categories;
          }
        },
+       //选中右侧列表选项时候，进行筛选，重新获取数据并渲染
+        getCategoryIds(id, name) {
+            this.restaurant_category_ids = id;
+            this.sortBy="";
+            this.foodTitle = this.headTitle = name;
+        },
+        //点击某个排序方式，获取事件对象的data值，并根据获取的值重新渲染
+        sortList(event){
+           let node;
+         // 如果点击的是 span 中的文字，则需要获取到 span 的父标签 p
+           if(event.target.nodeName.toUpperCase() !== "P") {
+             node=event.target.parentNode;
+           }else{
+              node=event.target;
+           }
+           console.log(node.getAttribute("data"));
+           this.sortByType = node.getAttribute("data");           
+           this.sortBy="";
+        },
+        //筛选配送
+
+
        
     }
 }
