@@ -46,7 +46,7 @@
 	</ul>        
 	
     <transition name="loading">
-		<!--<loading v-show="showLoading"></loading>-->
+		<loading v-show="showLoading"></loading>
     </transition>
 	</div>	
 </template>

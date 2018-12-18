@@ -88,6 +88,14 @@ export const foodCategory = (latitude, longitude) => get('/shopping/v2/restauran
 });
 
 /**
+ * 获取food页面的商家属性活动列表
+ */
+export const foodActivity = (latitude, longitude) => get('/shopping/v1/restaurants/activity_attributes', {
+	latitude,
+	longitude,
+	kw: ''
+});
+/**
  * 获取food的配送方式
  */
 export const foodDelivery = (latitude, longitude) => get('/shopping/v1/restaurants/delivery_modes', {
