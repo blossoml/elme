@@ -146,13 +146,15 @@ export const cssTransform=(el,attr,val)=>{
  *滑动行为
  *最大移动距离为document.querySelector('.scroll').offsetHeight+document.querySelector('#foot_guide').offsetHeight-667
  */
-
-export const mscroll=(wrap,callBack,footerel)=>{
-    var child=wrap.children[0];
+/**
+ *noBack： 没有回弹效果
+  dis:剩余空间
+ */
+export const mscroll=(wrap,callBack,dis,noBack=false)=>{
+    var child=wrap.querySelector('.scroll');
     var startPoint=0;
     var startY=0;
-
-    var minY=wrap.clientHeight-footerel.offsetHeight-child.offsetHeight;
+    var minY=wrap.clientHeight-dis-child.offsetHeight;
     var step=1;
     var lastY=0;
     var lastDis=0;
@@ -174,7 +176,7 @@ export const mscroll=(wrap,callBack,footerel)=>{
     };
     cssTransform(child,"translateZ",0.01);
     wrap.addEventListener('touchstart',function(e){
-        minY=wrap.clientHeight-footerel.offsetHeight-child.offsetHeight;
+        minY=wrap.clientHeight-dis-child.offsetHeight;
         clearInterval(child.scroll);
         if(callBack&&callBack.start){
             callBack.start();
@@ -209,15 +211,24 @@ export const mscroll=(wrap,callBack,footerel)=>{
         var t=startY+disY;
         var nowTime=new Date().getTime();
         if(t>0)/*下拉拉到顶部了*/{
-            step=1-t/wrap.clientHeight;
+           /* step=1-t/wrap.clientHeight;
             t=parseInt(t*step);
+            if(noBack)
+            {*/
+                t=0;
+           // }
         }
         if(t<minY)/*上拉拉到底部了 */
         {
+            if(noBack)
+            {
+                t=minY;
+            }else{
             var over=minY-t;
             step=1-over/wrap.clientHeight;//步长
             over=parseInt(over*step);
-            t=minY-over;//translateY的值
+            t=minY-over;//translateY的值   
+            }              
         }
         lastDis=nowPoint.pageY-lastY;//最后的距离差
         lastTimeDis = nowTime - lastTime; //最后的时间差
@@ -238,10 +249,10 @@ export const mscroll=(wrap,callBack,footerel)=>{
         var target=t+speed;
         var type="easeOut";
         var time=Math.abs(speed*.9);//抛物线
-        time= time<300?300:time;//时间限制在300秒
+        time= time<300?300:time;//时间限制在300毫秒
         if(target>0){
             target=0;
-            type="backOut";
+            type="easeOut";
         }
         if(target < minY) {
             target = minY;

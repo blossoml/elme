@@ -1,6 +1,5 @@
 <template>
-<div class="con" :style="{height:bodyHeight+'px'}"> <!--固定高度区域-->   
-  <div class="scroll"><!--可以改变transitionY的区域--> 
+<div class="con" :style="{height:bodyHeight+'px'}"> <!--固定高度区域-->  
          <head-top signin-up='msite'>
             <!--链接到搜索页面 search插槽-->
             <router-link :to="'/search/geohash'" class="link_search" slot="search">
@@ -13,7 +12,8 @@
             <router-link to="/home" slot="msite-title" class="msite_title">
                 <span class="title_text ellipsis">{{msiteTitle}}</span>
             </router-link>        
-         </head-top>      
+         </head-top>    
+      <div class="scroll"><!--可以改变transitionY的区域-->   
          <nav class="msite_nav">
          <div class="swiper-container" v-if="foodTypes.length">
             <div class="swiper-wrapper">
@@ -79,7 +79,8 @@ export default {
     this.bodyHeight = document.body.clientHeight;
     let wrap = document.querySelector(".con");
     let footerel = document.querySelector("#foot_guide");
-    let child = wrap.children[0];
+    let headerel=document.querySelector('#head_top');
+    let child = wrap.querySelector('.scroll');
     let callBack = {
       start: function() {
         that.isLoad = false;
@@ -87,7 +88,7 @@ export default {
       in: function() {
         if (!that.isLoad && !that.LoadOver) {
           if (
-            footerel.offsetHeight + child.offsetHeight - wrap.clientHeight <
+            footerel.offsetHeight +headerel.offsetHeight+ child.offsetHeight - wrap.clientHeight <
             -cssTransform(child, "translateY")
           ) {
             that.$refs.shopref.loaderMore();
@@ -98,7 +99,7 @@ export default {
       end: function() {
         if (!that.isLoad && !that.LoadOver) {
           if (
-            footerel.offsetHeight + child.offsetHeight - wrap.clientHeight <
+            footerel.offsetHeight +headerel.offsetHeight + child.offsetHeight - wrap.clientHeight <
             -cssTransform(child, "translateY")
           ) {
             that.$refs.shopref.loaderMore();
@@ -108,7 +109,7 @@ export default {
       },
       over: function() {}
     };
-    mscroll(wrap, callBack, footerel);   
+    mscroll(wrap, callBack, footerel.offsetHeight +headerel.offsetHeight);   
     //获取导航的食品分类列表
     msiteFoodTypes(this.geohash)
       .then(res => {
@@ -190,10 +191,10 @@ $fenmu: 1.6;
   }
 }
 .msite_nav {
-  padding-top: 2.1rem / $fenmu;
+  margin-top: 2.1rem / $fenmu;
   background-color: #fff;
   border-bottom: 0.025rem / $fenmu solid $bc;
-  height: 10.6rem / $fenmu;
+  height: (10.6-2.1)rem / $fenmu;
   .swiper-container {
     @include wh(100%, auto);
     padding-bottom: 0.6rem / $fenmu;

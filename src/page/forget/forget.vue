@@ -3,7 +3,7 @@
         <head-top head-title="重置密码" goBack="true"></head-top>
         <form class="restForm">
             <section class="input_container phone_number">
-                <input type="text" placeholder="账号" name="phone" maxlength="11" v-model="phoneNumber" @input="inputPhone">
+                <input type="text" placeholder="账号" name="phone" maxlength="11" v-model="phoneNumber" >
             </section>
               <section class="input_container">
                 <input type="text" placeholder="旧密码" name="oldPassWord" v-model="oldPassWord">

@@ -122,7 +122,6 @@
       </div> 
 </template>
 <script>
-import {} from "vuex";
 import { mapMutations, mapState } from "vuex"; //获取状态信息，以及更改状态信息
 import headTop from "@/commonCon/head";
 import footGuide from "@/commonCon/footGuide";
