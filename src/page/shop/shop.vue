@@ -32,10 +32,44 @@
                     </svg>
                   </footer>          
                  </section>
-            </header>
-         
-         
-        </section>
+            </header>  
+            <!--头部信息栏目-->
+            <transition name="fade">
+                <section class="activities_details" v-if="showActivities">
+                      <h2 class="activities_shoptitle">{{shopDetailData.name}}</h2>                      
+                </section>
+                <section  class="activities_list">
+                       <header class="activities_title_style"><span>优惠信息</span></header>
+                       <ul>
+                           <li v-for="item in shopDetailData.activities" :key=item.id>
+                                <span class="activities_icon" :style="{backgroundColor: '#' + item.icon_color, borderColor: '#' + item.icon_color}">{{item.icon_name}}</span>
+                                 <span>{{item.description}}（APP专享）</span> 
+                           </li>
+                       </ul>
+                </section>
+                 <section class="activities_shopinfo">
+                        <header class="activities_title_style"><span>商家公告</span></header>
+                        <p>{{promotionInfo}}</p>
+                    </section>
+                    <svg width="60" height="60" class="close_activities" @click.stop="showActivitiesFun">
+                        <circle cx="30" cy="30" r="25" stroke="#555" stroke-width="1" fill="none"/>
+                        <line x1="22" y1="38" x2="38" y2="22" style="stroke:#999;stroke-width:2"/>
+                        <line x1="22" y1="22" x2="38" y2="38" style="stroke:#999;stroke-width:2"/>
+                    </svg>                    
+            </transition>     
+            <!--切换导航条-->        
+            <section class="change_show_type"  ref="chooseType">
+                <div>
+                <span :class='{activity_show: changeShowType =="food"}'  @click="changeShowType='food'"></span>
+                </div>
+                <div>
+                 <span :class='{activity_show: changeShowType =="rating"}' @click="changeShowType='rating'"></span>
+                </div>
+            </section> 
+           <transition name="fade-chodse">
+               
+           </transition>
+          </section>
     </div>
 </template>
 <script>
