@@ -342,7 +342,7 @@ export default {
                 return this.shopDetailData.promotion_info || '欢迎光临，用餐高峰期请提前下单，谢谢。'
        },
        //配送费
-       deliveryFee: function () {
+       deliveryFee:function () {
                 if (this.shopDetailData) {
                     return this.shopDetailData.float_delivery_fee;
                 }else{
@@ -497,14 +497,14 @@ export default {
       removeOutCart(category_id, item_id, food_id, name, price, specs){
         this.REDUCE_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs});
       },
+   },
       watch:{
            shopCart: function (value){
                 this.initCategoryNum();
             },
       }   
     }
-  }
-};
+
 </script>
 
 <style lang="scss" scoped>
