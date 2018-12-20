@@ -2,7 +2,7 @@
     <div>
         <section v-if="!showLoading" class="shop_container">
             <nav class="goback" @click="goback">
-                <svg width="4rem/$fensu" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                <svg width="2.2rem" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
                     <polyline points="12,18 4,9 12,0" style="fill:none;stroke:rgb(255,255,255);stroke-width:3"/>
                 </svg>
             </nav>
@@ -121,10 +121,7 @@
                                             </section>  
                         <!--加减组件-->    
                         <buy-cart :shopId='shopId' 
-                        :foods='foods' @moveInCart="listenInCart"
-                         @showChooseList="showChooseList" 
-                         @showReduceTip="showReduceTip" 
-                         @showMoveDot="showMoveDotFun"
+                        :foods='foods' @moveInCart="listenInCart"                       
                         ></buy-cart> 
                        </footer>     
                       </section>
@@ -207,7 +204,7 @@
            <!--商品评价页面                                -->
             <transition name="fade-choose">
                 <section class="rating_container" id="ratingContainer" v-show="changeShowType =='rating'">
-                    <section v-load-more="loaderMoreRating" type="2">
+                    <section  type="2">
                         <section>
 
                             <header class="rating_header">
@@ -218,13 +215,11 @@
                                 </section>
                                 <section class="rating_header_right">
                                     <p>
-                                        <span>服务态度</span>
-                                        <rating-star :rating='ratingScoresData.service_score'></rating-star>
+                                        <span>服务态度</span>                                     
                                         <span class="rating_num">{{ratingScoresData.service_score.toFixed(1)}}</span>
                                     </p>
                                     <p>
-                                        <span>菜品评价</span>
-                                        <rating-star :rating='ratingScoresData.food_score'></rating-star>
+                                        <span>菜品评价</span>                                       
                                         <span class="rating_num">{{ratingScoresData.food_score.toFixed(1)}}</span>
                                     </p>
                                     <p>
@@ -243,8 +238,7 @@
                                         <header>
                                             <section class="username_star">
                                                 <p class="username">{{item.username}}</p>
-                                                <p class="star_desc">
-                                                    <rating-star :rating='item.rating_star'></rating-star>
+                                                <p class="star_desc">                                                 
                                                     <span class="time_spent_desc">{{item.time_spent_desc}}</span>
                                                 </p>
                                             </section>
@@ -287,7 +281,7 @@ import {
 } from "@/service/getData";
 import loading from "@/commonCon/loading";
 import buyCart from "@/commonCon/buyCart";
-import { getImgPath } from "@/common/mixin";
+import { getImgPath } from "@/common/mixin.js";
 export default {
   data() {
     return {
@@ -314,7 +308,7 @@ export default {
       ratingTageIndex: 0, //评价分类索引
       preventRepeatRequest: false, // 防止多次触发数据请求
       ratingTagName: "", //评论的类型
-      loadRatings: true, //加载更多评论是显示加载组件
+      loadRatings: false, //加载更多评论是显示加载组件
       foodScroll: null, //食品列表scroll
       showSpecs: false, //控制显示食品规格
       specsIndex: 0, //当前选中的规格索引值
@@ -328,9 +322,9 @@ export default {
       imgBaseUrl: "//elm.cangdu.org/img/"
     };
   },
-  mixins:{
+  mixins:[
      getImgPath
-  },
+  ],
   components:{
          loading,          
          buyCart,
