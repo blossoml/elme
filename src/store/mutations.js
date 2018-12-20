@@ -121,7 +121,7 @@ export default {
 	 },
 	 //清空当前商品的购物车信息
 	 [CLEAR_CART](state, shopid){
-		 state.cartList[shopid]=null;
+		 state.cartList[shopid]=null;//将该shopid置为空
 		 state.cartList={...state.cartList};
 		 setStore('buyCart',state.cartList);
 	 },

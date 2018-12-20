@@ -189,7 +189,6 @@
                                      </svg>
                                    </span>
                                     <span class="cart_num">{{item.num}}</span>
-
                                     <svg class="cart_add" @click="addToCart(item.category_id, item.item_id, item.food_id, item.name, item.price, item.specs)">
                                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
                                    </svg>
@@ -205,7 +204,7 @@
                 </transition>
             </section>    
            </transition>
-           <!--商品评价页面                         s        -->
+           <!--商品评价页面                                -->
             <transition name="fade-choose">
                 <section class="rating_container" id="ratingContainer" v-show="changeShowType =='rating'">
                     <section v-load-more="loaderMoreRating" type="2">
@@ -269,6 +268,10 @@
                 </section>
             </transition>
          </section>
+          <loading v-show="showLoading || loadRatings"></loading>
+          <transition name="router-slid" mode="out-in">
+            <router-view></router-view>
+          </transition>
     </div>
 </template>
 <script>
@@ -311,7 +314,7 @@ export default {
       ratingTageIndex: 0, //评价分类索引
       preventRepeatRequest: false, // 防止多次触发数据请求
       ratingTagName: "", //评论的类型
-      loadRatings: false, //加载更多评论是显示加载组件
+      loadRatings: true, //加载更多评论是显示加载组件
       foodScroll: null, //食品列表scroll
       showSpecs: false, //控制显示食品规格
       specsIndex: 0, //当前选中的规格索引值
@@ -324,6 +327,9 @@ export default {
       ratingScroll: null, //评论页Scroll
       imgBaseUrl: "//elm.cangdu.org/img/"
     };
+  },
+  mixins:{
+     getImgPath
   },
   components:{
          loading,          
@@ -372,7 +378,7 @@ export default {
     this.INIT_BUYCART();
   },
   mounted(){
-      this.initData();
+      this.initData();//挂载完成后初始化数据
       this.windowHeight = window.innerHeight;
   }, 
   methods:{
@@ -383,23 +389,119 @@ export default {
       showActivitiesFun() {
        this.showActivities = !this.showActivities;
       },
+      //隐藏加载动画
+      hideLoading(){
+          this.showLoading=false;
+      },
      //初始化的时候获取基本数据
-     async initData(){
+      async initData(){
       if(!this.latitude){
-
+          //获取位置信息
+          let res=await msiteAddress(this.geohash);
+          //记录当前经纬度
+          this.RECORD_ADDRESS(res);
       }
+      //获取商铺信息
+      this.shopDetailData=await shopDetails(this.shopId, this.latitude, this.longitude);
+      //获取食品列表
+      this.menuList=await foodMenu(this.shopId);
+      //评论列表
+      this.ratingList=await getRatingList(this.shopId, this.ratingOffset);
+      //商铺评价分数详情
+      this.ratingScoresData= await ratingScores(this.shopId); 
+      //评论tag列表
+      this.ratingTagsList=await ratingTags(this.shopId);
+      this.RECORD_SHOPDETAIL(this.shopDetailData);
+       //隐藏加载动画
+       this.hideLoading();
      },
-     //加入购物车，所需7个参数，商铺id，食品目录id，食品id，食品规格id，食品名字，食品价格，食品规格
-     addToCart(category_id,item_id,food_id ,name, price, specs){
-      this.ADD_CART({
-       shopid:this.shopId,
-       category_id,
-       item_id,
-       food_id,//食品规格id
-       name,
-       price,
-       specs
-      })
+     /* * 初始化和shopCart变化时，
+             * 重新获取购物车改变过的数据，
+             * 赋值 categoryNum，totalPrice，cartFoodList，
+             * 整个数据流是自上而下的形式，所有的购物车数据都交给vuex统一管理，
+             * 包括购物车组件中自身的商品数量，使整个数据流更加清晰
+    */
+     initCategoryNum(){   
+         let newArr=[];
+         let cartFoodNum=0;
+         this.totalPrice=0;
+         this.cartFoodList=[]; 
+         /**
+          * shopCart的结构
+          * 目录id=>可能存在多个
+          * 商品id=>包含在目录id下
+          * 食品规格id=>包含在商品id里面
+          */
+         /**
+          * menuList结构 json数组
+          * 目录id 
+          * foods属性，包含所有该目录下的商品信息.对象数组 
+          */
+         this.menuList.forEach((item,index)=>{
+            if(this.shopCart&&this.shopCart[item.foods[0].category_id]){
+                //如果缓存中存在购物车信息，且购物车当前目录下信息存在
+               let num=0;
+               //遍历目录下的商品id
+               Object.keys(this.shopCart[item.foods[0].category_id]).forEach(itemid=>{
+                    Object.keys(this.shopCart[item.foods[0].category_id][itemid]).forEach(foodid => {
+                        //商品规格id
+                         let foodItem = this.shopCart[item.foods[0].category_id][itemid][foodid];
+                         num+=foodItem.num;
+                         if(item.type==1)
+                         {    this.totalPrice += foodItem.num*foodItem.price;
+                               if (foodItem.num > 0) {
+                                        this.cartFoodList[cartFoodNum] = {};
+                                        this.cartFoodList[cartFoodNum].category_id = item.foods[0].category_id;
+                                        this.cartFoodList[cartFoodNum].item_id = itemid;
+                                        this.cartFoodList[cartFoodNum].food_id = foodid;
+                                        this.cartFoodList[cartFoodNum].num = foodItem.num;
+                                        this.cartFoodList[cartFoodNum].price = foodItem.price;
+                                        this.cartFoodList[cartFoodNum].name = foodItem.name;
+                                        this.cartFoodList[cartFoodNum].specs = foodItem.specs;
+                                        cartFoodNum ++;
+                               }
+                         }
+                    })
+               }) 
+              newArr[index] = num;           
+            }  else{
+                newArr[index]=0;
+            }  
+            this.totalPrice= this.totalPrice.toFixed(2);
+            this.categoryNum=[...newArr];              
+         })
+     },
+     //控制购物列表是否显示
+     toggleCartList(){
+           this.cartFoodList.length ? this.showCartList = !this.showCartList : true;     
+           //如果length大于0，则改变购物车伸缩状态。否则不作改变       
+     },     
+     //清除购物车
+     clearCart(){
+         this.toggleCartList();
+         this.CLEAR_CART(this.shopId);
+     },
+     //监听原点进入购物车
+      listenInCart(){
+       
+
+      },
+      goback(){
+                this.$router.go(-1);
+      },
+     //加入购物车，所需7个参数，商铺id，食品分类id，食品id，食品规格id，食品名字，食品价格，食品规格
+      addToCart(category_id, item_id, food_id, name, price, specs){
+        this.ADD_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs});
+      },
+    //移出购物车，所需7个参数，商铺id，食品分类id，食品id，食品规格id，食品名字，食品价格，食品规格
+      removeOutCart(category_id, item_id, food_id, name, price, specs){
+        this.REDUCE_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs});
+      },
+      watch:{
+           shopCart: function (value){
+                this.initCategoryNum();
+            },
+      }   
     }
   }
 };
