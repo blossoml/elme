@@ -67,11 +67,11 @@ export default {
 		let category=shop[category_id]=(shop[category_id] || {});//目录id
 		let item = category[item_id] = (category[item_id] || {});//商品id
 		if(item[food_id]){
-         item[food_id]['num']++;/**如果食物id存在那么直接加 */
+         item[food_id]['num']++;/**食品规格id 数量加一*/
 		}else{
 			item[food_id]={
 				"num":1,//数量
-				"id":food_id,//食物id
+				"id":food_id,//食品id
 				"name":name,//商品名称
 				"price":price,//价格
 				"specs" : specs,
@@ -99,10 +99,10 @@ export default {
 		let category = (shop[category_id] || {});
 		let item = (category[item_id] || {});
 		if(item&&item[food_id]){
-			if (item[food_id]['num'] > 0) {
+			if (item[food_id]['num'] > 0) {//如果数量大于0的时候，
 				item[food_id]['num']--;
-				state.cartList={...cart};
-				//存入localStorage
+				//解构对象，并且存入localStorage
+				state.cartList={...cart};			
 				setStore('buyCart', state.cartList);
 			}else{
 				//商品数量为0的时候。清空当前商品信息
