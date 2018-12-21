@@ -1,6 +1,7 @@
 <template>
 <section class="cart_module">
-    <section v-if="!foods.specifications.length" class="cart_button" > 
+    <section v-if="!foods.specifications.length" class="cart_button" >
+      <!--减按钮--> 
       <transition name="showReduce">
           <span v-if="foodNum"
            @click="removeOutCart(foods.category_id,foods.item_id, foods.specfoods[0].food_id,
@@ -9,14 +10,17 @@
                   <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-minus"></use>
               </svg>
           </span>
-      </transition>     
+      </transition> 
+      <!--foodNum按钮-->   
        <transition name="fade">
               <span class="cart_num" v-if="foodNum">{{foodNum}}</span>
-       </transition>   
+       </transition>  
+       <!--加按钮--> 
         <svg class="add_icon" @touchstart="addToCart(foods.category_id, foods.item_id, foods.specfoods[0].food_id, foods.specfoods[0].name, foods.specfoods[0].price, '', foods.specfoods[0].packing_fee, foods.specfoods[0].sku_id, foods.specfoods[0].stock, $event)">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
         </svg>
-    </section>
+    </section>   
+     <!--选规格按钮--> 
      <section v-else class="choose_specification">
             <section class="choose_icon_container">
                 <transition name="showReduce">
@@ -47,12 +51,14 @@ export default {
     computed:{
         ...mapState(['cartList']), 
         /**
-         * 监听list的变化，更新当前商铺的购物车信息shopCart，同时返回一个新对象
+         * 当前商铺的购物车信息
          */
         shopCart:function(){
         return Object.assign({},this.cartList[this.shopId])
         },
-        //shopCart变化的时候重新计算当前商品的数量
+        /**
+         *当前组件的数量信息
+         */
         foodNum:function(){
               let category_id = this.foods.category_id;
               let item_id=this.foods.item_id;//商品id
@@ -83,14 +89,14 @@ export default {
      //加入购物车，计算按钮位置。
      addToCart(category_id, item_id, food_id, name, price, specs, packing_fee, sku_id, stock, event){
        this.ADD_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs, packing_fee, sku_id, stock})
-       let elLeft=event.target.getBoundingClientRect().left;//元素左边到视窗左边的距离
-       let elBottom= event.target.getBoundingClientRect().bottom;
+       let elLeft=event.target.getBoundingClientRect().left;//距离左边的距离
+       let elBottom= event.target.getBoundingClientRect().bottom;//距离底部的距离
        this.showMoveDot.push(true);
        this.$emit('showMoveDot', this.showMoveDot, elLeft, elBottom);/**原点运动的函数 */
      },
      //显示规格列表??????????????????????????????
-      showChooseList(foodScroll){
-                this.$emit('showChooseList', foodScroll)
+      showChooseList(foods){
+                this.$emit('showChooseList', foods)
       },
       //点击多规格商品的减按钮，弹出提示
       showReduceTip(){

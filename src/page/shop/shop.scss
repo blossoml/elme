@@ -843,28 +843,33 @@ $fensu: 1.6;
  .fade-enter-active, .fade-leave-active {
      transition: opacity .5s;
  }
- .fade-enter, .fade-leave-active {
+ //进入和离开完成时候透明度为0
+ .fade-enter, .fade-leave-to {
      opacity: 0;
  }
  .fade-choose-enter-active, .fade-choose-leave-active {
      transition: opacity .5s;
  }
- .fade-choose-leave, .fade-choose-leave-active {
+ //进入和离开完成透明度为0，且display为none
+ .fade-choose-leave , .fade-choose-leave-to{
      display: none;
  }
- .fade-choose-enter, .fade-choose-leave-active {
+ .fade-choose-enter, .fade-choose-leave-to {
      opacity: 0;
  }
+ //进入和离开完成时候tranlateX为2rem。透明度为0
  .router-slid-enter-active, .router-slid-leave-active {
      transition: all .4s;
  }
- .router-slid-enter, .router-slid-leave-active {
+ .router-slid-enter, .router-slid-leave-to {
      transform: translate3d(2rem/$fensu, 0, 0);
      opacity: 0;
  }
+
  .toggle-cart-enter-active, .toggle-cart-leave-active {
      transition: all .3s ease-out;
  }
- .toggle-cart-enter, .toggle-cart-leave-active {
+ //进入和离开完成时候translateY值为100%
+ .toggle-cart-enter, .toggle-cart-leave-to {
      transform: translateY(100%);
  }
