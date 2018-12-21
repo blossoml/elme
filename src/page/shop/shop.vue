@@ -264,6 +264,19 @@
                 </section>
             </transition>
          </section>
+        <transition
+        appear
+        @after-appear = 'afterEnter'
+        @before-appear="beforeEnter"
+        v-for="(item,index) in showMoveDot"
+        :key="index"
+        >
+            <span class="move_dot" v-if="item">
+                <svg class="move_liner">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
+                </svg>
+            </span>
+        </transition>
          <loading v-show="showLoading || loadRatings"></loading>
          <transition name="router-slid" mode="out-in">
             <router-view></router-view>
@@ -390,6 +403,43 @@ export default {
       hideLoading(){
           this.showLoading=false;
       },
+     //监听原点是否进入购物车
+     listenInCart(){
+        if(!this.receiveInCart){
+            this.receiveInCart=true;
+            this.$refs.cartContainer.addEventListener('animationend', () => {
+                        this.receiveInCart = false;
+            })
+             this.$refs.cartContainer.addEventListener('webkitAnimationEnd', () => {
+                        this.receiveInCart = false;
+            })
+        } 
+     },
+     //显示下落圆球
+     showMoveDot(showMoveDot, elLeft, elBottom){
+        this.showMoveDot = [...this.showMoveDot, ...showMoveDot];
+        this.elLeft = elLeft;
+        this.elBottom = elBottom;
+     },
+      beforeEnter(el){
+                el.style.transform = `translate3d(0,${37 + this.elBottom - this.windowHeight}px,0)`;
+                el.children[0].style.transform = `translate3d(${this.elLeft - 30}px+ ,0,0)`;
+                el.children[0].style.opacity = 0;
+       },
+      afterEnter(el){
+                el.style.transform = `translate3d(0,0,0)`;
+                el.children[0].style.transform = `translate3d(0,0,0)`;//竖直方向上加速，抛物线
+                el.style.transition = 'transform .55s cubic-bezier(0.3, -0.25, 0.7, -0.15)';
+                el.children[0].style.transition = 'transform .55s linear';//水平方向上匀速
+                this.showMoveDot = this.showMoveDot.map(item => false);
+                el.children[0].style.opacity = 1;
+                el.children[0].addEventListener('transitionend', () => {
+                    this.listenInCart();
+                })
+                el.children[0].addEventListener('webkitAnimationEnd', () => {
+                    this.listenInCart();
+                })
+      },
      //获取食品分类列表的高度，存入shopListTop数组中
      getFoodListHeight(){
          const listContainer = this.$refs.menuFoodList;//右侧食品列表dom
@@ -491,7 +541,7 @@ export default {
      },
      //监听原点进入购物车
       listenInCart(){       
-
+      
       },
       goback(){
                 this.$router.go(-1);
