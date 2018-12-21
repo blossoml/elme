@@ -72,7 +72,7 @@
                 <section class="menu_container">
                     <section class="menu_left" id="wrapper_menu" ref="wrapperMenu">
                         <ul>
-                            <li v-for="(item,index) in menuList" :key="index"  class="menu_left_li" :class="{activity_menu: index == menuIndex}" @click="chooseMenu(index)">
+                            <li v-for="(item,index) in menuList" :key="index"  class="menu_left_li" :class="{activity_menu: index == menuIndex}">
                             <img :src="getImgPath(item.icon_url)" v-if="item.icon_url">
                             <span>{{item.name}}</span>
                             <span class="category_num" v-if="categoryNum[index]&&item.type==1">{{categoryNum[index]}}</span>
@@ -102,8 +102,7 @@
                                                         <p :style="{color: attribute.icon_name == '新'? '#fff' : '#' + attribute.icon_color}">{{attribute.icon_name == '新'? '新品':attribute.icon_name}}</p>
                                                     </li>
                                                 </ul>                                    
-                                        </h3>
-                                </section>
+                                    </h3>                            
                                     <p class="food_description_content">{{foods.description}}</p>
                                     <p class="food_description_sale_rating">
                                                         <span>月售{{foods.month_sales}}份</span>
@@ -112,6 +111,7 @@
                                     <p v-if="foods.activity" class="food_activity">
                                     <span :style="{color: '#' + foods.activity.image_text_color,borderColor:'#' +foods.activity.icon_color}">{{foods.activity.image_text}}</span>
                                 </p>
+                                </section>
                         </router-link>    
                         <footer class="menu_detail_footer">
                                                 <section class="food_price">
@@ -124,7 +124,7 @@
                             :foods='foods' @moveInCart="listenInCart"                       
                             ></buy-cart> 
                         </footer>     
-                        </section>
+                      </section>
                     </li>
                     </ul>
                     </section>               
@@ -419,7 +419,7 @@ export default {
     */
      initCategoryNum(){   
          let newArr=[];
-         let cartFoodNum=0;
+         let cartFoodNum=0;        
          this.totalPrice=0;
          this.cartFoodList=[]; 
          /**
@@ -427,8 +427,6 @@ export default {
           * 目录id=>可能存在多个
           * 商品id=>包含在目录id下
           * 食品规格id=>包含在商品id里面
-          */
-         /**
           * menuList结构 json数组
           * 目录id 
           * foods属性，包含所有该目录下的商品信息.对象数组 
@@ -440,11 +438,12 @@ export default {
                //遍历目录下的商品id
                Object.keys(this.shopCart[item.foods[0].category_id]).forEach(itemid=>{
                     Object.keys(this.shopCart[item.foods[0].category_id][itemid]).forEach(foodid => {
-                        //商品规格id
+                        //商品规格id                      
                          let foodItem = this.shopCart[item.foods[0].category_id][itemid][foodid];
                          num+=foodItem.num;
                          if(item.type==1)
                          {    this.totalPrice += foodItem.num*foodItem.price;
+                              console.log(foodItem.num*foodItem.price)
                                if (foodItem.num > 0) {
                                         this.cartFoodList[cartFoodNum] = {};
                                         this.cartFoodList[cartFoodNum].category_id = item.foods[0].category_id;
@@ -463,9 +462,9 @@ export default {
             }  else{
                 newArr[index]=0;
             }  
-            this.totalPrice= this.totalPrice.toFixed(2);
-            this.categoryNum=[...newArr];              
-         })
+          })
+          this.totalPrice = this.totalPrice.toFixed(2);
+          this.categoryNum=[...newArr];             
      },
      //控制购物列表是否显示
      toggleCartList(){
@@ -493,11 +492,19 @@ export default {
       removeOutCart(category_id, item_id, food_id, name, price, specs){
         this.REDUCE_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs});
       },
-   },
-      watch:{
-           shopCart: function (value){
+    },
+    watch:{
+        shopCart: function (value){
                 this.initCategoryNum();
-            },
+        },          
+		showLoading: function(value){	
+            console.log(value);	
+			if(!value){
+			 this.$nextTick(()=>{
+				this.initCategoryNum();
+			 })
+            }
+        }     
       }   
     }
 

@@ -1,25 +1,22 @@
 <template>
 <section class="cart_module">
     <section v-if="!foods.specifications.length" class="cart_button" >
-      <!--减按钮--> 
-      <transition name="showReduce">
-          <span v-if="foodNum"
+      <!--减按钮-->   
+      <transition name="showReduce">       
+          <section v-if="foodNum" class="add_icon"
            @click="removeOutCart(foods.category_id,foods.item_id, foods.specfoods[0].food_id,
            foods.specfoods[0].price,'',foods.specfoods[0].packing_fee,foods.specfoods[0].sku_id,foods.specfoods[0].stock)">
-               <svg>
-                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-minus"></use>
-              </svg>
-          </span>
-      </transition> 
+               <p> - </p>
+          </section>
+      </transition>
       <!--foodNum按钮-->   
        <transition name="fade">
               <span class="cart_num" v-if="foodNum">{{foodNum}}</span>
        </transition>  
-       <!--加按钮--> 
-        <svg class="add_icon" @touchstart="addToCart(foods.category_id, foods.item_id, foods.specfoods[0].food_id, foods.specfoods[0].name, foods.specfoods[0].price, '', foods.specfoods[0].packing_fee, foods.specfoods[0].sku_id, foods.specfoods[0].stock, $event)">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
-        </svg>
-    </section>   
+      <section class="add_icon" @click="addToCart(foods.category_id, foods.item_id, foods.specfoods[0].food_id, foods.specfoods[0].name, foods.specfoods[0].price, '', foods.specfoods[0].packing_fee, foods.specfoods[0].sku_id, foods.specfoods[0].stock, $event)">
+              <p> + </p>
+      </section>
+    </section>
      <!--选规格按钮--> 
      <section v-else class="choose_specification">
             <section class="choose_icon_container">
@@ -34,8 +31,7 @@
                 <span class="show_chooselist" @click="showChooseList(foods)">选规格</span>
             </section>
      </section>
-</section>
-    
+</section>    
 </template>
 <script>
 import {mapState, mapMutations} from 'vuex'
@@ -45,37 +41,33 @@ export default {
               showMoveDot: [], //控制下落的小圆点显示隐藏
         }
     },
-    mounted(){
-
+    mounted(){    
     },
+    props:['foods', 'shopId'],
     computed:{
-        ...mapState(['cartList']), 
-        /**
-         * 当前商铺的购物车信息
-         */
+       ...mapState([
+                'cartList'
+        ]),       
         shopCart:function(){
         return Object.assign({},this.cartList[this.shopId])
-        },
-        /**
-         *当前组件的数量信息
-         */
-        foodNum:function(){
+        },       
+        foodNum:function(){          
               let category_id = this.foods.category_id;
               let item_id=this.foods.item_id;//商品id
-              //商品id存在
-              if(this.shopCart&this.shopCart[category_id]&&this.shopCart[category_id][item_id])
+              //商品id存在             
+              if(this.shopCart&&this.shopCart[category_id]&&this.shopCart[category_id][item_id])
               {
                   let num=0;
                   Object.values(this.shopCart[category_id][item_id]).forEach((item,index)=>{
-                      num+=item.num;  
-                  });                 
+                      num += item.num;  
+                  });                      
+                  return num; 
              }else{
                return 0;
              }
         }
-    },
-   props:['foods', 'shopId'],
-   methods:{
+    }, 
+    methods:{
      ...mapMutations([
            'ADD_CART','REDUCE_CART',
      ]),
@@ -92,7 +84,7 @@ export default {
        let elLeft=event.target.getBoundingClientRect().left;//距离左边的距离
        let elBottom= event.target.getBoundingClientRect().bottom;//距离底部的距离
        this.showMoveDot.push(true);
-       this.$emit('showMoveDot', this.showMoveDot, elLeft, elBottom);/**原点运动的函数 */
+       //this.$emit('showMoveDot', this.showMoveDot, elLeft, elBottom);/**原点运动的函数 */
      },
      //显示规格列表??????????????????????????????
       showChooseList(foods){
@@ -112,16 +104,21 @@ export default {
 	.cart_module{
         .add_icon{
             position: relative;
-            z-index: 999;
+            z-index: 10;
+            border-radius: 50%;   
+            font-size: 16px;
+            font-weight: bold;    
+            @include wh(.9rem/$fensu, .9rem/$fensu);
+            background-color: #3190e8;
+            text-align: center;
+        }
+        .add_icon p{
+            color: #fff;
         }
         .cart_button{
             display: flex;
             align-items: center;
-        }
-        svg{
-            @include wh(.9rem/$fensu, .9rem/$fensu);
-            fill: #3190e8;
-        }
+        }    
         .specs_reduce_icon{
             fill: #999;
         }
@@ -149,7 +146,7 @@ export default {
     .showReduce-enter-active, .showReduce-leave-active {
         transition: all .3s ease-out;
     }
-    .showReduce-enter, .showReduce-leave-active {
+    .showReduce-enter, .showReduce-leave-to {
         opacity: 0;
         transform: translateX(1rem/$fensu);
     }

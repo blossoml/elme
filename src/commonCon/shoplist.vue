@@ -71,7 +71,7 @@ export default {
     },
     components:{
         loading
-    },
+	},
     /**接收参数
 	 * 目录id,排序id,配送方式
 	*/
