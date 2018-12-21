@@ -79,6 +79,7 @@
                             </li>
                         </ul>
                     </section>
+                    <!--全部的商品列表-->
                     <section class="menu_right" ref="menuFoodList">
                     <ul>
                     <li v-for="(item,index) in menuList" :key="index">
@@ -375,7 +376,7 @@ export default {
   },
   mounted(){
       this.initData();//挂载完成后初始化数据
-      this.windowHeight = window.innerHeight;
+      this.windowHeight = window.innerHeight;//设置window高度
   }, 
   methods:{
       ...mapMutations([
@@ -389,6 +390,18 @@ export default {
       hideLoading(){
           this.showLoading=false;
       },
+     //获取食品分类列表的高度，存入shopListTop数组中
+     getFoodListHeight(){
+         const listContainer = this.$refs.menuFoodList;//右侧食品列表dom
+         if(listContainer){
+           //Array.from方法用于将两类对象转为真正的数组：
+           //类似数组的对象（array-like object）和可遍历（iterable）的对象
+           const listArr= Array.from(listContainer.children[0].children);
+           listArr.forEach((item,index)=>{
+               this.shopListTop[index]=item.offsetTop;               
+           })
+         }        
+     },
      //初始化的时候获取基本数据
       async initData(){
       if(!this.latitude){
@@ -396,7 +409,7 @@ export default {
           let res=await msiteAddress(this.geohash);
           //记录当前经纬度
           this.RECORD_ADDRESS(res);
-      }
+      }      
       //获取商铺信息
       this.shopDetailData=await shopDetails(this.shopId, this.latitude, this.longitude);
       //获取食品列表
@@ -477,8 +490,7 @@ export default {
          this.CLEAR_CART(this.shopId);
      },
      //监听原点进入购物车
-      listenInCart(){
-       
+      listenInCart(){       
 
       },
       goback(){
@@ -500,8 +512,12 @@ export default {
 		showLoading: function(value){	
             console.log(value);	
 			if(!value){
+            //nextTick：下次dom更新循环结束后执行延迟回调，在修改数据之后立即使用这个方法，
+            //获取更新后的dom
+            //数据加载完成后，获取高度并且初始化购物车
 			 this.$nextTick(()=>{
-				this.initCategoryNum();
+                this.getFoodListHeight();
+                this.initCategoryNum();                
 			 })
             }
         }     
