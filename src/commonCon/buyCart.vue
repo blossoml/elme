@@ -84,7 +84,7 @@ export default {
        let elLeft=event.target.getBoundingClientRect().left;//距离左边的距离
        let elBottom= event.target.getBoundingClientRect().bottom;//距离底部的距离
        this.showMoveDot.push(true);
-       //this.$emit('showMoveDot', this.showMoveDot, elLeft, elBottom);/**原点运动的函数 */
+       this.$emit('showMoveDot', this.showMoveDot, elLeft, elBottom);/**原点运动的函数 */
      },
      //显示规格列表??????????????????????????????
       showChooseList(foods){

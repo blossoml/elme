@@ -242,7 +242,7 @@ $fensu: 1.6;
      }
      .menu_right{
          flex: 4;
-         overflow-y: auto;
+         overflow-y: hidden;
          .menu_detail_header{
              width: 100%;
              padding: .4rem/$fensu;
@@ -834,7 +834,9 @@ $fensu: 1.6;
      position: fixed;
      bottom: 30px;
      left: 30px;
-
+     div{
+         color:red;
+     }
      svg{
          @include wh(.9rem/$fensu, .9rem/$fensu);
          fill: #3190e8;

@@ -79,8 +79,10 @@ export default {
     this.bodyHeight = document.body.clientHeight;
     let wrap = document.querySelector(".con");
     let footerel = document.querySelector("#foot_guide");
-    let headerel=document.querySelector('#head_top');
+    let headerel=document.querySelector('#head_top');   
     let child = wrap.querySelector('.scroll');
+    let dis=footerel.offsetHeight +headerel.offsetHeight;
+    cssTransform(child,"translateZ",0.01);
     let callBack = {
       start: function() {
         that.isLoad = false;
@@ -88,7 +90,7 @@ export default {
       in: function() {
         if (!that.isLoad && !that.LoadOver) {
           if (
-            footerel.offsetHeight +headerel.offsetHeight+ child.offsetHeight - wrap.clientHeight <
+            dis+child.offsetHeight- wrap.clientHeight <
             -cssTransform(child, "translateY")
           ) {
             that.$refs.shopref.loaderMore();
@@ -99,7 +101,7 @@ export default {
       end: function() {
         if (!that.isLoad && !that.LoadOver) {
           if (
-            footerel.offsetHeight +headerel.offsetHeight + child.offsetHeight - wrap.clientHeight <
+            dis + child.offsetHeight - wrap.clientHeight <
             -cssTransform(child, "translateY")
           ) {
             that.$refs.shopref.loaderMore();
@@ -109,7 +111,7 @@ export default {
       },
       over: function() {}
     };
-    mscroll(wrap, callBack, footerel.offsetHeight +headerel.offsetHeight);   
+    mscroll(wrap,child,callBack,dis);   
     //获取导航的食品分类列表
     msiteFoodTypes(this.geohash)
       .then(res => {

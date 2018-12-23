@@ -108,7 +108,7 @@ export const cssTransform=(el,attr,val)=>{
     if(!el.transform){
 		el.transform = {};
 	}
-    if(val) {
+    if(val==0||val!=undefined) {
         let sVal="";
         el.transform[attr]=val;       
         for(var s in el.transform)
@@ -124,7 +124,7 @@ export const cssTransform=(el,attr,val)=>{
                     break;   
                 case "scaleX":
                 case "scaleY":
-                case "scale":
+                case "scale": 
                     sVal +=s+"("+el.transform[s]+") ";
                     break;	
             }                   
@@ -148,12 +148,13 @@ export const cssTransform=(el,attr,val)=>{
  */
 /**
  *noBack： 没有回弹效果
-  dis:剩余空间
+  dis:剩余空间,
+  wrap:固定高度元素
+  child:非固定高度可滑动元素
  */
-export const mscroll=(wrap,callBack,dis,noBack=false)=>{
-    var child=wrap.querySelector('.scroll');
+export const mscroll=(wrap,child,callBack,dis,noBack=false)=>{ 
     var startPoint=0;
-    var startY=0;
+    var startY=0;   
     var minY=wrap.clientHeight-dis-child.offsetHeight;
     var step=1;
     var lastY=0;
@@ -225,15 +226,15 @@ export const mscroll=(wrap,callBack,dis,noBack=false)=>{
                 t=minY;
             }else{
             var over=minY-t;
-            step=1-over/wrap.clientHeight;//步长
-            over=parseInt(over*step);
+            step=1-over/wrap.clientHeight;//步长与over成反比
+            over=parseInt(over*step*0.5);
             t=minY-over;//translateY的值   
             }              
         }
         lastDis=nowPoint.pageY-lastY;//最后的距离差
         lastTimeDis = nowTime - lastTime; //最后的时间差
         lastY=nowPoint.pageY;//最后的Y坐标值
-        lastTime=nowTime;//改变最后时间
+        lastTime=nowTime;//改变最后时间  
         cssTransform(child,"translateY",t);
         if(callBack&&callBack.in){       
             callBack.in();
