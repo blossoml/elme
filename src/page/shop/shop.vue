@@ -411,13 +411,13 @@ export default {
         let wrapRight=document.querySelector(".menu_right");   
         let leftChild=wrapLeft.children[0];
         let rightChild=wrapRight.children[0];     
-        let leftLiHeight=wrapRight.children[0].children[0].offsetHeight;
+        let leftLiHeight=wrapLeft.children[0].children[0].offsetHeight;
         let index=0;        
         let that=this;  
         let callBack={
-        in: function(){
-          index=that.getIndex(Math.abs(cssTransform(rightChild,"translateY")),that.shopListTop);
-          that.menuIndex=index;       
+        in: function(){         
+          index=that.getIndex(Math.abs(cssTransform(rightChild,"translateY")),that.shopListTop);  
+          that.menuIndex=index;  
           let offbottom=Math.abs(cssTransform(leftChild,"translateY"))+wrapLeftHeight-that.menuLeftTop[index];
           let offTop=Math.abs(cssTransform(leftChild,"translateY"))-that.menuLeftTop[index];
           if(offbottom<0){             
@@ -458,8 +458,13 @@ export default {
        getIndex(transformY,offsetheightTop){        
         let index=0;
         for(let i=0;i<offsetheightTop.length;i++){
-            if(offsetheightTop[i]<=transformY&&transformY<offsetheightTop[i+1])
+            if(offsetheightTop[i]<=transformY+3&&transformY<offsetheightTop[i+1])
             index=i;
+            if(i==offsetheightTop.length-1)
+            {
+                if(offsetheightTop[i]<=transformY)
+                index=i;
+            }
         }
         return index;       
        },
