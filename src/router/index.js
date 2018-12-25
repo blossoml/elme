@@ -10,6 +10,8 @@ const foodDetail = r => require.ensure([], () => r(require('../page/shop/childre
 const shopDetail = r => require.ensure([], () => r(require('../page/shop/children/shopDetail')), 'shopDetail')
 const shopSafe = r => require.ensure([], () => r(require('../page/shop/children/children/shopSafe')), 'shopSafe')
 const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
+const info = r => require.ensure([], () => r(require('../page/profile/children/info')), 'info')
+
 export default[{
   path:'/',
   component: App, //顶层路由，对应index.html 
@@ -23,6 +25,10 @@ export default[{
     {
       path:'/profile',
       component:profile, 
+      children: [{
+        path: 'info', //个人信息详情页
+        component: info,
+      }]
     },
     {
       path:'/HelloWorld',
