@@ -82,7 +82,7 @@ export default {
 		}
 		state.cartList={...cart};
 		//存入localStorage
-		getStore('buyCart',state.cartList);
+		setStore('buyCart',state.cartList);
 	},
 	//移出购物车
 	[REDUCE_CART](state, {

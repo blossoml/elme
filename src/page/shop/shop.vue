@@ -425,15 +425,31 @@ export default {
           }
           if(offTop>0){
               cssTransform(leftChild,"translateY",-that.menuLeftTop[index]);
-          }
-          that.menuIndex=index;
+          }         
          },
          end:function(){
           index=that.getIndex(Math.abs(cssTransform(rightChild,"translateY")),that.shopListTop);
           that.menuIndex=index;
+          let offbottom=Math.abs(cssTransform(leftChild,"translateY"))+wrapLeftHeight-that.menuLeftTop[index];
+          let offTop=Math.abs(cssTransform(leftChild,"translateY"))-that.menuLeftTop[index];
+          if(offbottom<0){             
+              cssTransform(leftChild,"translateY",wrapLeftHeight-that.menuLeftTop[index]-leftLiHeight);
+          }
+          if(offTop>0){
+              cssTransform(leftChild,"translateY",-that.menuLeftTop[index]);
+          }         
          },
          over:function(){
-
+          index=that.getIndex(Math.abs(cssTransform(rightChild,"translateY")),that.shopListTop);
+          that.menuIndex=index;
+          let offbottom=Math.abs(cssTransform(leftChild,"translateY"))+wrapLeftHeight-that.menuLeftTop[index];
+          let offTop=Math.abs(cssTransform(leftChild,"translateY"))-that.menuLeftTop[index];
+          if(offbottom<0){             
+              cssTransform(leftChild,"translateY",wrapLeftHeight-that.menuLeftTop[index]-leftLiHeight);
+          }
+          if(offTop>0){
+              cssTransform(leftChild,"translateY",-that.menuLeftTop[index]);
+          }     
          }
         }
         mscroll(wrapRight,rightChild,callBack,true);
@@ -654,8 +670,7 @@ export default {
         this.$nextTick(() => {
             let that=this;           
             let wrap=document.querySelector(".rating_container");
-            let child=wrap.children[0];          
-            let ratingDis=document.querySelector(".change_show_type").offsetHeight+document.querySelector(".shop_detail_header").offsetHeight;    
+            let child=wrap.children[0];         
             let callBack={
             start: function() {
                 that.ratingIsLoad = false;
