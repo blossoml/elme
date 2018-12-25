@@ -9,6 +9,7 @@ const shop=r=>require.ensure([],()=>r(require('../page/shop/shop')),'shop')
 const foodDetail = r => require.ensure([], () => r(require('../page/shop/children/foodDetail')), 'foodDetail')
 const shopDetail = r => require.ensure([], () => r(require('../page/shop/children/shopDetail')), 'shopDetail')
 const shopSafe = r => require.ensure([], () => r(require('../page/shop/children/children/shopSafe')), 'shopSafe')
+const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
 export default[{
   path:'/',
   component: App, //顶层路由，对应index.html 
@@ -17,6 +18,11 @@ export default[{
     {
     path:'',
     redirect:'/HelloWorld'
+    },
+    //个人信息页
+    {
+      path:'/profile',
+      component:profile, 
     },
     {
       path:'/HelloWorld',
