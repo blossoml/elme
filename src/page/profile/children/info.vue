@@ -44,10 +44,10 @@ export default {
            async uploadAvatar(){
                 if (this.userInfo) {
                     let input = document.querySelector('.profileinfopanel-upload')
-                    let data = new FormData();
-                    data.append('file', input.files[0]);
+                    let formData = new FormData();
+                    formData.append('file', input.files[0]);
                     try{
-                        let response = await $post('/eus/v1/users/' + this.userInfo.user_id + '/avatar',data);                           
+                        let response = await  Axios.post('/eus/v1/users/' + this.userInfo.user_id + '/avatar',data);      
                         //credentials,include不论是不是跨域的请求,总是发送请求资源域在本地的 cookies、 HTTP Basic authentication 等验证信息.
                         let res = await response.json();
                         if (res.status == 1) {

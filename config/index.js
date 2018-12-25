@@ -3,13 +3,16 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-
+/**
+ * 由于项目本身启动本地服务是需要单独占用一个端口的，所以必然产生跨域问题。当然跨域有多种方式解决
+ */
 module.exports = {
   dev: { //开发环境
+    env: require('./dev.env'),
     assetsSubDirectory: 'staticonfic',
     assetsPublicPath: '/',  
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 8083, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,//运行后项目自启
     errorOverlay: true,//查询错误
     notifyOnErrors: true,//通知错误
@@ -18,21 +21,7 @@ module.exports = {
     devtool: 'source-map',
    // cacheBusting: true,
     cacheBusting:false,
-    cssSourceMap: false,
-    context: [ //代理路径
-      '/shopping',
-      '/ugc',
-      '/v1',
-      '/v2',
-      '/v3',
-      '/v4',
-      '/bos',
-      '/member',
-      '/promotion',
-      '/eus',
-      '/payapi',
-      '/img',
-    ],
+    cssSourceMap: false,   
     proxyTable:{
       '/api':{
         target: 'http://cangdu.org:8001',//目标接口和域名
@@ -47,6 +36,7 @@ module.exports = {
   //'http://localhost:8080/api' ===> 'http://www.abc.com/api'
   build: {   
     //配置入口文件
+    env:require ('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
     //项目打包路径
     assetsRoot: path.resolve(__dirname, '../dist'),

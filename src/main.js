@@ -9,9 +9,10 @@ import FastClick from 'fastclick'
 //是为了检查用户是否在做双击。为了能立即响应用户的点击事件，用fastclick
 import 'lib-flexible'  //使用flexible.js
 import {post,get} from './util/util'
-
+import axios from 'axios'
 Vue.prototype.$post=post;//定义全局变量
 Vue.prototype.$get=get;
+Vue.prototype.$http = axios
 //安装其他插件的时候，可以使用vue.use()来注册，但是axios并不是vue插件，所以不能用
 //所以只能在每个需要发送请求的组件中引入即可。
 //Vue.prototype.$http=axios;

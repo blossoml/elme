@@ -2,7 +2,8 @@ import Axios from "axios";
 import { resolve } from "path";
 //axios配置
 Axios.defaults.timeout=5000;
-Axios.defaults.baseURL='http://cangdu.org:8001/';
+//Axios.defaults.baseURL='http://cangdu.org:8001/';
+Axios.defaults.baseURL='api/'
 Axios.defaults.withCredentials=true;//允许携带cookies信息
 //http request 拦截器
 Axios.interceptors.request.use(
@@ -13,6 +14,7 @@ Axios.interceptors.request.use(
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
+        console.log(config.url);
         /*if(token)
         {
             config.params={'token':token}
@@ -51,9 +53,8 @@ export function get(url,params={}){
 export function post(url,data={}){
     return new Promise((resolve,reject)=>{
         Axios.post(url,data)
-        .then(response=>{           
-            console.log('dashjklj');
-            resolve(response.data);
+        .then(response=>{          
+           resolve(response.data);
         },err=>{
             reject(err);
         })   
