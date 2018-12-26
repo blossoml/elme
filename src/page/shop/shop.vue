@@ -363,7 +363,6 @@ export default {
                     return null;
                 }
         },
-
        //还差多少元起送，为负数时候显示结算按钮
         minimumOrderAmount:function(){
           if(this.shopDetailData)

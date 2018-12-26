@@ -35,8 +35,7 @@ export default {
    mounted(){
        //vue实例创建之后，dom挂载完成
        //获取用户信息
-       this.getUserInfo();
-       console.log(this.userInfo);
+       this.getUserInfo();   
    },
    //接收父组件传递过来的参数包括title,返回和登录
    props: ['signinUp', 'headTitle', 'goBack'],

@@ -11,7 +11,7 @@ const shopDetail = r => require.ensure([], () => r(require('../page/shop/childre
 const shopSafe = r => require.ensure([], () => r(require('../page/shop/children/children/shopSafe')), 'shopSafe')
 const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
 const info = r => require.ensure([], () => r(require('../page/profile/children/info')), 'info')
-
+const service = r => require.ensure([], () => r(require('../page/service/service')), 'service')
 export default[{
   path:'/',
   component: App, //顶层路由，对应index.html 
@@ -28,7 +28,10 @@ export default[{
       children: [{
         path: 'info', //个人信息详情页
         component: info,
-      }]
+      },{
+        path: 'service', //服务中心
+        component: service,
+     }]
     },
     {
       path:'/HelloWorld',
@@ -50,6 +53,11 @@ export default[{
       path: '/msite',
       component: msite,
       meta: { keepAlive: true },
+     },
+    //服务中心
+     {
+        path: '/service',
+        component: service,       
      },
      //搜索页面
      {

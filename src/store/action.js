@@ -14,7 +14,7 @@ export default{
   	async getUserInfo({commit,state}){
      let res=await getUser();//获取用户信息
      commit(GET_USERINFO,res);//
-    }, 
+    },   
    async saveAddress({
     commit,
     state

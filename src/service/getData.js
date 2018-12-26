@@ -44,6 +44,11 @@ geohash,
 group_type:'1',
 'flags[]':'F'
 })
+/**
+ * 获取服务中心信息
+ */
+
+export const getService = () => get('/v3/profile/explain');
 
 /**
  * 获取msite商铺列表
