@@ -23,6 +23,7 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
 import {mapMutations, mapState} from 'vuex'
 import headTop from '@/commonCon/head'
 export default {
@@ -47,13 +48,18 @@ export default {
                     let formData = new FormData();
                     formData.append('file', input.files[0]);
                     try{
-                        let response = await  Axios.post('/eus/v1/users/' + this.userInfo.user_id + '/avatar',data);      
+                         let  instance = axios.create({
+                                            baseURL: 'api/',
+                                            timeout: 1000,
+                                            headers: { credentials: 'include'}
+                                            });
+                        let response = await  instance.post('/eus/v1/users/' + this.userInfo.user_id + '/avatar',formData);      
                         //credentials,include不论是不是跨域的请求,总是发送请求资源域在本地的 cookies、 HTTP Basic authentication 等验证信息.
-                        let res = await response.json();
+                        let res = await response.data;
                         if (res.status == 1) {
                             this.userInfo.avatar = res.image_path;
                         }
-                    }catch (error) {
+                   }catch (error) {
                         this.showAlert = true;
                         this.alertText = '上传失败';
                         throw new Error(error);
@@ -61,7 +67,6 @@ export default {
                 }
            }
        }
-
 }
 </script>
 <style lang="scss" scoped>
