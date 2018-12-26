@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title></title>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <style type="text/css">
+
+        * {margin: 0;padding: 0;}
+
+        body{
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        ::-webkit-scrollbar {/*滚动条整体样式*/
+            width: 0;     /*高宽分别对应横竖滚动条的尺寸*/
+        }
+
+        .appMain {
+
+        }
+
+        .appHead {
+            line-height: 45px;
+            height: 45px;
+            background-color: #666;
+            text-align:center;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .appCentent {
+            /*position: relative;*/
+            overflow: hidden;
+        }
+
+        #mid_right {
+            position: fixed;
+            top: 45px;
+            right: 0;
+            height: inherit;
+            font-size: 14px;
+            padding-bottom: 60px;
+            overflow: scroll;
+            z-index: 0;
+        }
+
+        #mid_right > dl {
+            width: 100%;
+        }
+
+        #mid_right > dl > dt {
+            width: 100%;
+            line-height: 30px;
+            text-indent: 10px;
+            background-color: #11bbe8;
+            color: #fff;
+        }
+
+        #mid_right > dl > dd {
+            width: 90%;
+            margin:0 5%;
+            line-height: 66px;
+            /*text-indent: 10px;*/
+            /*background-color: #11bbe8;*/
+            color: #999;
+            border-bottom: 1px solid #ddd;
+        }
+        #mid_right > dl > dd:last-child {border-bottom: none;}
+
+        #mid_left {
+            position: fixed;
+            left: 0;
+            top: 45px;
+            width: 80px;
+            height: inherit;
+            overflow-x:hidden;
+            overflow-y:scroll;
+            background-color:#ddd;
+        }
+
+        #mid_left > a {
+            float: left;
+            width: 77px;
+            color: #FFF;
+            text-decoration: none;
+            line-height: 50px;
+            border-bottom: 1px solid #ccc;
+            border-left: 3px solid #ddd;
+            text-indent: 16px;
+            font-weight: bold;
+            font-size: 14px;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        #mid_left > a.yes {
+            float: left;
+            width: 77px;
+            color: #afae18;
+            text-decoration: none;
+            line-height: 50px;
+            border-bottom: 1px solid #ccc;
+            border-left: 3px solid #47bbe3;
+            background-color: #FFF;
+            font-weight: bold;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .appFoot {
+            float: left;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            background-color: #666;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 1225;
+        }
+
+        .appFoot > aside {
+            float: left;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            position: relative;
+            top:-20px;
+            left: 20px;
+            background-color: #666;
+            box-shadow: 0 0 5px #333;
+            color: #ffec27;
+            text-align: center;
+            line-height: 60px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        #pay {
+            float: right;
+            width: 100px;
+            height: inherit;
+            background-color: #777;
+            color: #999;
+            border: none;
+            font-weight: bold;
+            overflow: hidden;
+            font-size: 15px;
+        }
+
+        .mfoot {
+            text-align: center;
+            line-height: 25px;
+            color: #ddd;
+            font-size: 12px;
+            padding: 15px 0;
+        }
+
+    </style>
+</head>
+<body>
+    <section class="appMain">
+        <header id="header" class="appHead">麻辣烫</header>
+        <main id="middle" class="appCentent">
+            <aside id="mid_left">
+                <a href="#yh" class="yes">优惠</a>
+                <a href="#rm">热卖</a>
+                <a href="#zk">折扣</a>
+                <a href="#yl">饮料</a>
+                <a href="#zs">主食</a>
+                <a href="#tj">推荐</a>
+                <a href="#tc">套餐</a>
+                <a href="#xc">小吃</a>
+                <a href="#pp">品牌</a>
+                <a href="#tjj">特价</a>
+                <a href="#xl">限量</a>
+                <a href="#qg">抢购</a>
+                <a href="#td">甜点</a>
+            </aside>
+            <section id="mid_right">
+                <dl>
+                    <dt id="yh">优惠</dt>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                </dl>
+                <dl>
+                    <dt id="rm">热卖</dt>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                </dl>
+                <dl>
+                    <dt id="zk">折扣</dt>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                </dl>
+                <dl>
+                    <dt id="yl">饮料</dt>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                </dl>
+                <dl>
+                    <dt id="zs">主食</dt>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                </dl>
+                <dl>
+                    <dt id="tj">推荐</dt>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                </dl>
+                <dl>
+                    <dt id="tc">套餐</dt>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                </dl>
+                <dl>
+                    <dt id="xc">小吃</dt>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                </dl>
+                <dl>
+                    <dt id="pp">品牌</dt>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                </dl>
+                <dl>
+                    <dt id="tjj">特价</dt>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                </dl>
+                <dl>
+                    <dt id="xl">限量</dt>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                </dl>
+                <dl>
+                    <dt id="qg">抢购</dt>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                </dl>
+                <dl>
+                    <dt id="td">甜点</dt>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                    <dd>sdsdfsdf</dd>
+                </dl>
+                <footer class="mfoot">
+                    来自刘备月下独酌余温青青子衿的make<br />
+                    2018-12-25
+                </footer>
+            </section>
+        </main>
+        <footer id="footer" class="appFoot">
+            <aside>66.66</aside>
+            <button id="pay">结 算</button>
+        </footer>
+    </section>
+</body>
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="application/javascript">
+    (function($){
+        "use strict";
+        document.getElementById("middle").style.height = window.innerHeight - document.getElementById("header").clientHeight - document.getElementById("footer").clientHeight + "px";
+        document.getElementById("mid_right").style.width = window.innerWidth - document.getElementById("mid_left").clientWidth + "px";
+
+        let list = document.querySelectorAll("#middle > aside > a")
+                ,b = true
+                ,r = $("#mid_right");
+
+        [].forEach.call(list,function(v,i){
+            v.addEventListener("click",function(){
+                b = false;
+                clickList(this);
+                let d = this.getAttribute("href").split("#")[1];
+                r.animate({scrollTop:document.getElementById(d).offsetTop},800);
+            });
+        });
+
+        r.on("touchend",function(){b = true;});
+        r.on("scroll",function(e){
+            if(b){
+                $(this).find("dl").each(function(i){
+                    let top = $(this).offset().top
+                            ,bottom = $(this).find("dd").last().offset().top;
+                    if((top <= 145 && top >= 0) || (top < 0 && bottom >= 300 && bottom >= 0)) {
+                        console.log(bottom);
+                        clickList(list[i]);
+                        let dt = list[i].offsetTop;
+                        $('#mid_left').scrollTop(dt);
+                    }
+                })
+            }
+        });
+
+        function clickList(t){
+            for(let n = 0;n < list.length;n++) list[n].className = "";
+            t.className = "yes";
+        }
+
+    })(jQuery);
+</script>
+</html>
