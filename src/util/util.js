@@ -13,8 +13,7 @@ Axios.interceptors.request.use(
         config.headers={
             'Accept': 'application/json',
             'Content-Type': 'application/json'
-        }
-        console.log(config.url);
+        }     
         /*if(token)
         {
             config.params={'token':token}
