@@ -12,6 +12,8 @@ const shopSafe = r => require.ensure([], () => r(require('../page/shop/children/
 const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
 const info = r => require.ensure([], () => r(require('../page/profile/children/info')), 'info')
 const service = r => require.ensure([], () => r(require('../page/service/service')), 'service')
+const questionDetail = r => require.ensure([], () => r(require('../page/service/children/questionDetail')), 'questionDetail')
+const download = r => require.ensure([], () => r(require('../page/download/download')), 'download')
 export default[{
   path:'/',
   component: App, //顶层路由，对应index.html 
@@ -28,10 +30,11 @@ export default[{
       children: [{
         path: 'info', //个人信息详情页
         component: info,
-      },{
-        path: 'service', //服务中心
-        component: service,
-     }]
+      }]
+    },
+    {
+      path:'/download',
+      component:download, 
     },
     {
       path:'/HelloWorld',
@@ -57,7 +60,13 @@ export default[{
     //服务中心
      {
         path: '/service',
-        component: service,       
+        component: service,    
+        name:'service',
+        children:[{
+          path: 'questionDetail', //问题详情页
+          component: questionDetail,
+          name:'questionDetail'
+        }]   
      },
      //搜索页面
      {

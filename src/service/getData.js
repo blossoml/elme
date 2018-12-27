@@ -21,7 +21,45 @@ export const msiteFoodTypes = geohash => get('/v2/index_entry', {
 	group_type: '1',
 	'flags[]': 'F'
 });
+/**
+ * 确认订单
+ */
 
+export const checkout = (geohash, entities, shopid) => post('/v1/carts/checkout', {
+	come_from: "web",
+	geohash,
+	entities,
+	restaurant_id: shopid,
+});
+
+/**
+ * 获取地址列表
+ */
+
+export const getAddress = (id, sig) => get('/v1/carts/' + id + '/addresses', {
+	sig
+});
+/**
+ * 下订单
+ */
+
+export const placeOrders = (user_id, cart_id, address_id, description, entities, geohash, sig) => post('/v1/users/' + user_id + '/carts/' + cart_id + '/orders', {
+	address_id,
+	come_from: "mobile_web",
+	deliver_time: "",
+	description,
+	entities,
+	geohash,
+	paymethod_id: 1,
+	sig,
+});
+
+
+/**
+*个人中心里编辑地址
+*/
+
+export const getAddressList = (user_id) => get('/v1/users/'+user_id+'/addresses')
 
 /**
  * 获取当前所在城市

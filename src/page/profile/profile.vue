@@ -363,7 +363,7 @@ $fenmu: 1.6;
         transition: all .4s;
     }
     .router-slid-enter, .router-slid-leave-active {
-        transform: translate3d(2rem/$fenmu, 0, 0);
+        transform: translate3d(1.25rem, 0, 0);
         opacity: 0;
     }
 </style>

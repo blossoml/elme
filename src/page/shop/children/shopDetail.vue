@@ -64,8 +64,8 @@
                 <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg" version="1.1" class="description_arrow" >
                     <path d="M0 0 L8 7 L0 14"  stroke="#bbb" stroke-width="1.5" fill="none"/>
                 </svg>
-            </p>
-        </section>
+            </p>   
+         </section>
         <!--图片遮罩层需要过渡-->
         <transition name="fade">
             <section class="license_container" v-if="showlicenseImg" @click="showlicenseImg = false">
