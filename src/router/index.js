@@ -14,6 +14,14 @@ const info = r => require.ensure([], () => r(require('../page/profile/children/i
 const service = r => require.ensure([], () => r(require('../page/service/service')), 'service')
 const questionDetail = r => require.ensure([], () => r(require('../page/service/children/questionDetail')), 'questionDetail')
 const download = r => require.ensure([], () => r(require('../page/download/download')), 'download')
+const confirmOrder = r => require.ensure([], () => r(require('../page/confirmOrder/confirmOrder')), 'confirmOrder')
+/*const remark = r => require.ensure([], () => r(require('../page/confirmOrder/children/remark')), 'remark')
+const payment = r => require.ensure([], () => r(require('../page/confirmOrder/children/payment')), 'payment')
+const userValidation = r => require.ensure([], () => r(require('../page/confirmOrder/children/userValidation')), 'userValidation')
+const invoice = r => require.ensure([], () => r(require('../page/confirmOrder/children/invoice')), 'invoice')
+const chooseAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/chooseAddress')), 'chooseAddress')
+const addAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/children/addAddress')), 'addAddress')
+const searchAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/children/children/searchAddress')), 'searchAddress')*/
 export default[{
   path:'/',
   component: App, //顶层路由，对应index.html 
@@ -31,6 +39,11 @@ export default[{
         path: 'info', //个人信息详情页
         component: info,
       }]
+    },
+     //确认订单页
+    {
+      path: '/confirmOrder',
+      component: confirmOrder,      
     },
     {
       path:'/download',

@@ -198,7 +198,7 @@ export default {
 		cart_id,
 		sig
 	}){
-		state.cart_id=cart.cart_id;//购物车id
+		state.cart_id=cart_id;//购物车id
 		state.sig=sig;//订单sig
 	},
 	//保存下单参数，用户验证页面调用
