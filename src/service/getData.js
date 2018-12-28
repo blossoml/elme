@@ -42,7 +42,6 @@ export const getAddress = (id, sig) => get('/v1/carts/' + id + '/addresses', {
 /**
  * 下订单
  */
-
 export const placeOrders = (user_id, cart_id, address_id, description, entities, geohash, sig) => post('/v1/users/' + user_id + '/carts/' + cart_id + '/orders', {
 	address_id,
 	come_from: "mobile_web",

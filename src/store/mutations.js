@@ -178,7 +178,7 @@ export default {
 		address,
 		index
 	}) {
-		state.CHOOSE_ADDRESS=address;
+		state.CHOOSE_ADDRESS=address;//地址
 		state.addressIndex=index;
 	},
 	//记录用户信息
@@ -193,13 +193,13 @@ export default {
 		state.needValidation = needValidation;
 		//确认订单时是否需要验证
 	},
-	//保存下单后购物id 和 sig
+	//保存下单后购物id 和 订单id sig
 	[SAVE_CART_ID_SIG](state, {
 		cart_id,
 		sig
 	}){
 		state.cart_id=cart.cart_id;//购物车id
-		state.sig=sig;//购物车sig
+		state.sig=sig;//订单sig
 	},
 	//保存下单参数，用户验证页面调用
 	[SAVE_ORDER_PARAM](state, orderParam) {
