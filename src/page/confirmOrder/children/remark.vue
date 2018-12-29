@@ -16,6 +16,7 @@
             </section>
             <div class="determine" @click="confirmRemark">确定</div>
     </section>
+    <loading v-if="showLoading"></loading>
 </div>
     
 </template>
