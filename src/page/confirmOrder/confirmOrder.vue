@@ -292,14 +292,8 @@ export default {
                 });  
                 //发送订单信息               
                 let orderRes = await placeOrders(this.userInfo.user_id, this.checkoutData.cart.id, this.choosedAddress.id, this.remarklist, this.checkoutData.cart.groups, this.geohash, this.checkoutData.sig);
-                 //第一次下单的手机号需要进行验证，否则直接下单成功
-                /*if (orderRes.need_validation) {
-                    this.NEED_VALIDATION(orderRes);
-                   this.$router.push('/confirmOrder/userValidation');
-                }else{
-                    this.ORDER_SUCCESS(orderRes);
-                    this.$router.push('/confirmOrder/payment');
-                }*/
+                this.ORDER_SUCCESS(orderRes);
+                this.$router.push('/confirmOrder/payment');               
         }
       },
       watch: {

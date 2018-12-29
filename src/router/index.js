@@ -15,8 +15,8 @@ const service = r => require.ensure([], () => r(require('../page/service/service
 const questionDetail = r => require.ensure([], () => r(require('../page/service/children/questionDetail')), 'questionDetail')
 const download = r => require.ensure([], () => r(require('../page/download/download')), 'download')
 const confirmOrder = r => require.ensure([], () => r(require('../page/confirmOrder/confirmOrder')), 'confirmOrder')
-/*const remark = r => require.ensure([], () => r(require('../page/confirmOrder/children/remark')), 'remark')
-const payment = r => require.ensure([], () => r(require('../page/confirmOrder/children/payment')), 'payment')
+const remark = r => require.ensure([], () => r(require('../page/confirmOrder/children/remark')), 'remark')
+/*const payment = r => require.ensure([], () => r(require('../page/confirmOrder/children/payment')), 'payment')
 const userValidation = r => require.ensure([], () => r(require('../page/confirmOrder/children/userValidation')), 'userValidation')
 const invoice = r => require.ensure([], () => r(require('../page/confirmOrder/children/invoice')), 'invoice')
 const chooseAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/chooseAddress')), 'chooseAddress')
@@ -43,7 +43,11 @@ export default[{
      //确认订单页
     {
       path: '/confirmOrder',
-      component: confirmOrder,      
+      component: confirmOrder,  
+      children: [{
+        path: 'remark', //订单备注
+        component: remark,
+      }]   
     },
     {
       path:'/download',

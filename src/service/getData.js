@@ -33,6 +33,14 @@ export const checkout = (geohash, entities, shopid) => post('/v1/carts/checkout'
 });
 
 /**
+ * 获取快速备注列表
+ */
+
+export const getRemark = (id, sig) => get('/v1/carts/' + id + '/remarks', {
+	sig
+});
+
+/**
  * 获取地址列表
  */
 
