@@ -379,8 +379,8 @@ export default {
         }, 
         //购物车总共商品的数量
         totalNum:function(){
-            let num=0;
-            this.cartFoodList.forEach(item=>{
+            let num=0; 
+            this.cartFoodList.forEach(item=>{  
                 num+=item.num;
             })
             return num;
