@@ -1,6 +1,9 @@
 /**
- * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
- * http://cssreset.com
+ *有两个静态文件路径，分别是src/assets和static。
+ 首先理解webpack是怎么处理静态资源的。在vue组件中，所有的模板和css都会被
+ vue-html-loader和css-loader解析，寻找资源的url。举个例子。在<img src=“./logo.png”
+ 都是相对资源路径，都会被webpack解析成模块依赖。由于图片不是js,被看成模块以来的时候，
+ 需要url-loader和file-loader进行处理。
  */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,

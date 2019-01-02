@@ -37,8 +37,14 @@ module.exports = {
   build: {   
     //配置入口文件
     env:require ('./prod.env'),
+    //__dirname变量可以获取当前模块文件所在目录的完整绝对路径。
     index: path.resolve(__dirname, '../dist/index.html'),
     //项目打包路径
+    /**
+     * path.resolve()方法将一系列路径活路径字段解析成绝对路径，
+     * path.resolve([from...],to)
+     * 将参数to解析到绝对路径里
+     * */   
     assetsRoot: path.resolve(__dirname, '../dist'),
     //项目资源文件路径
     assetsSubDirectory: 'static',
