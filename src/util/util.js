@@ -1,8 +1,8 @@
 import Axios from "axios";
 import { resolve } from "path";
+import router from '../router/index'
 //axios配置
 Axios.defaults.timeout=5000;
-//Axios.defaults.baseURL='http://cangdu.org:8001/';
 Axios.defaults.baseURL='api/'
 Axios.defaults.withCredentials=true;//允许携带cookies信息
 //http request 拦截器
@@ -11,8 +11,9 @@ Axios.interceptors.request.use(
        // const token=getCookies('session');
         config.data=JSON.stringify(config.data);
         config.headers={
-            'Accept': 'application/json',
+            'Accept': 'application/json',/**Accept表示客户端希望接受的数据类型 */
             'Content-Type': 'application/json'
+            /**Content-Type代表发送端（客户端|服务器）发送的实体数据的数据类型 */
         }     
         /*if(token)
         {
