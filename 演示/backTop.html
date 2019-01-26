@@ -24,8 +24,8 @@
             cursor: pointer;
             overflow: hidden;
             bottom: 50px;
-            right: 150px;
-            background-image: url(./f.png);          
+            right: 150px;           
+            background-image: url(f.png);          
             transition: bottom 3s ease-in;
         }
 
@@ -44,7 +44,7 @@
 <footer style="height: 150px;background-color: #999999;line-height: 150px;">Footer</footer>
 <aside id="rocket" class="state5"></aside>
 </body>
-<script type="application/javascript" src="jquery-3.2.1.min.js"></script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script type="application/javascript">
     (function($){
         "use strict";
@@ -77,12 +77,10 @@
             t.on("scroll",upDataScrollTop);
             $("#rocket").on("click",scrollToTop);
         };
-
         scrollObj.prototype.showRocket= function(w){
             let _this = this,rocket = $("#rocket");
             _this.scrollTop > w ? rocket.show() : rocket.hide();
         };
-
         new scrollObj($(document));
     })(jQuery);
 </script>

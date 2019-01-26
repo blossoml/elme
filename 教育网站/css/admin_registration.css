@@ -1,0 +1,169 @@
+body{
+	background-color: #f5f6f8;
+}
+/*订单菜单导航*/
+.order_content{
+	margin-bottom: 30px;
+	margin-top: 100px;
+	overflow: hidden;	
+}
+.head_nav{
+	width: 250px;
+	height: 610px;
+	padding: 50px 0;
+	background-color: #fff;
+	margin-right: 20px;
+}
+.personal_img{
+	width: 100px;
+	height: 100px;
+	border-radius:100% ;
+	margin-bottom: 8px;
+}
+.personal_name{
+	font-size: 16px;
+	color: #333;
+	font-weight: bold;
+	margin-bottom: 30px;
+}
+.order_menu li{
+	text-align: left;
+}
+.order_menu li a{
+	display: block;
+	padding-left: 30px;
+	height: 44px;
+	line-height: 44px;
+}
+.order_menu li i{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	margin-bottom: -10px;
+	margin-right: 10px;
+}
+.training i{
+	background: url(../img/training1.png);
+}
+.menu_ys{
+	background-color: #18599E;
+	color: #fff;
+}
+.meeting_menu li a:hover{
+	background-color: #18599E;
+	color: #fff;
+}
+.meeting_menu li a{
+	padding-left: 80px;
+}
+
+/*订单确认*/
+.qr_order{
+	width: 930px;
+	background-color: #fff;
+	height: 710px;
+}
+.ddqr{
+	height: 51px;
+	line-height: 50px;
+	text-align: left;
+	border-bottom: 1px solid #e4e4e4;
+}
+.ddqr span{
+	display: inline-block;
+	width: 128px;
+	height: 50px;
+	text-align: center;
+	font-size: 16px;
+	color: #666;
+	border: 1px solid #e4e4e4;
+	border-bottom: 1px solid #fff;;
+}
+.ddqr_nr{
+	padding: 30px;
+}
+.search_div{
+	text-align: left;
+	margin-bottom: 10px;
+}
+.hymc_ku,.chdwmc_ku{
+	width: 270px;
+	height: 42px;
+	border: 1px solid #E4E4E4;
+	border-radius: 5px;
+	padding-left: 20px;
+	margin-right: 8px;
+}
+#btn_search{
+	width: 50px;
+	height: 42px;
+	border: 1px solid #E4E4E4;
+	border-radius: 3px;
+	background-color: #fff;
+}
+#btn_search:hover{
+	cursor: pointer;
+	background-color: #18599E;
+	color: #fff;
+}
+.export_btndiv{
+	text-align: right;
+}
+.export_btn{
+    display: inline-block;
+    width: 120px;
+    height: 44px;
+    text-align: center;
+    line-height: 44px;
+    font-size: 12px;
+    color: #fff;
+    background-color: #18599e;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+.ddqr_nr table{
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+}
+.ddqr_nr table th{
+	height: 50px;
+	line-height: 50px;
+	background-color: #E4E4E4;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+.ddqr_nr table td{
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	padding: 20px 10px;
+	font-size: 14px;
+	color: #666;
+}
+.hy_name{
+	width: 280px;
+}
+.bm_name{
+	width: 90px;
+}
+.bm_phone{
+	width: 110px;
+}
+.bm_time{
+	width: 150px;
+}
+.chdwmc{
+	width: 150px;
+}
+.more_xq{
+	width: 90px;
+}
+.ahy_name:hover ,.more_axq:hover {
+	color: #18599E;
+	font-weight: bold;
+}
+.ahy_name{
+	display: inline-block;
+	text-align: left !important;
+}
+
+   

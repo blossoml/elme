@@ -1,0 +1,116 @@
+body{
+	background-color: #f5f6f8;
+}
+
+.login{
+	margin-top: 120px;
+	margin-bottom: 50px;
+	height: 600px;
+	background-color: #fff;
+	overflow: hidden;
+}
+.register_login{
+	width: 520px;
+	margin-left: 100px;
+	padding-top: 70px;
+}
+.qiehuan{
+	height: 28px;
+	margin-bottom: 35px;
+}
+.qiehuan span{
+	display: inline-block;
+	width: 100px;
+	line-height: 28px;
+	text-align: center;
+	color: #18599E;
+	cursor: pointer;
+	border: 1px solid #18599E;
+	margin-left: -5px;
+}
+.zhuche{
+	border-bottom-left-radius: 3px;
+	border-top-left-radius: 3px;
+}
+.denglu{
+	border-bottom-right-radius: 3px;
+	border-top-right-radius: 3px;
+}
+.qiehuan_active{
+	background-color: #18599E;
+	color: #fff !important;
+}
+
+/*注册*/
+.register ,.loginer{
+	text-align: left;
+	padding: 0 50px;
+}
+.register p label{
+	font-size: 14px;
+	color: #666;
+	line-height: 28px;
+}
+.register div input{
+	width: 400px;
+	height: 48px;
+	border: 1px solid #E4E4E4;
+	border-radius: 5px;
+	padding-left: 20px;
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 10px;
+}
+.yanzm{
+	width: 260px !important;
+	margin-right: 10px;
+}
+.hqyzm{
+	width: 120px !important;
+	padding-left: 0px !important;
+}
+.submit{
+	display:inline-block;
+	width: 100%;
+	height: 50px;
+	border: 0px;
+	border-radius: 5px;
+	text-align: center;
+	font-size: 16px;
+	color: #fff;
+	background-color: #18599e;
+	margin-top: 35px;
+	cursor: pointer;
+}
+
+/*登录*/
+.loginer{
+	display: none;
+}
+.loginer p label{
+	font-size: 14px;
+	color: #666;
+	line-height: 28px;
+}
+.loginer div input{
+	width: 400px;
+	height: 48px;
+	border: 1px solid #E4E4E4;
+	border-radius: 5px;
+	padding-left: 20px;
+	font-size: 14px;
+	color: #666;
+	margin-bottom: 10px;
+}
+.forgot_pad{
+	text-align: right;
+}
+.forgot_pad a{
+	font-size: 14px;
+	color: #999;
+}
+
+.login_img{
+	margin-top: 140px;
+}
+

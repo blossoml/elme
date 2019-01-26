@@ -1,0 +1,92 @@
+.banner{
+	width: 100%;
+	height: 700px;
+	background:url(../img/meeting_bg.jpg) no-repeat center;
+	background-color:rgba(0,255,0,0.2);
+}
+.banner h2{
+	padding-top: 200px;
+	font-size: 48px;
+	color: #fff;
+	margin-top: 0px;
+}
+.banner p{
+	font-size: 60px;
+	color: #fff;
+}
+.zc{
+	height: 700px;
+	width: 100%;
+    background-color:rgba(0,0,0,0.2);
+}
+.meeting_litnr{
+	padding: 0 160px;
+	margin-top: -230px;
+	z-index: 1000;
+}
+.meeting_lists{
+	overflow: hidden;
+	padding: 80px 100px;
+	background-color: #fff;
+	min-width: 1200px;
+}
+.meeting_lists li{
+	height: 320px;
+	padding: 0 20px;
+	margin-bottom: 20px;
+}
+.meeting_div{
+	height: 320px;
+	padding: 24px 27px;
+	position: relative;
+	border: 8px solid #fff;
+}
+.meeting_month{
+	font-size: 30px;
+	color: #ccc;
+	margin-right: 10px;
+}
+.meeting_year{
+	font-size: 16px;
+	color: #ccc;
+}
+.meeting_htitle{
+	font-size: 18px;
+	color: #333;
+	margin-top: 15px;
+	margin-bottom: 6px;
+}
+.meeting_nr{
+	font-size: 14px;
+	color: #999;
+	line-height: 24px;
+	margin-bottom: 30px;
+}
+.meeting_xqnr{
+	font-size: 16px;
+	color: #999;
+}
+.meeting_more{
+	margin: 0 auto;
+	text-align: center;
+}
+.meeting_more a{
+	display: inline-block;
+	font-size: 16px;
+	color: #666;
+	border: 1px solid #d7d7d7;
+	padding: 13px 116px;	
+	border-radius: 5px;
+}
+.meeting_more a:hover{
+	background-color: #2f69a8;
+	border: 1px solid #2f69a8;
+	color: #fff;
+}
+ 
+
+
+
+
+
+
