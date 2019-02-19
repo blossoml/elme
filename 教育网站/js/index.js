@@ -99,7 +99,7 @@ function mStrat() {
         if (i == 3) {
             i = 0;
         }
-        Show();
+       // Show();
     }, 3000);
 }
 
