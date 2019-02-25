@@ -49,12 +49,12 @@
 }
 .swiper-button-next{
  background-image: url("images/首页/u14.png");
- right: 224px;
+ right: 5%;
  position: absolute;
 }
 .swiper-button-prev{
  background-image: url("images/首页/u14.png");
- left:224px;
+ left:5%;
  position: absolute; 
 }
 /*产业化平台  */
@@ -379,8 +379,7 @@ line-height: 80px;
 }
 .wrap1{
     padding: 52px 128px 64px;/*上52px，左右128px 下64px*/
-    width:100%;
-    min-width:1200px;    
+    width:100%;     
     height: 700px;
 }
 .ul1
