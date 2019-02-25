@@ -113,7 +113,7 @@ h6 { font-size:12px;  font-family:"微软雅黑";}
     overflow: hidden;
  }
  .imgBox img{
-     margin: 0 -100%;  
+     margin: 0 -100%; 
  }
 /*头部样式*/
 .header{
@@ -227,7 +227,10 @@ h6 { font-size:12px;  font-family:"微软雅黑";}
 }
 /*banner*/
   .companyWrap{
-    padding-top: 80px ;
+    position: fixed;
+    top:80px;
+    z-index:600;
+    width: 100%;
   }
   .companyWrap .imgBox{
     position: relative;  
@@ -257,14 +260,15 @@ h6 { font-size:12px;  font-family:"微软雅黑";}
       color: #fff;
       font-size: 14px;
       line-height: 22px;
-      padding: 58px 10px;
+      padding: 58px 5%;
+      position: relative;
+      z-index: 800;
   }
-  .footer_wrap{
-      width: 1180px;     
+  .footer_wrap{   
       margin: 0 auto; 
   }
   .footer_wrap .f_l{
-      width:900px;
+      width:540px;
   }
  .erweima .f_imgW
  {
@@ -315,3 +319,10 @@ h6 { font-size:12px;  font-family:"微软雅黑";}
      font-size: 12px;
      color: #666666;
  }
+ .cus_tuW{
+    width: 100%;
+    background-color: #fff;
+    margin-top:380px;
+    z-index:800;
+    position: relative;
+  }
