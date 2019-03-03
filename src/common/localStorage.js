@@ -156,6 +156,8 @@ export const mscroll=(wrap,child,callBack,dis,noBack=false)=>{
     var startPoint=0;
     var startY=0;   
     var minY=wrap.clientHeight-dis-child.offsetHeight;
+    if(minY>0)
+    return;/*如果非固定高度小于容器高度那么直接return*/
     var step=1;
     var lastY=0;
     var lastDis=0;
@@ -225,7 +227,7 @@ export const mscroll=(wrap,child,callBack,dis,noBack=false)=>{
             {
                 t=minY;
             }else{
-            var over=minY-t;
+            var over=minY-t;/*over为正数*/
             step=1-over/wrap.clientHeight;//步长与over成反比
             over=parseInt(over*step*0.5);
             t=minY-over;//translateY的值   

@@ -451,8 +451,8 @@ export default {
           }     
          }
         }
-        mscroll(wrapRight,rightChild,callBack,true);
-        mscroll(wrapLeft,leftChild,{},true);
+        mscroll(wrapRight,rightChild,callBack,0);
+        mscroll(wrapLeft,leftChild,{},0);
       },      
       //加载更多评论
       async loaderMoreRating(){      
