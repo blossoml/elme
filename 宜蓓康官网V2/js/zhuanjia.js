@@ -1,0 +1,16 @@
+﻿$(function(){
+    $(".tu_wrap").hover(function(){
+      $(this).find(".jia_icon").stop().animate({top:"150px",opacity:1},300);
+      $(this).find(".mengban").stop().animate({opacity:0.8},300);
+      $(this).find(".mengban2").stop().animate({opacity:0.8},300);
+      $(this).find(".name").css("color","#ffffff");
+    },function(){
+      $(this).find(".jia_icon").stop().animate({top:"0",opacity:0},300);
+      $(this).find(".mengban").stop().animate({opacity:0},300);
+      $(this).find(".name").css("color","#ffffff");    
+      $(this).find(".mengban2").stop().animate({opacity:0},300);      
+    })
+    $(".tu_wrap").click(function(){
+     window.open("index.html");
+    })
+})

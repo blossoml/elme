@@ -1,0 +1,18 @@
+$(document).ready(function () {
+    var $items = $(".news_list");
+    $items.hover(function () {      
+        $(this).addClass("active");
+        $(this).stop().animate({
+            top:"-20px"
+        }, 500);
+
+    }, function () {
+        // out
+        $(this).removeClass("active");
+        $(this).stop().animate({
+            top:"0"
+        }, 500);
+    }
+    );
+})
+

@@ -1,0 +1,13 @@
+﻿$(function(){
+ $(".tu_li").hover(function(){
+   $(this).find(".cen2").show();
+   $(this).find("img").css("transform","scale(1.1)");
+   $(this).find(".hengxian").animate({left:"168px"},300);
+   $(this).find(".shuxian").animate({bottom:"32px"},300);
+ },function(){
+  $(this).find(".cen2").hide();
+  $(this).find("img").css("transform","scale(1)");
+  $(this).find(".hengxian").css("left","-42px");
+  $(this).find(".shuxian").css("bottom","-42px");
+ })
+})

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
+  <link rel="stylesheet" type="text/css" href="css/reset.css"> 
+  <link rel="stylesheet" type="text/css" href="css/product.css"> 
+  <link rel="shortcut icon" href="img/short.png" />
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <link href="http://at.alicdn.com/t/font_983309_bqgnlthjwih.css" type="text/css" rel="stylesheet"/>
+  <link href="http://at.alicdn.com/t/font_983309_0b896ab5obpk.css" type="text/css" rel="stylesheet"/>
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css " type="text/css" rel="stylesheet"/>
+  <title></title>
+  <style>    
+    .imgBox{
+      position: relative;  
+      text-align: center;    
+    }
+    .imgBox p{
+      position: absolute;
+      color: #fff;     
+      width: 100%;
+    }
+    .imgBox p:nth-child(2){
+      top:114px; 
+      font-size: 36px;
+      line-height: 36px;
+    }
+    .imgBox p:nth-child(3){
+      top:150px;
+      font-size: 20px;
+      line-height: 20px;
+    }
+    .jieshao
+    {
+      width: 900px;
+      margin: 0 auto;
+      text-align: left;
+      padding: 50px 0 120px;
+      line-height: 28px;
+    }
+    .jieshao p{
+      margin-bottom: 28px;
+      font-size: 14px;
+      color: #666666;
+    }
+    .jieshao p.t{
+      font-size: 28px;          
+    }
+    .jieshao img{
+      margin:0 auto;
+      height: 300px;
+    }
+  </style>
+</head>  
+<body style="min-width: 1200px;">
+  <!--头部导航部分-->
+	<div class="header" style="position:fixed">
+      <div class="head_wrap flexCenter">
+        <div class="icon_wrap">
+          <a href="javascript:;"><img src="img/logo.png"/></img></a>
+        </div>
+        <div>
+           <ul class="flexCenter title_list">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="product.html">产品</a></li>
+            <li><a href="customer.html">签约客户</a></li>
+            <li><a href="company.html" class="act">关于宜蓓康</a></li>
+            <li><a href="http://www.ebicomresearch.com/" target="_blank">更多站点</a></li>                  
+           </ul>
+      </div>  
+    </div> 
+    </div>
+  <!--头部banner-->
+  <div class="companyWrap">
+    <div class="imgBox" style="position: relative;">
+      <img src="img/u172.jpg"></img>
+      <p>关于宜蓓康</p>
+      <p>COMPANY PROFILE</p>
+    </div>
+  </div>
+  
+  <!--文字-->
+  <div class="cus_tuW">
+  <div class="jieshao">
+  <p class="t">关于宜蓓康</p>
+  <p>宜蓓康公司成立于2015年7月，国内首家现代老年医学应用软件与老年医疗解决方案提供商。经过三年的持续研究与不懈努力，宜蓓康不但构建了完整的老年健康医学评估应用软件体系，并且率先搭建起以老年医学为基础，覆盖医学评估、临床路径、康复干预、主动健康、机构能力提升、教育教学等在内的整体生态闭环。</p>
+  <p>借助专家系统与医疗大数据等技术能力，推动创新医疗应用的研发，优化医疗供给侧的整体效能，不断完善以现代老年医学为核心的医养结合解决方案为重心的全产业链条，业务布局逐步渗透到医疗机构、养老机构、诊所药店、家庭终端、商业保险等大健康产业链上下游环节，提供标准化、定制化医疗解决方案，老年人个体健康康复管理方案与打通全产业链的养老服务提供。</p>
+  <p>自成立以来，获得6项发明专利，13项软件著作权，参与国家重大科研与标准建设项目7个，课题总经费达1.91亿，参与5个政策与标准制定。</p>
+  <p  class="t">我们的愿景</p>
+  <p>宜蓓康致力于领先的现代老年医学整体技术在中国社会的推动与应用，协助医疗机构建设老年科室、提升医疗实力，协助养老机构扩展养老服务能力，并为机构在人口老龄化、医养结合时代的转型提供增益项目与解决方案；协助有老年人的家庭实现对老年人全面的健康评估与管理；愿天下老年人一辈子都健康！</p> 
+  </div> 
+ </div>
+<!--底部信息-->
+<div class="footer_c">
+    <div class="footer_wrap clearfix">
+      <div class="f_l">
+        <div class="f_a" style="color: #fff">
+          <a href="index.html" class="act">首页</a>
+          <a href="product.html">产品</a>
+          <a href="customer.html">签约客户</a>
+          <a href="company.html">关于宜蓓康</a>
+        </div>
+        <h3>四川宜蓓康科技有限公司</h3>
+        <p>电话：028-85533577</p>
+        <p>邮箱：about@ebicom.cn</p>
+        <p>地址：成都市武侯区科华北路62号力宝大厦S区14F</p>
+        <small>Copyright©2019 四川宜蓓康科技有限公司.All Rights Reserved 备案号：蜀ICP备17023670号-1</small>
+      </div>
+      <div class="f_r erweima clearfix">
+        <div class="f_imgW f_l">
+            <img src="img/gongzong.jpg"></img>
+            <p>宜蓓康公众号</p>
+        </div>
+        <div  class="f_imgW f_l">
+           <img src="img/yanjiu.jpg"></img>
+           <p>宜蓓康研究院</p>
+        </div>    
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="swiper/swiper.min.js"></script>
+</body>  
+</html>
+     

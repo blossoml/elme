@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
+  <link rel="stylesheet" type="text/css" href="css/reset.css"> 
+  <link rel="stylesheet" type="text/css" href="css/product.css"> 
+  <link rel="shortcut icon" href="img/short.png" />
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <link href="http://at.alicdn.com/t/font_983309_bqgnlthjwih.css" type="text/css" rel="stylesheet"/>
+  <link href="http://at.alicdn.com/t/font_983309_0b896ab5obpk.css" type="text/css" rel="stylesheet"/>
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css " type="text/css" rel="stylesheet"/> 
+  <title></title>
+  <style>   
+  .tu{
+    width: 1170px;   
+    margin:0 auto;
+  } 
+  .tu_wrap{
+    padding-right:30px;   
+    margin-top:30px;
+    width:400px;
+    position: relative;
+    height: 386px;  
+    float: left;
+  } 
+  .tu_wrap:nth-child(3n+3){
+   padding-right: 0px;
+   width: 370px;
+  }
+  .name{
+    font-size: 20px;
+    text-indent: 20px;
+    margin-top:36px;
+  }
+  </style>
+</head>  
+<body style="min-width: 1200px;">
+   <!--头部导航部分-->
+	<div class="header" style="position:fixed">
+      <div class="head_wrap flexCenter">
+        <div class="icon_wrap">
+          <a href="javascript:;"><img src="img/logo.png"/></img></a>
+        </div>
+        <div>
+           <ul class="flexCenter title_list">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="product.html">产品</a></li>
+            <li><a href="customer.html" class="act">签约客户</a></li>
+            <li><a href="company.html">关于宜蓓康</a></li>
+            <li><a href="http://www.ebicomresearch.com/" target="_blank">更多站点</a></li>                   
+            <!--<li class="yiji_list">
+              <a href="javascript:;">
+              关于 <span style="font-family: FontAwesome; font-weight: 380; font-size: 16px;" ></span>
+              </a>            
+              <ul class="erji_list">
+                <li><a class="u131" href="javascript:;">关于宜蓓康</a></li>
+                <li><a class="u131" href="javascript:;">新闻中心</a></li>
+                <li><a class="u131" href="javascript:;">招贤纳士</a></li>
+              </ul>
+            </li>
+            <li class="yiji_list">
+             <a href="javascript:;">合作伙伴 <span style="font-family: FontAwesome; font-weight: 380; font-size: 16px;" "></span>
+             </a>
+               <ul class="erji_list">
+                <li><a class="u131" href="javascript:;">经典案例</a></li>
+                <li><a class="u131" href="javascript:;">研究院专家</a></li>            
+               </ul>
+            </li>
+            <li><a href="javascript:;">培训 </a></li>
+            <li class="yiji_list">
+              <a href="javascript:;">更多站点 <span style="font-family: FontAwesome; font-weight: 380; font-size: 16px;" ></span></a>
+               <ul class="erji_list">
+                <li><a class="u131" href="javascript:;">中国老年医学与教育平台</a></li>
+                <li><a class="u131" href="javascript:;">宜蓓康研究院</a></li>             
+               </ul>
+            </li>-->
+           </ul>
+      </div>  
+    </div> 
+    </div>
+
+</body>  
+</html>
+     
